@@ -102,20 +102,21 @@ def test_relative_paths_resolve_against_project_root(env, monkeypatch):
 
 
 def test_responses_carry_flags():
-    r = schemas.TriageResult(classification="incident", confidence=0.8, reasons=["x"])
+    r = schemas.TriageResult(classification="incident", fusion_classification="incident", confidence=0.8, reasons=["x"])
     assert r.simulated is True and r.requires_human_review is True
 
 
 def test_human_review_flag_cannot_be_disabled():
     with pytest.raises(ValidationError):
         schemas.TriageResult(
-            classification="noise", confidence=0.1, reasons=[], requires_human_review=False
+            classification="noise", fusion_classification="no_incident", confidence=0.1, reasons=[],
+            requires_human_review=False,
         )
 
 
 def test_confidence_is_bounded():
     with pytest.raises(ValidationError):
-        schemas.TriageResult(classification="noise", confidence=1.5, reasons=[])
+        schemas.TriageResult(classification="noise", fusion_classification="no_incident", confidence=1.5, reasons=[])
 
 
 def test_banner_mentions_simulation_and_review():

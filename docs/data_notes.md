@@ -114,6 +114,22 @@ Fetch from the new USGS Water Data API (`https://api.waterdata.usgs.gov/ogcapi/v
 - Roboflow debris model: one live run of 48 frames, all HTTP 200, **0 predictions on every clip**. The responses are cached in `backend/fixtures/vision/` and the demo reads only the cache. The model detects trash and people, not plumes, so it is supporting context only.
 - Fusion: an incident needs a plume and an unexplained gauge anomaly within ±3.0 h (the reach's travel time). A single source gives flag_for_review with confidence at most 0.4, and storm-runoff events never count as corroboration.
 
+## Agents on Groq (step 7)
+
+- Chain: Triage → Trace → Compliance → Report (`backend/app/agents/`), run with `python scripts/run_scenario.py --case spill|storm`. The model never calls tools: agent code calls the plain Python tools, records every returned value in a ledger, and shows the model those results as JSON. The model only selects and writes prose.
+- **Agent modes** (`agent_modes`, and `report_mode` on the report):
+  - `llm`: the model answered and its output passed the guardrails.
+  - `fallback`: the model was expected but failed (no key or model set, invalid JSON twice, rate limit exhausted, timeout, API error), so the deterministic template was used. `fallback_reason` says why, and never contains the key.
+  - `skipped`: the agent makes no model call by design. Storm runoff gets no candidate list, so trace and compliance are skipped. `skipped` never means a failure.
+- Guardrails (in code):
+  - facility IDs and names must come from tool results;
+  - accusatory wording is rewritten or the sentence is dropped;
+  - triage can't be stronger than fusion, and confidence is fusion's;
+  - candidate values are copied from tools, in distance order;
+  - `simulated` and `requires_human_review` are always true.
+  The notes record each rejection without repeating the rejected name or wording.
+- **Number guardrail:** a sentence is dropped if it cites a number that is not in the tool results, the pipeline outputs (gauge events, storm filter, rain, camera summary, fusion, run settings) or the context shown to the model. Dates, times, year ranges and the "≥ X h" bounds are recognised. Per-reach trace values and per-frame camera values are not citable, so the allowed set stays small. Limit: numbers are checked without their units, so a real value cited with the wrong unit (e.g. a 3.4 FNU turbidity peak written as "3.4 in" of rain) would pass.
+
 ## ECHO (verified)
 
 ### Facilities (`ICIS_FACILITIES.csv`)

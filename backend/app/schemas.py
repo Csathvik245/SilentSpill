@@ -278,14 +278,22 @@ class FusedEvent(BaseModel):
 
 
 # ---- Agents ----------------------------------------------------------------------------------
+# "skipped": the agent makes no model call by design (e.g. storm runoff gets no candidate list);
+# "fallback": the LLM was expected but failed or is not configured, so the template was used.
+AgentMode = Literal["llm", "fallback", "skipped"]
+TriageClass = Literal["incident", "flag_for_review", "storm_runoff", "noise"]
+
+
 class TriageResult(ResponseBase):
-    classification: Literal["incident", "storm_runoff", "noise"]
+    classification: TriageClass  # never stronger than the fusion result it starts from
+    fusion_classification: Literal["incident", "storm_runoff", "flag_for_review", "no_incident"]
     confidence: float = Field(ge=0, le=1)
     reasons: list[str]
 
 
 class TraceResult(ResponseBase):
-    candidates: list[CandidateFacility]
+    candidates: list[CandidateFacility]  # values copied from tool output, ranked by distance
+    candidate_notes: dict[str, str] = {}  # facility_id -> short note
     assumptions: list[str] = []
 
 
@@ -314,7 +322,11 @@ class IncidentReport(ResponseBase):
     confidence: float = Field(ge=0, le=1)
     assumptions: list[str]
     limitations: list[str]
-    generated_by: Literal["groq", "fallback_template"]
+    classification: Literal["incident", "storm_runoff", "flag_for_review", "no_incident"]
+    data_origin: str
+    report_mode: AgentMode
+    fallback_reason: str | None = None  # why the template was used, never containing a key
+    guardrail_notes: list[str] = []  # what the guardrails rejected or rewrote
 
 
 class IncidentResponse(ResponseBase):
@@ -323,6 +335,7 @@ class IncidentResponse(ResponseBase):
     trace: TraceResult
     compliance: ComplianceResult
     report: IncidentReport
+    agent_modes: dict[str, AgentMode] = {}  # triage/trace/compliance/report -> "llm", "fallback" or "skipped"
 
 
 class ScenarioRunResponse(ResponseBase):
