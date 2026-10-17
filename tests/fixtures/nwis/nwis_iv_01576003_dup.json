@@ -1,0 +1,1046 @@
+{
+ "name": "ns1:timeSeriesResponseType",
+ "declaredType": "org.cuahsi.waterml.TimeSeriesResponseType",
+ "scope": "javax.xml.bind.JAXBElement$GlobalScope",
+ "value": {
+  "queryInfo": {
+   "queryURL": "http://waterservices.usgs.gov/nwis/iv/sites=01576003&parameterCd=00095%2C63680&startDT=2026-10-10T00%3A00Z&endDT=2026-10-10T06%3A00Z&format=json",
+   "criteria": {
+    "locationParam": "[ALL:01576003]",
+    "variableParam": "[00095, 63680]",
+    "timeParam": {
+     "beginDateTime": "2026-10-10T00:00:00.000",
+     "endDateTime": "2026-10-10T06:00:00.000"
+    },
+    "parameter": []
+   },
+   "note": [
+    {
+     "value": "[ALL:01576003]",
+     "title": "filter:sites"
+    },
+    {
+     "value": "[mode=RANGE, modifiedSince=null] interval={INTERVAL[2026-10-10T00:00:00.000Z/2026-10-10T06:00:00.000Z]}",
+     "title": "filter:timeRange"
+    },
+    {
+     "value": "methodIds=[ALL]",
+     "title": "filter:methodId"
+    },
+    {
+     "value": "2026-10-17T20:47:58.752Z",
+     "title": "requestDT"
+    },
+    {
+     "value": "095c2af0-ca6c-11f1-868a-005056beda50",
+     "title": "requestId"
+    },
+    {
+     "value": "Provisional data are subject to revision. Go to http://waterdata.usgs.gov/nwis/help/?provisional for more information.",
+     "title": "disclaimer"
+    },
+    {
+     "value": "caas01",
+     "title": "server"
+    }
+   ]
+  },
+  "timeSeries": [
+   {
+    "sourceInfo": {
+     "siteName": "Susquehanna River at Columbia, PA",
+     "siteCode": [
+      {
+       "value": "01576003",
+       "network": "NWIS",
+       "agencyCode": "USGS"
+      }
+     ],
+     "timeZoneInfo": {
+      "defaultTimeZone": {
+       "zoneOffset": "-05:00",
+       "zoneAbbreviation": "EST"
+      },
+      "daylightSavingsTimeZone": {
+       "zoneOffset": "-04:00",
+       "zoneAbbreviation": "EDT"
+      },
+      "siteUsesDaylightSavingsTime": true
+     },
+     "geoLocation": {
+      "geogLocation": {
+       "srs": "EPSG:4326",
+       "latitude": 40.0284308,
+       "longitude": -76.5177432
+      },
+      "localSiteXY": []
+     },
+     "note": [],
+     "siteType": [],
+     "siteProperty": [
+      {
+       "value": "ST",
+       "name": "siteTypeCd"
+      },
+      {
+       "value": "02050306",
+       "name": "hucCd"
+      },
+      {
+       "value": "42",
+       "name": "stateCd"
+      },
+      {
+       "value": "42071",
+       "name": "countyCd"
+      }
+     ]
+    },
+    "variable": {
+     "variableCode": [
+      {
+       "value": "00095",
+       "network": "NWIS",
+       "vocabulary": "NWIS:UnitValues",
+       "variableID": 45807295,
+       "default": true
+      }
+     ],
+     "variableName": "Specific conductance, water, unfiltered, microsiemens per centimeter at 25&#176;C",
+     "variableDescription": "Specific conductance, water, unfiltered, microsiemens per centimeter at 25 degrees Celsius",
+     "valueType": "Derived Value",
+     "unit": {
+      "unitCode": "uS/cm @25C"
+     },
+     "options": {
+      "option": [
+       {
+        "name": "Statistic",
+        "optionCode": "00000"
+       }
+      ]
+     },
+     "note": [],
+     "noDataValue": -999999.0,
+     "variableProperty": [],
+     "oid": "45807295"
+    },
+    "values": [
+     {
+      "value": [],
+      "qualifier": [],
+      "qualityControlLevel": [],
+      "method": [
+       {
+        "methodDescription": "Center",
+        "methodID": 316277
+       }
+      ],
+      "source": [],
+      "offset": [],
+      "sample": [],
+      "censorCode": []
+     },
+     {
+      "value": [
+       {
+        "value": "354",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T20:00:00.000-04:00"
+       },
+       {
+        "value": "352",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T20:15:00.000-04:00"
+       },
+       {
+        "value": "352",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T20:30:00.000-04:00"
+       },
+       {
+        "value": "349",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T20:45:00.000-04:00"
+       },
+       {
+        "value": "353",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T21:00:00.000-04:00"
+       },
+       {
+        "value": "352",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T21:15:00.000-04:00"
+       },
+       {
+        "value": "350",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T21:30:00.000-04:00"
+       },
+       {
+        "value": "355",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T21:45:00.000-04:00"
+       },
+       {
+        "value": "353",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T22:00:00.000-04:00"
+       },
+       {
+        "value": "350",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T22:15:00.000-04:00"
+       },
+       {
+        "value": "350",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T22:30:00.000-04:00"
+       },
+       {
+        "value": "352",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T22:45:00.000-04:00"
+       },
+       {
+        "value": "354",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T23:00:00.000-04:00"
+       },
+       {
+        "value": "359",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T23:15:00.000-04:00"
+       },
+       {
+        "value": "354",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T23:30:00.000-04:00"
+       },
+       {
+        "value": "353",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T23:45:00.000-04:00"
+       },
+       {
+        "value": "355",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-10T00:00:00.000-04:00"
+       },
+       {
+        "value": "354",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-10T00:15:00.000-04:00"
+       },
+       {
+        "value": "356",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-10T00:30:00.000-04:00"
+       },
+       {
+        "value": "363",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-10T00:45:00.000-04:00"
+       },
+       {
+        "value": "358",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-10T01:00:00.000-04:00"
+       },
+       {
+        "value": "352",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-10T01:15:00.000-04:00"
+       },
+       {
+        "value": "356",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-10T01:30:00.000-04:00"
+       },
+       {
+        "value": "357",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-10T01:45:00.000-04:00"
+       },
+       {
+        "value": "355",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-10T02:00:00.000-04:00"
+       }
+      ],
+      "qualifier": [
+       {
+        "qualifierCode": "P",
+        "qualifierDescription": "Provisional data subject to revision.",
+        "qualifierID": 0,
+        "network": "NWIS",
+        "vocabulary": "uv_rmk_cd"
+       }
+      ],
+      "qualityControlLevel": [],
+      "method": [
+       {
+        "methodDescription": "East",
+        "methodID": 316278
+       }
+      ],
+      "source": [],
+      "offset": [],
+      "sample": [],
+      "censorCode": []
+     },
+     {
+      "value": [
+       {
+        "value": "311",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T20:00:00.000-04:00"
+       },
+       {
+        "value": "311",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T20:15:00.000-04:00"
+       },
+       {
+        "value": "311",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T20:30:00.000-04:00"
+       },
+       {
+        "value": "311",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T20:45:00.000-04:00"
+       },
+       {
+        "value": "311",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T21:00:00.000-04:00"
+       },
+       {
+        "value": "311",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T21:15:00.000-04:00"
+       },
+       {
+        "value": "311",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T21:30:00.000-04:00"
+       },
+       {
+        "value": "310",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T21:45:00.000-04:00"
+       },
+       {
+        "value": "310",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T22:00:00.000-04:00"
+       },
+       {
+        "value": "311",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T22:15:00.000-04:00"
+       },
+       {
+        "value": "311",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T22:30:00.000-04:00"
+       },
+       {
+        "value": "311",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T22:45:00.000-04:00"
+       },
+       {
+        "value": "311",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T23:00:00.000-04:00"
+       },
+       {
+        "value": "312",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T23:15:00.000-04:00"
+       },
+       {
+        "value": "312",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T23:30:00.000-04:00"
+       },
+       {
+        "value": "312",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T23:45:00.000-04:00"
+       },
+       {
+        "value": "312",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-10T00:00:00.000-04:00"
+       },
+       {
+        "value": "312",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-10T00:15:00.000-04:00"
+       },
+       {
+        "value": "311",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-10T00:30:00.000-04:00"
+       },
+       {
+        "value": "311",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-10T00:45:00.000-04:00"
+       },
+       {
+        "value": "312",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-10T01:00:00.000-04:00"
+       },
+       {
+        "value": "312",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-10T01:15:00.000-04:00"
+       },
+       {
+        "value": "311",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-10T01:30:00.000-04:00"
+       },
+       {
+        "value": "311",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-10T01:45:00.000-04:00"
+       },
+       {
+        "value": "310",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-10T02:00:00.000-04:00"
+       }
+      ],
+      "qualifier": [
+       {
+        "qualifierCode": "P",
+        "qualifierDescription": "Provisional data subject to revision.",
+        "qualifierID": 0,
+        "network": "NWIS",
+        "vocabulary": "uv_rmk_cd"
+       }
+      ],
+      "qualityControlLevel": [],
+      "method": [
+       {
+        "methodDescription": "West",
+        "methodID": 316279
+       }
+      ],
+      "source": [],
+      "offset": [],
+      "sample": [],
+      "censorCode": []
+     }
+    ],
+    "name": "USGS:01576003:00095:00000"
+   },
+   {
+    "sourceInfo": {
+     "siteName": "Susquehanna River at Columbia, PA",
+     "siteCode": [
+      {
+       "value": "01576003",
+       "network": "NWIS",
+       "agencyCode": "USGS"
+      }
+     ],
+     "timeZoneInfo": {
+      "defaultTimeZone": {
+       "zoneOffset": "-05:00",
+       "zoneAbbreviation": "EST"
+      },
+      "daylightSavingsTimeZone": {
+       "zoneOffset": "-04:00",
+       "zoneAbbreviation": "EDT"
+      },
+      "siteUsesDaylightSavingsTime": true
+     },
+     "geoLocation": {
+      "geogLocation": {
+       "srs": "EPSG:4326",
+       "latitude": 40.0284308,
+       "longitude": -76.5177432
+      },
+      "localSiteXY": []
+     },
+     "note": [],
+     "siteType": [],
+     "siteProperty": [
+      {
+       "value": "ST",
+       "name": "siteTypeCd"
+      },
+      {
+       "value": "02050306",
+       "name": "hucCd"
+      },
+      {
+       "value": "42",
+       "name": "stateCd"
+      },
+      {
+       "value": "42071",
+       "name": "countyCd"
+      }
+     ]
+    },
+    "variable": {
+     "variableCode": [
+      {
+       "value": "63680",
+       "network": "NWIS",
+       "vocabulary": "NWIS:UnitValues",
+       "variableID": 51443524,
+       "default": true
+      }
+     ],
+     "variableName": "Turbidity, water, unfiltered, monochrome near infra-red LED light, 780-900 nm, detection angle 90 &#177;2.5&#176;, formazin nephelometric units (FNU)",
+     "variableDescription": "Turbidity, water, unfiltered, monochrome near infra-red LED light, 780-900 nm, detection angle 90 +-2.5 degrees, formazin nephelometric units (FNU)",
+     "valueType": "Derived Value",
+     "unit": {
+      "unitCode": "FNU"
+     },
+     "options": {
+      "option": [
+       {
+        "name": "Statistic",
+        "optionCode": "00000"
+       }
+      ]
+     },
+     "note": [],
+     "noDataValue": -999999.0,
+     "variableProperty": [],
+     "oid": "51443524"
+    },
+    "values": [
+     {
+      "value": [],
+      "qualifier": [],
+      "qualityControlLevel": [],
+      "method": [
+       {
+        "methodDescription": "Center",
+        "methodID": 316339
+       }
+      ],
+      "source": [],
+      "offset": [],
+      "sample": [],
+      "censorCode": []
+     },
+     {
+      "value": [
+       {
+        "value": "1.4",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T20:00:00.000-04:00"
+       },
+       {
+        "value": "1.5",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T20:15:00.000-04:00"
+       },
+       {
+        "value": "1.4",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T20:30:00.000-04:00"
+       },
+       {
+        "value": "1.5",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T20:45:00.000-04:00"
+       },
+       {
+        "value": "1.4",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T21:00:00.000-04:00"
+       },
+       {
+        "value": "1.4",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T21:15:00.000-04:00"
+       },
+       {
+        "value": "1.4",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T21:30:00.000-04:00"
+       },
+       {
+        "value": "1.4",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T21:45:00.000-04:00"
+       },
+       {
+        "value": "1.5",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T22:00:00.000-04:00"
+       },
+       {
+        "value": "1.4",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T22:15:00.000-04:00"
+       },
+       {
+        "value": "1.4",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T22:30:00.000-04:00"
+       },
+       {
+        "value": "1.7",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T22:45:00.000-04:00"
+       },
+       {
+        "value": "1.4",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T23:00:00.000-04:00"
+       },
+       {
+        "value": "1.3",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T23:15:00.000-04:00"
+       },
+       {
+        "value": "1.4",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T23:30:00.000-04:00"
+       },
+       {
+        "value": "1.4",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T23:45:00.000-04:00"
+       },
+       {
+        "value": "1.3",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-10T00:00:00.000-04:00"
+       },
+       {
+        "value": "1.3",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-10T00:15:00.000-04:00"
+       },
+       {
+        "value": "1.4",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-10T00:30:00.000-04:00"
+       },
+       {
+        "value": "1.3",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-10T00:45:00.000-04:00"
+       },
+       {
+        "value": "1.4",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-10T01:00:00.000-04:00"
+       },
+       {
+        "value": "1.4",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-10T01:15:00.000-04:00"
+       },
+       {
+        "value": "1.4",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-10T01:30:00.000-04:00"
+       },
+       {
+        "value": "1.4",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-10T01:45:00.000-04:00"
+       },
+       {
+        "value": "1.4",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-10T02:00:00.000-04:00"
+       }
+      ],
+      "qualifier": [
+       {
+        "qualifierCode": "P",
+        "qualifierDescription": "Provisional data subject to revision.",
+        "qualifierID": 0,
+        "network": "NWIS",
+        "vocabulary": "uv_rmk_cd"
+       }
+      ],
+      "qualityControlLevel": [],
+      "method": [
+       {
+        "methodDescription": "East",
+        "methodID": 316340
+       }
+      ],
+      "source": [],
+      "offset": [],
+      "sample": [],
+      "censorCode": []
+     },
+     {
+      "value": [
+       {
+        "value": "3.7",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T20:00:00.000-04:00"
+       },
+       {
+        "value": "2.6",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T20:15:00.000-04:00"
+       },
+       {
+        "value": "3.2",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T20:30:00.000-04:00"
+       },
+       {
+        "value": "3.7",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T20:45:00.000-04:00"
+       },
+       {
+        "value": "3.6",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T21:00:00.000-04:00"
+       },
+       {
+        "value": "4.5",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T21:15:00.000-04:00"
+       },
+       {
+        "value": "3.9",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T21:30:00.000-04:00"
+       },
+       {
+        "value": "4.4",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T21:45:00.000-04:00"
+       },
+       {
+        "value": "3.4",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T22:00:00.000-04:00"
+       },
+       {
+        "value": "3.2",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T22:15:00.000-04:00"
+       },
+       {
+        "value": "3.1",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T22:30:00.000-04:00"
+       },
+       {
+        "value": "3.7",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T22:45:00.000-04:00"
+       },
+       {
+        "value": "3.2",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T23:00:00.000-04:00"
+       },
+       {
+        "value": "3.4",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T23:15:00.000-04:00"
+       },
+       {
+        "value": "3.9",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T23:30:00.000-04:00"
+       },
+       {
+        "value": "2.6",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-09T23:45:00.000-04:00"
+       },
+       {
+        "value": "3.3",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-10T00:00:00.000-04:00"
+       },
+       {
+        "value": "3.3",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-10T00:15:00.000-04:00"
+       },
+       {
+        "value": "2.4",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-10T00:30:00.000-04:00"
+       },
+       {
+        "value": "3.3",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-10T00:45:00.000-04:00"
+       },
+       {
+        "value": "3.7",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-10T01:00:00.000-04:00"
+       },
+       {
+        "value": "3.2",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-10T01:15:00.000-04:00"
+       },
+       {
+        "value": "3.2",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-10T01:30:00.000-04:00"
+       },
+       {
+        "value": "3.5",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-10T01:45:00.000-04:00"
+       },
+       {
+        "value": "3.7",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-10-10T02:00:00.000-04:00"
+       }
+      ],
+      "qualifier": [
+       {
+        "qualifierCode": "P",
+        "qualifierDescription": "Provisional data subject to revision.",
+        "qualifierID": 0,
+        "network": "NWIS",
+        "vocabulary": "uv_rmk_cd"
+       }
+      ],
+      "qualityControlLevel": [],
+      "method": [
+       {
+        "methodDescription": "West",
+        "methodID": 316341
+       }
+      ],
+      "source": [],
+      "offset": [],
+      "sample": [],
+      "censorCode": []
+     }
+    ],
+    "name": "USGS:01576003:63680:00000"
+   }
+  ]
+ },
+ "nil": false,
+ "globalScope": true,
+ "typeSubstituted": false
+}

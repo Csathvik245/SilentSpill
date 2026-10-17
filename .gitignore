@@ -1,0 +1,10 @@
+﻿.env
+/data/
+/cache/
+/2024_us.csv
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+*.pkl
+*.parquet

@@ -1,0 +1,1770 @@
+{
+ "name": "ns1:timeSeriesResponseType",
+ "declaredType": "org.cuahsi.waterml.TimeSeriesResponseType",
+ "scope": "javax.xml.bind.JAXBElement$GlobalScope",
+ "value": {
+  "queryInfo": {
+   "queryURL": "http://waterservices.usgs.gov/nwis/iv/sites=01634000&parameterCd=00095%2C63680%2C00400%2C00060&startDT=2026-09-16T12%3A00Z&endDT=2026-09-17T00%3A00Z&format=json",
+   "criteria": {
+    "locationParam": "[ALL:01634000]",
+    "variableParam": "[00095, 63680, 00400, 00060]",
+    "timeParam": {
+     "beginDateTime": "2026-09-16T12:00:00.000",
+     "endDateTime": "2026-09-17T00:00:00.000"
+    },
+    "parameter": []
+   },
+   "note": [
+    {
+     "value": "[ALL:01634000]",
+     "title": "filter:sites"
+    },
+    {
+     "value": "[mode=RANGE, modifiedSince=null] interval={INTERVAL[2026-09-16T12:00:00.000Z/2026-09-17T00:00:00.000Z]}",
+     "title": "filter:timeRange"
+    },
+    {
+     "value": "methodIds=[ALL]",
+     "title": "filter:methodId"
+    },
+    {
+     "value": "2026-10-17T20:47:58.436Z",
+     "title": "requestDT"
+    },
+    {
+     "value": "092bf330-ca6c-11f1-868a-005056beda50",
+     "title": "requestId"
+    },
+    {
+     "value": "Provisional data are subject to revision. Go to http://waterdata.usgs.gov/nwis/help/?provisional for more information.",
+     "title": "disclaimer"
+    },
+    {
+     "value": "caas01",
+     "title": "server"
+    }
+   ]
+  },
+  "timeSeries": [
+   {
+    "sourceInfo": {
+     "siteName": "N F SHENANDOAH RIVER NEAR STRASBURG, VA",
+     "siteCode": [
+      {
+       "value": "01634000",
+       "network": "NWIS",
+       "agencyCode": "USGS"
+      }
+     ],
+     "timeZoneInfo": {
+      "defaultTimeZone": {
+       "zoneOffset": "-05:00",
+       "zoneAbbreviation": "EST"
+      },
+      "daylightSavingsTimeZone": {
+       "zoneOffset": "-04:00",
+       "zoneAbbreviation": "EDT"
+      },
+      "siteUsesDaylightSavingsTime": true
+     },
+     "geoLocation": {
+      "geogLocation": {
+       "srs": "EPSG:4326",
+       "latitude": 38.9767759,
+       "longitude": -78.3361152
+      },
+      "localSiteXY": []
+     },
+     "note": [],
+     "siteType": [],
+     "siteProperty": [
+      {
+       "value": "ST",
+       "name": "siteTypeCd"
+      },
+      {
+       "value": "02070006",
+       "name": "hucCd"
+      },
+      {
+       "value": "51",
+       "name": "stateCd"
+      },
+      {
+       "value": "51187",
+       "name": "countyCd"
+      }
+     ]
+    },
+    "variable": {
+     "variableCode": [
+      {
+       "value": "00060",
+       "network": "NWIS",
+       "vocabulary": "NWIS:UnitValues",
+       "variableID": 45807197,
+       "default": true
+      }
+     ],
+     "variableName": "Streamflow, ft&#179;/s",
+     "variableDescription": "Discharge, cubic feet per second",
+     "valueType": "Derived Value",
+     "unit": {
+      "unitCode": "ft3/s"
+     },
+     "options": {
+      "option": [
+       {
+        "name": "Statistic",
+        "optionCode": "00000"
+       }
+      ]
+     },
+     "note": [],
+     "noDataValue": -999999.0,
+     "variableProperty": [],
+     "oid": "45807197"
+    },
+    "values": [
+     {
+      "value": [
+       {
+        "value": "128",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T08:00:00.000-04:00"
+       },
+       {
+        "value": "128",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T08:15:00.000-04:00"
+       },
+       {
+        "value": "128",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T08:30:00.000-04:00"
+       },
+       {
+        "value": "128",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T08:45:00.000-04:00"
+       },
+       {
+        "value": "131",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T09:00:00.000-04:00"
+       },
+       {
+        "value": "131",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T09:15:00.000-04:00"
+       },
+       {
+        "value": "128",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T09:30:00.000-04:00"
+       },
+       {
+        "value": "128",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T09:45:00.000-04:00"
+       },
+       {
+        "value": "131",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T10:00:00.000-04:00"
+       },
+       {
+        "value": "131",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T10:15:00.000-04:00"
+       },
+       {
+        "value": "131",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T10:30:00.000-04:00"
+       },
+       {
+        "value": "131",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T10:45:00.000-04:00"
+       },
+       {
+        "value": "131",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T11:00:00.000-04:00"
+       },
+       {
+        "value": "131",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T11:15:00.000-04:00"
+       },
+       {
+        "value": "128",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T11:30:00.000-04:00"
+       },
+       {
+        "value": "131",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T11:45:00.000-04:00"
+       },
+       {
+        "value": "131",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T12:00:00.000-04:00"
+       },
+       {
+        "value": "131",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T12:15:00.000-04:00"
+       },
+       {
+        "value": "128",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T12:30:00.000-04:00"
+       },
+       {
+        "value": "131",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T12:45:00.000-04:00"
+       },
+       {
+        "value": "131",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T13:00:00.000-04:00"
+       },
+       {
+        "value": "131",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T13:15:00.000-04:00"
+       },
+       {
+        "value": "131",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T13:30:00.000-04:00"
+       },
+       {
+        "value": "131",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T13:45:00.000-04:00"
+       },
+       {
+        "value": "131",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T14:00:00.000-04:00"
+       },
+       {
+        "value": "131",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T14:15:00.000-04:00"
+       },
+       {
+        "value": "131",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T14:30:00.000-04:00"
+       },
+       {
+        "value": "131",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T14:45:00.000-04:00"
+       },
+       {
+        "value": "131",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T15:00:00.000-04:00"
+       },
+       {
+        "value": "131",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T15:15:00.000-04:00"
+       },
+       {
+        "value": "131",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T15:30:00.000-04:00"
+       },
+       {
+        "value": "131",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T15:45:00.000-04:00"
+       },
+       {
+        "value": "131",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T16:00:00.000-04:00"
+       },
+       {
+        "value": "131",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T16:15:00.000-04:00"
+       },
+       {
+        "value": "131",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T16:30:00.000-04:00"
+       },
+       {
+        "value": "131",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T16:45:00.000-04:00"
+       },
+       {
+        "value": "134",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T17:00:00.000-04:00"
+       },
+       {
+        "value": "131",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T17:15:00.000-04:00"
+       },
+       {
+        "value": "131",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T17:30:00.000-04:00"
+       },
+       {
+        "value": "131",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T17:45:00.000-04:00"
+       },
+       {
+        "value": "131",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T18:00:00.000-04:00"
+       },
+       {
+        "value": "131",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T18:15:00.000-04:00"
+       },
+       {
+        "value": "131",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T18:30:00.000-04:00"
+       },
+       {
+        "value": "131",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T18:45:00.000-04:00"
+       },
+       {
+        "value": "128",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T19:00:00.000-04:00"
+       },
+       {
+        "value": "128",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T19:15:00.000-04:00"
+       },
+       {
+        "value": "128",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T19:30:00.000-04:00"
+       },
+       {
+        "value": "128",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T19:45:00.000-04:00"
+       },
+       {
+        "value": "128",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T20:00:00.000-04:00"
+       }
+      ],
+      "qualifier": [
+       {
+        "qualifierCode": "P",
+        "qualifierDescription": "Provisional data subject to revision.",
+        "qualifierID": 0,
+        "network": "NWIS",
+        "vocabulary": "uv_rmk_cd"
+       }
+      ],
+      "qualityControlLevel": [],
+      "method": [
+       {
+        "methodDescription": "",
+        "methodID": 146493
+       }
+      ],
+      "source": [],
+      "offset": [],
+      "sample": [],
+      "censorCode": []
+     }
+    ],
+    "name": "USGS:01634000:00060:00000"
+   },
+   {
+    "sourceInfo": {
+     "siteName": "N F SHENANDOAH RIVER NEAR STRASBURG, VA",
+     "siteCode": [
+      {
+       "value": "01634000",
+       "network": "NWIS",
+       "agencyCode": "USGS"
+      }
+     ],
+     "timeZoneInfo": {
+      "defaultTimeZone": {
+       "zoneOffset": "-05:00",
+       "zoneAbbreviation": "EST"
+      },
+      "daylightSavingsTimeZone": {
+       "zoneOffset": "-04:00",
+       "zoneAbbreviation": "EDT"
+      },
+      "siteUsesDaylightSavingsTime": true
+     },
+     "geoLocation": {
+      "geogLocation": {
+       "srs": "EPSG:4326",
+       "latitude": 38.9767759,
+       "longitude": -78.3361152
+      },
+      "localSiteXY": []
+     },
+     "note": [],
+     "siteType": [],
+     "siteProperty": [
+      {
+       "value": "ST",
+       "name": "siteTypeCd"
+      },
+      {
+       "value": "02070006",
+       "name": "hucCd"
+      },
+      {
+       "value": "51",
+       "name": "stateCd"
+      },
+      {
+       "value": "51187",
+       "name": "countyCd"
+      }
+     ]
+    },
+    "variable": {
+     "variableCode": [
+      {
+       "value": "00095",
+       "network": "NWIS",
+       "vocabulary": "NWIS:UnitValues",
+       "variableID": 45807295,
+       "default": true
+      }
+     ],
+     "variableName": "Specific conductance, water, unfiltered, microsiemens per centimeter at 25&#176;C",
+     "variableDescription": "Specific conductance, water, unfiltered, microsiemens per centimeter at 25 degrees Celsius",
+     "valueType": "Derived Value",
+     "unit": {
+      "unitCode": "uS/cm @25C"
+     },
+     "options": {
+      "option": [
+       {
+        "name": "Statistic",
+        "optionCode": "00000"
+       }
+      ]
+     },
+     "note": [],
+     "noDataValue": -999999.0,
+     "variableProperty": [],
+     "oid": "45807295"
+    },
+    "values": [
+     {
+      "value": [
+       {
+        "value": "396",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T08:00:00.000-04:00"
+       },
+       {
+        "value": "395",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T08:15:00.000-04:00"
+       },
+       {
+        "value": "395",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T08:30:00.000-04:00"
+       },
+       {
+        "value": "395",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T08:45:00.000-04:00"
+       },
+       {
+        "value": "395",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T09:00:00.000-04:00"
+       },
+       {
+        "value": "395",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T09:15:00.000-04:00"
+       },
+       {
+        "value": "395",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T09:30:00.000-04:00"
+       },
+       {
+        "value": "395",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T09:45:00.000-04:00"
+       },
+       {
+        "value": "395",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T10:00:00.000-04:00"
+       },
+       {
+        "value": "395",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T10:15:00.000-04:00"
+       },
+       {
+        "value": "395",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T10:30:00.000-04:00"
+       },
+       {
+        "value": "395",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T10:45:00.000-04:00"
+       },
+       {
+        "value": "396",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T11:00:00.000-04:00"
+       },
+       {
+        "value": "396",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T11:15:00.000-04:00"
+       },
+       {
+        "value": "396",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T11:30:00.000-04:00"
+       },
+       {
+        "value": "397",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T11:45:00.000-04:00"
+       },
+       {
+        "value": "397",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T12:00:00.000-04:00"
+       },
+       {
+        "value": "399",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T12:15:00.000-04:00"
+       },
+       {
+        "value": "399",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T12:30:00.000-04:00"
+       },
+       {
+        "value": "400",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T13:45:00.000-04:00"
+       },
+       {
+        "value": "400",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T14:00:00.000-04:00"
+       },
+       {
+        "value": "400",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T14:15:00.000-04:00"
+       },
+       {
+        "value": "399",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T14:30:00.000-04:00"
+       },
+       {
+        "value": "399",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T14:45:00.000-04:00"
+       },
+       {
+        "value": "399",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T15:00:00.000-04:00"
+       },
+       {
+        "value": "398",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T15:15:00.000-04:00"
+       },
+       {
+        "value": "398",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T15:30:00.000-04:00"
+       },
+       {
+        "value": "397",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T15:45:00.000-04:00"
+       },
+       {
+        "value": "397",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T16:00:00.000-04:00"
+       },
+       {
+        "value": "396",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T16:15:00.000-04:00"
+       },
+       {
+        "value": "396",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T16:30:00.000-04:00"
+       },
+       {
+        "value": "395",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T16:45:00.000-04:00"
+       },
+       {
+        "value": "395",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T17:00:00.000-04:00"
+       },
+       {
+        "value": "395",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T17:15:00.000-04:00"
+       },
+       {
+        "value": "394",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T17:30:00.000-04:00"
+       },
+       {
+        "value": "394",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T17:45:00.000-04:00"
+       },
+       {
+        "value": "394",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T18:00:00.000-04:00"
+       },
+       {
+        "value": "394",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T18:15:00.000-04:00"
+       },
+       {
+        "value": "393",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T18:30:00.000-04:00"
+       },
+       {
+        "value": "394",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T18:45:00.000-04:00"
+       },
+       {
+        "value": "394",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T19:00:00.000-04:00"
+       },
+       {
+        "value": "394",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T19:15:00.000-04:00"
+       },
+       {
+        "value": "394",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T19:30:00.000-04:00"
+       },
+       {
+        "value": "395",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T19:45:00.000-04:00"
+       },
+       {
+        "value": "395",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T20:00:00.000-04:00"
+       }
+      ],
+      "qualifier": [
+       {
+        "qualifierCode": "P",
+        "qualifierDescription": "Provisional data subject to revision.",
+        "qualifierID": 0,
+        "network": "NWIS",
+        "vocabulary": "uv_rmk_cd"
+       }
+      ],
+      "qualityControlLevel": [],
+      "method": [
+       {
+        "methodDescription": "",
+        "methodID": 330449
+       }
+      ],
+      "source": [],
+      "offset": [],
+      "sample": [],
+      "censorCode": []
+     }
+    ],
+    "name": "USGS:01634000:00095:00000"
+   },
+   {
+    "sourceInfo": {
+     "siteName": "N F SHENANDOAH RIVER NEAR STRASBURG, VA",
+     "siteCode": [
+      {
+       "value": "01634000",
+       "network": "NWIS",
+       "agencyCode": "USGS"
+      }
+     ],
+     "timeZoneInfo": {
+      "defaultTimeZone": {
+       "zoneOffset": "-05:00",
+       "zoneAbbreviation": "EST"
+      },
+      "daylightSavingsTimeZone": {
+       "zoneOffset": "-04:00",
+       "zoneAbbreviation": "EDT"
+      },
+      "siteUsesDaylightSavingsTime": true
+     },
+     "geoLocation": {
+      "geogLocation": {
+       "srs": "EPSG:4326",
+       "latitude": 38.9767759,
+       "longitude": -78.3361152
+      },
+      "localSiteXY": []
+     },
+     "note": [],
+     "siteType": [],
+     "siteProperty": [
+      {
+       "value": "ST",
+       "name": "siteTypeCd"
+      },
+      {
+       "value": "02070006",
+       "name": "hucCd"
+      },
+      {
+       "value": "51",
+       "name": "stateCd"
+      },
+      {
+       "value": "51187",
+       "name": "countyCd"
+      }
+     ]
+    },
+    "variable": {
+     "variableCode": [
+      {
+       "value": "00400",
+       "network": "NWIS",
+       "vocabulary": "NWIS:UnitValues",
+       "variableID": 45810855,
+       "default": true
+      }
+     ],
+     "variableName": "pH, water, unfiltered, field, standard units",
+     "variableDescription": "pH, water, unfiltered, field, standard units",
+     "valueType": "Derived Value",
+     "unit": {
+      "unitCode": "std units"
+     },
+     "options": {
+      "option": [
+       {
+        "name": "Statistic",
+        "optionCode": "00000"
+       }
+      ]
+     },
+     "note": [],
+     "noDataValue": -999999.0,
+     "variableProperty": [],
+     "oid": "45810855"
+    },
+    "values": [
+     {
+      "value": [
+       {
+        "value": "8.1",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T08:00:00.000-04:00"
+       },
+       {
+        "value": "8.1",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T08:15:00.000-04:00"
+       },
+       {
+        "value": "8.1",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T08:30:00.000-04:00"
+       },
+       {
+        "value": "8.1",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T08:45:00.000-04:00"
+       },
+       {
+        "value": "8.1",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T09:00:00.000-04:00"
+       },
+       {
+        "value": "8.2",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T09:15:00.000-04:00"
+       },
+       {
+        "value": "8.2",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T09:30:00.000-04:00"
+       },
+       {
+        "value": "8.2",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T09:45:00.000-04:00"
+       },
+       {
+        "value": "8.2",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T10:00:00.000-04:00"
+       },
+       {
+        "value": "8.3",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T10:15:00.000-04:00"
+       },
+       {
+        "value": "8.3",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T10:30:00.000-04:00"
+       },
+       {
+        "value": "8.3",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T10:45:00.000-04:00"
+       },
+       {
+        "value": "8.4",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T11:00:00.000-04:00"
+       },
+       {
+        "value": "8.4",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T11:15:00.000-04:00"
+       },
+       {
+        "value": "8.4",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T11:30:00.000-04:00"
+       },
+       {
+        "value": "8.4",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T11:45:00.000-04:00"
+       },
+       {
+        "value": "8.5",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T12:00:00.000-04:00"
+       },
+       {
+        "value": "8.5",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T12:15:00.000-04:00"
+       },
+       {
+        "value": "8.5",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T12:30:00.000-04:00"
+       },
+       {
+        "value": "8.6",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T13:45:00.000-04:00"
+       },
+       {
+        "value": "8.6",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T14:00:00.000-04:00"
+       },
+       {
+        "value": "8.6",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T14:15:00.000-04:00"
+       },
+       {
+        "value": "8.6",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T14:30:00.000-04:00"
+       },
+       {
+        "value": "8.6",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T14:45:00.000-04:00"
+       },
+       {
+        "value": "8.6",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T15:00:00.000-04:00"
+       },
+       {
+        "value": "8.6",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T15:15:00.000-04:00"
+       },
+       {
+        "value": "8.6",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T15:30:00.000-04:00"
+       },
+       {
+        "value": "8.6",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T15:45:00.000-04:00"
+       },
+       {
+        "value": "8.6",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T16:00:00.000-04:00"
+       },
+       {
+        "value": "8.6",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T16:15:00.000-04:00"
+       },
+       {
+        "value": "8.6",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T16:30:00.000-04:00"
+       },
+       {
+        "value": "8.6",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T16:45:00.000-04:00"
+       },
+       {
+        "value": "8.6",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T17:00:00.000-04:00"
+       },
+       {
+        "value": "8.6",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T17:15:00.000-04:00"
+       },
+       {
+        "value": "8.5",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T17:30:00.000-04:00"
+       },
+       {
+        "value": "8.5",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T17:45:00.000-04:00"
+       },
+       {
+        "value": "8.5",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T18:00:00.000-04:00"
+       },
+       {
+        "value": "8.5",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T18:15:00.000-04:00"
+       },
+       {
+        "value": "8.5",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T18:30:00.000-04:00"
+       },
+       {
+        "value": "8.5",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T18:45:00.000-04:00"
+       },
+       {
+        "value": "8.5",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T19:00:00.000-04:00"
+       },
+       {
+        "value": "8.4",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T19:15:00.000-04:00"
+       },
+       {
+        "value": "8.4",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T19:30:00.000-04:00"
+       },
+       {
+        "value": "8.4",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T19:45:00.000-04:00"
+       },
+       {
+        "value": "8.4",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T20:00:00.000-04:00"
+       }
+      ],
+      "qualifier": [
+       {
+        "qualifierCode": "P",
+        "qualifierDescription": "Provisional data subject to revision.",
+        "qualifierID": 0,
+        "network": "NWIS",
+        "vocabulary": "uv_rmk_cd"
+       }
+      ],
+      "qualityControlLevel": [],
+      "method": [
+       {
+        "methodDescription": "",
+        "methodID": 330450
+       }
+      ],
+      "source": [],
+      "offset": [],
+      "sample": [],
+      "censorCode": []
+     }
+    ],
+    "name": "USGS:01634000:00400:00000"
+   },
+   {
+    "sourceInfo": {
+     "siteName": "N F SHENANDOAH RIVER NEAR STRASBURG, VA",
+     "siteCode": [
+      {
+       "value": "01634000",
+       "network": "NWIS",
+       "agencyCode": "USGS"
+      }
+     ],
+     "timeZoneInfo": {
+      "defaultTimeZone": {
+       "zoneOffset": "-05:00",
+       "zoneAbbreviation": "EST"
+      },
+      "daylightSavingsTimeZone": {
+       "zoneOffset": "-04:00",
+       "zoneAbbreviation": "EDT"
+      },
+      "siteUsesDaylightSavingsTime": true
+     },
+     "geoLocation": {
+      "geogLocation": {
+       "srs": "EPSG:4326",
+       "latitude": 38.9767759,
+       "longitude": -78.3361152
+      },
+      "localSiteXY": []
+     },
+     "note": [],
+     "siteType": [],
+     "siteProperty": [
+      {
+       "value": "ST",
+       "name": "siteTypeCd"
+      },
+      {
+       "value": "02070006",
+       "name": "hucCd"
+      },
+      {
+       "value": "51",
+       "name": "stateCd"
+      },
+      {
+       "value": "51187",
+       "name": "countyCd"
+      }
+     ]
+    },
+    "variable": {
+     "variableCode": [
+      {
+       "value": "63680",
+       "network": "NWIS",
+       "vocabulary": "NWIS:UnitValues",
+       "variableID": 51443524,
+       "default": true
+      }
+     ],
+     "variableName": "Turbidity, water, unfiltered, monochrome near infra-red LED light, 780-900 nm, detection angle 90 &#177;2.5&#176;, formazin nephelometric units (FNU)",
+     "variableDescription": "Turbidity, water, unfiltered, monochrome near infra-red LED light, 780-900 nm, detection angle 90 +-2.5 degrees, formazin nephelometric units (FNU)",
+     "valueType": "Derived Value",
+     "unit": {
+      "unitCode": "FNU"
+     },
+     "options": {
+      "option": [
+       {
+        "name": "Statistic",
+        "optionCode": "00000"
+       }
+      ]
+     },
+     "note": [],
+     "noDataValue": -999999.0,
+     "variableProperty": [],
+     "oid": "51443524"
+    },
+    "values": [
+     {
+      "value": [
+       {
+        "value": "0.8",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T08:00:00.000-04:00"
+       },
+       {
+        "value": "0.7",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T08:15:00.000-04:00"
+       },
+       {
+        "value": "0.7",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T08:30:00.000-04:00"
+       },
+       {
+        "value": "0.7",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T08:45:00.000-04:00"
+       },
+       {
+        "value": "0.7",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T09:00:00.000-04:00"
+       },
+       {
+        "value": "2.2",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T09:15:00.000-04:00"
+       },
+       {
+        "value": "0.7",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T09:30:00.000-04:00"
+       },
+       {
+        "value": "0.7",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T09:45:00.000-04:00"
+       },
+       {
+        "value": "0.7",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T10:00:00.000-04:00"
+       },
+       {
+        "value": "0.8",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T10:15:00.000-04:00"
+       },
+       {
+        "value": "0.8",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T10:30:00.000-04:00"
+       },
+       {
+        "value": "0.7",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T10:45:00.000-04:00"
+       },
+       {
+        "value": "0.8",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T11:00:00.000-04:00"
+       },
+       {
+        "value": "0.7",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T11:15:00.000-04:00"
+       },
+       {
+        "value": "0.7",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T11:30:00.000-04:00"
+       },
+       {
+        "value": "0.7",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T11:45:00.000-04:00"
+       },
+       {
+        "value": "0.7",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T12:00:00.000-04:00"
+       },
+       {
+        "value": "0.6",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T12:15:00.000-04:00"
+       },
+       {
+        "value": "0.7",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T12:30:00.000-04:00"
+       },
+       {
+        "value": "0.7",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T13:45:00.000-04:00"
+       },
+       {
+        "value": "0.5",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T14:00:00.000-04:00"
+       },
+       {
+        "value": "0.6",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T14:15:00.000-04:00"
+       },
+       {
+        "value": "0.6",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T14:30:00.000-04:00"
+       },
+       {
+        "value": "0.6",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T14:45:00.000-04:00"
+       },
+       {
+        "value": "0.6",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T15:00:00.000-04:00"
+       },
+       {
+        "value": "0.6",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T15:15:00.000-04:00"
+       },
+       {
+        "value": "0.7",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T15:30:00.000-04:00"
+       },
+       {
+        "value": "0.7",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T15:45:00.000-04:00"
+       },
+       {
+        "value": "0.6",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T16:00:00.000-04:00"
+       },
+       {
+        "value": "0.6",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T16:15:00.000-04:00"
+       },
+       {
+        "value": "0.6",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T16:30:00.000-04:00"
+       },
+       {
+        "value": "0.6",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T16:45:00.000-04:00"
+       },
+       {
+        "value": "0.6",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T17:00:00.000-04:00"
+       },
+       {
+        "value": "0.6",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T17:15:00.000-04:00"
+       },
+       {
+        "value": "0.6",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T17:30:00.000-04:00"
+       },
+       {
+        "value": "0.7",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T17:45:00.000-04:00"
+       },
+       {
+        "value": "0.7",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T18:00:00.000-04:00"
+       },
+       {
+        "value": "0.7",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T18:15:00.000-04:00"
+       },
+       {
+        "value": "0.8",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T18:30:00.000-04:00"
+       },
+       {
+        "value": "0.8",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T18:45:00.000-04:00"
+       },
+       {
+        "value": "0.7",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T19:00:00.000-04:00"
+       },
+       {
+        "value": "1.1",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T19:15:00.000-04:00"
+       },
+       {
+        "value": "0.7",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T19:30:00.000-04:00"
+       },
+       {
+        "value": "0.8",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T19:45:00.000-04:00"
+       },
+       {
+        "value": "1.0",
+        "qualifiers": [
+         "P"
+        ],
+        "dateTime": "2026-09-16T20:00:00.000-04:00"
+       }
+      ],
+      "qualifier": [
+       {
+        "qualifierCode": "P",
+        "qualifierDescription": "Provisional data subject to revision.",
+        "qualifierID": 0,
+        "network": "NWIS",
+        "vocabulary": "uv_rmk_cd"
+       }
+      ],
+      "qualityControlLevel": [],
+      "method": [
+       {
+        "methodDescription": "",
+        "methodID": 330452
+       }
+      ],
+      "source": [],
+      "offset": [],
+      "sample": [],
+      "censorCode": []
+     }
+    ],
+    "name": "USGS:01634000:63680:00000"
+   }
+  ]
+ },
+ "nil": false,
+ "globalScope": true,
+ "typeSubstituted": false
+}

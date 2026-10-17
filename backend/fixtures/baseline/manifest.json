@@ -1,0 +1,22 @@
+{
+  "site_id": "01634000",
+  "station_id": "GHCND:USW00013731",
+  "start": "2026-09-16T00:00:00+00:00",
+  "end": "2026-10-14T00:00:00+00:00",
+  "nwis_parameters": {
+    "00095": "conductivity",
+    "63680": "turbidity",
+    "00400": "ph",
+    "00060": "discharge"
+  },
+  "nwis_sources": [
+    "waterdata"
+  ],
+  "prcp_resolution": "daily",
+  "created_from": [
+    "01634000_20260916_20261014.csv",
+    "USW00013731_20260916_20261014.csv"
+  ],
+  "nwis_file": "nwis.csv",
+  "noaa_file": "noaa_prcp.csv"
+}
