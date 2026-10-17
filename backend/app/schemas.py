@@ -176,11 +176,19 @@ class SensorSeriesResponse(ResponseBase):
 
 
 class SensorEvent(BaseModel):
-    timestamp: datetime
+    """One run of consecutive anomalous slots for one parameter."""
+
+    timestamp: datetime  # onset: first anomalous slot
     parameter: SensorParameter
-    score: float
-    value: float
-    baseline_mean: float
+    score: float  # peak |z| in the run
+    value: float  # value at the peak
+    baseline_mean: float  # pre-event rolling baseline at the peak
+    baseline_std: float
+    direction: Literal["rise", "drop"]
+    peak_timestamp: datetime
+    end_timestamp: datetime
+    n_points: int
+    includes_simulated: bool = False  # True if any slot in the run was injected
 
 
 class RainDay(BaseModel):
@@ -195,7 +203,21 @@ class RainContext(BaseModel):
     window_total_inches: float | None
     threshold_inches: float
     exceeded: bool | None  # None when rain data is missing
+    missing_days: int = 0
     note: str = "Daily totals only; rain timing within a day is unknown."
+
+
+class StormDecision(BaseModel):
+    event: SensorEvent
+    label: Literal["storm_runoff", "flag_for_review"]
+    reason: str
+
+
+class StormFilterResult(ResponseBase):
+    overall: Literal["storm_runoff", "flag_for_review", "no_anomaly"]
+    decisions: list[StormDecision]
+    rain: RainContext | None
+    data_origin: str  # e.g. "real observed data, not simulated" or "simulated spill injected into real baseline"
 
 
 class VisionDetection(BaseModel):

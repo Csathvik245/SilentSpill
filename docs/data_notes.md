@@ -96,6 +96,14 @@ Fetch from the new USGS Water Data API (`https://api.waterdata.usgs.gov/ogcapi/v
 - Woodstock 2 NE (`GHCND:USC00449263`) is upstream of the reach but also daily-only. It is a possible second station.
 - Auth: token in a request header named `token`.
 
+## Demo scenarios (step 5)
+
+- **Spill:** `SCENARIO_TIMESTAMP=2026-10-09T20:00:00Z` (16:00 local). All four sensors are continuous from 2026-10-06 19:00Z to 10-12 12:45Z, which gives 72 h before and 24 h after. It is clear of the 10-03 to 10-06 outage and the turbidity gap. There is no rain reading on 10-08 or 10-09 (likely dry; the station reported temperature).
+  - It was first set to 10-10 14:00Z and moved earlier: the **real** data has a natural runoff-like event starting about 2026-10-11 09:00Z (discharge 115 to 256 cfs, turbidity 0.7 to 9.2 FNU, conductivity 406 to 314) with no rain reading, which would have fallen inside the spill's 24 h window. The filter classifies that real event `flag_for_review` with "no rain reading".
+  - Injected spill defaults: conductivity +250 uS/cm, pH -1.5, turbidity +15 FNU, 45 min rise, 6 h e-folding decay, 24 h duration, 3% seeded noise. The pH shift was raised from -0.6 because at 20:00Z pH is at its diurnal high (~8.7), where -0.6 stays inside the normal daily range.
+- **Storm:** 2026-09-22 (`STORM_CASE_DATE`), real observed data, unchanged. Detection runs over the storm day and the next day. A one-reading turbidity spike on the evening of 09-21 has only 0.28 in in its daily window (09-20 no reading, 09-21 0.28 in), so the strict daily rule flags it for review. That is reported, not hidden.
+- **Detection defaults:** z ≥ 4 against a 24 h time-based baseline of preceding values (at least 48 points), with std floors of 2 uS/cm, 0.2 FNU and 0.02 pH. Over the quiet stretch 10-07 to 10-11 this gives one single-reading turbidity false event (10-10 11:00Z) and no pH false events.
+
 ## ECHO (verified)
 
 ### Facilities (`ICIS_FACILITIES.csv`)

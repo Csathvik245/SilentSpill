@@ -14,6 +14,7 @@ REQUIRED = {
     "NOAA_STATION_ID": "GHCND:USW00013731",
     "RAIN_THRESHOLD_INCHES": "0.5",
     "RAIN_WINDOW_HOURS": "24",
+    "SCENARIO_TIMESTAMP": "2026-10-10T14:00:00Z",
 }
 
 
@@ -64,6 +65,14 @@ def test_rain_threshold_must_be_positive(env, monkeypatch):
     monkeypatch.setenv("RAIN_WINDOW_HOURS", "0")
     with pytest.raises(ConfigError, match="RAIN_WINDOW_HOURS"):
         load_settings(env_file=None)
+
+
+def test_scenario_timestamp_is_utc(env, monkeypatch):
+    s = load_settings(env_file=None)
+    assert s.scenario_timestamp.isoformat() == "2026-10-10T14:00:00+00:00"
+    assert s.storm_case_date.isoformat() == "2026-09-22"
+    monkeypatch.setenv("SCENARIO_TIMESTAMP", "2026-10-10T10:00:00-04:00")
+    assert load_settings(env_file=None).scenario_timestamp.isoformat() == "2026-10-10T14:00:00+00:00"
 
 
 def test_violation_window_years_setting(env, monkeypatch):

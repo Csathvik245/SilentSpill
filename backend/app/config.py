@@ -1,6 +1,7 @@
 """Settings loaded from .env via pydantic. Required values fail fast with a clear message."""
 from __future__ import annotations
 
+from datetime import date, datetime, timezone
 from functools import lru_cache
 from pathlib import Path
 from typing import Any
@@ -54,6 +55,8 @@ class Settings(BaseSettings):
     noaa_station_id: str
     rain_threshold_inches: float
     rain_window_hours: int
+    scenario_timestamp: datetime  # spill start for the demo; also ends the violation window
+    storm_case_date: date = date(2026, 9, 22)  # real observed storm used for the storm_runoff case
 
     # Optional: the pipeline falls back or skips when these are absent
     groq_api_key: SecretStr | None = None
@@ -83,6 +86,11 @@ class Settings(BaseSettings):
         if v <= 0:
             raise ValueError("must be greater than 0")
         return v
+
+    @field_validator("scenario_timestamp", mode="after")
+    @classmethod
+    def _utc(cls, v: datetime) -> datetime:
+        return v.replace(tzinfo=timezone.utc) if v.tzinfo is None else v.astimezone(timezone.utc)
 
     @model_validator(mode="after")
     def _required_paths_exist(self) -> "Settings":
