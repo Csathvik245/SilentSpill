@@ -262,3 +262,14 @@ def test_real_october_event_without_rain_reading_is_not_storm_runoff(settings, s
     assert turb
     assert all("no rain reading" in d.reason.lower() and d.label == "flag_for_review" for d in turb)
     assert r.overall != "storm_runoff"
+
+
+def test_ph_spill_of_one_unit_detected_and_quiet_ph_has_no_events(settings, snap):
+    # Same-time-of-day pH baseline: the default -1.0 shift is found, and the daily swing alone is not.
+    ts = settings.scenario_timestamp
+    injected = inject_spill(snap.sensors, spill_params_from_settings()).frame
+    ph = [e for e in detect_anomalies(injected, baseline_end=ts, start=ts, end=ts + timedelta(hours=24))
+          if e.parameter == "ph"]
+    assert len(ph) == 1 and ph[0].direction == "drop" and ph[0].score >= 4
+    quiet = detect_anomalies(snap.sensors, parameters=("ph",), start=utc(2026, 9, 19), end=utc(2026, 10, 11))
+    assert quiet == []

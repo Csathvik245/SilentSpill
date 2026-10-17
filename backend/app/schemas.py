@@ -223,11 +223,47 @@ class StormFilterResult(ResponseBase):
 class VisionDetection(BaseModel):
     frame_index: int
     time_s: float
-    label: str  # e.g. "plume" or "debris"
+    timestamp: datetime | None = None  # scenario time of the frame
+    label: str  # "plume" from the HSV detector; class names from the Roboflow model
     confidence: float = Field(ge=0, le=1)
     area_fraction: float | None = None
     bbox: tuple[int, int, int, int] | None = None
-    detector: Literal["hsv", "yolo"]
+    detector: Literal["hsv", "yolo", "roboflow"]
+
+
+class VisionFrame(BaseModel):
+    """HSV plume result for one frame, detected or not."""
+
+    frame_index: int
+    timestamp: datetime
+    plume_detected: bool
+    area_fraction: float  # dye pixels / river pixels
+    confidence: float = Field(ge=0, le=1)
+
+
+class VisionSummary(ResponseBase):
+    clip: str
+    clip_kind: str  # "spill" or a negative kind
+    frames_analyzed: int
+    frames: list[VisionFrame]
+    plume_detections: list[VisionDetection]
+    first_plume: datetime | None
+    last_plume: datetime | None
+    debris: list[VisionDetection] = []
+    debris_status: str  # e.g. "ok: 12 frames from cache" or "skipped: ROBOFLOW_API_KEY not set"
+    debris_note: str = (
+        "The Roboflow model detects trash and people, not plumes; its results are supporting context only."
+    )
+
+
+class FusionResult(ResponseBase):
+    classification: Literal["incident", "storm_runoff", "flag_for_review", "no_incident"]
+    confidence: float = Field(ge=0, le=1)
+    single_source: bool
+    sources: list[Literal["sensor", "vision"]]
+    events: list[FusedEvent]
+    max_delay_hours: float
+    reasons: list[str]
 
 
 class FusedEvent(BaseModel):

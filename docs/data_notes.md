@@ -100,9 +100,19 @@ Fetch from the new USGS Water Data API (`https://api.waterdata.usgs.gov/ogcapi/v
 
 - **Spill:** `SCENARIO_TIMESTAMP=2026-10-09T20:00:00Z` (16:00 local). All four sensors are continuous from 2026-10-06 19:00Z to 10-12 12:45Z, which gives 72 h before and 24 h after. It is clear of the 10-03 to 10-06 outage and the turbidity gap. There is no rain reading on 10-08 or 10-09 (likely dry; the station reported temperature).
   - It was first set to 10-10 14:00Z and moved earlier: the **real** data has a natural runoff-like event starting about 2026-10-11 09:00Z (discharge 115 to 256 cfs, turbidity 0.7 to 9.2 FNU, conductivity 406 to 314) with no rain reading, which would have fallen inside the spill's 24 h window. The filter classifies that real event `flag_for_review` with "no rain reading".
-  - Injected spill defaults: conductivity +250 uS/cm, pH -1.5, turbidity +15 FNU, 45 min rise, 6 h e-folding decay, 24 h duration, 3% seeded noise. The pH shift was raised from -0.6 because at 20:00Z pH is at its diurnal high (~8.7), where -0.6 stays inside the normal daily range.
+  - Injected spill defaults: conductivity +250 uS/cm, pH -1.0, turbidity +15 FNU, 45 min rise, 6 h e-folding decay, 24 h duration, 3% seeded noise.
+  - pH is compared with the **same time of day over the previous 72 h** (±30 min, at least 6 points), which removes its daily 8.2-8.7 swing. Against that baseline a -0.8 shift scores z 6.9 and -1.0 scores z 8.9 at the 20:00Z daily high, so -1.0 is used. The std floor for this baseline is 0.1, the gauge's pH resolution; with the 0.02 floor, single 0.1 steps scored as anomalies (28 false events over three weeks). With 0.1 there are no pH events from 09-19 to 10-11 without injection, and one real pH drop during the natural 10-11 runoff.
 - **Storm:** 2026-09-22 (`STORM_CASE_DATE`), real observed data, unchanged. Detection runs over the storm day and the next day. A one-reading turbidity spike on the evening of 09-21 has only 0.28 in in its daily window (09-20 no reading, 09-21 0.28 in), so the strict daily rule flags it for review. That is reported, not hidden.
-- **Detection defaults:** z ≥ 4 against a 24 h time-based baseline of preceding values (at least 48 points), with std floors of 2 uS/cm, 0.2 FNU and 0.02 pH. Over the quiet stretch 10-07 to 10-11 this gives one single-reading turbidity false event (10-10 11:00Z) and no pH false events.
+- **Event merging:** events of the same parameter and direction less than 1 h apart (end to next onset) are joined into one.
+- **Detection defaults:** z ≥ 4 against a 24 h time-based baseline of preceding values (at least 48 points) for conductivity and turbidity, and the same-time-of-day baseline for pH, with std floors of 2 uS/cm, 0.2 FNU and 0.1 pH. Over the quiet stretch 10-07 to 10-11 this gives one single-reading turbidity false event (10-10 11:00Z) and no pH false events.
+
+## Camera simulation and fusion (step 6)
+
+- No NAIP imagery: clips are drawn top-down on a synthetic river along the real flowline of the demo reach (`backend/fixtures/reach/reach_10000500083697.geojson`, digitized upstream to downstream), at about 3.5 m per pixel with a 40 m wide channel. Every frame carries a "SIMULATED" watermark and a UTC timestamp.
+- The spill clip runs from 19:50 to 21:49Z (30 s of scenario time per frame). The dye is released at `SCENARIO_TIMESTAMP` and drifts at the reach's EROM velocity (0.293 m/s). The negatives are glare, cloud shadow and algae, with no dye.
+- Plume detection is an HSV threshold on the dye colour. It finds the plume from 20:02Z in 216 of 240 frames, and nothing in any negative. There are no YOLO weights (ultralytics is not installed), so HSV is the only plume detector.
+- Roboflow debris model: one live run of 48 frames, all HTTP 200, **0 predictions on every clip**. The responses are cached in `backend/fixtures/vision/` and the demo reads only the cache. The model detects trash and people, not plumes, so it is supporting context only.
+- Fusion: an incident needs a plume and an unexplained gauge anomaly within ±3.0 h (the reach's travel time). A single source gives flag_for_review with confidence at most 0.4, and storm-runoff events never count as corroboration.
 
 ## ECHO (verified)
 

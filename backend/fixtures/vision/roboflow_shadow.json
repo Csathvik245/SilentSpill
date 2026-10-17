@@ -1,0 +1,73 @@
+{
+ "clip_name": "shadow",
+ "model_id": "illegal-dumping-detection-dd6wk-3t0jf/1",
+ "status": "ok",
+ "reason": "12 sampled frames sent to the hosted model",
+ "fetched_at": "2026-10-17T21:21:46+00:00",
+ "sample_every": 20,
+ "request_format": "POST {api_url}/{model_id}, base64 JPEG body (application/x-www-form-urlencoded), key in an Authorization: Bearer header (verified live; the key is never in the URL or body)",
+ "simulated": true,
+ "note": "The Roboflow model detects trash and people, not plumes; its results are supporting context only. Frames are SIMULATED footage.",
+ "responses": [
+  {
+   "frame_index": 0,
+   "timestamp": "2026-10-09T19:50:00+00:00",
+   "predictions": []
+  },
+  {
+   "frame_index": 20,
+   "timestamp": "2026-10-09T20:00:00+00:00",
+   "predictions": []
+  },
+  {
+   "frame_index": 40,
+   "timestamp": "2026-10-09T20:10:00+00:00",
+   "predictions": []
+  },
+  {
+   "frame_index": 60,
+   "timestamp": "2026-10-09T20:20:00+00:00",
+   "predictions": []
+  },
+  {
+   "frame_index": 80,
+   "timestamp": "2026-10-09T20:30:00+00:00",
+   "predictions": []
+  },
+  {
+   "frame_index": 100,
+   "timestamp": "2026-10-09T20:40:00+00:00",
+   "predictions": []
+  },
+  {
+   "frame_index": 120,
+   "timestamp": "2026-10-09T20:50:00+00:00",
+   "predictions": []
+  },
+  {
+   "frame_index": 140,
+   "timestamp": "2026-10-09T21:00:00+00:00",
+   "predictions": []
+  },
+  {
+   "frame_index": 160,
+   "timestamp": "2026-10-09T21:10:00+00:00",
+   "predictions": []
+  },
+  {
+   "frame_index": 180,
+   "timestamp": "2026-10-09T21:20:00+00:00",
+   "predictions": []
+  },
+  {
+   "frame_index": 200,
+   "timestamp": "2026-10-09T21:30:00+00:00",
+   "predictions": []
+  },
+  {
+   "frame_index": 220,
+   "timestamp": "2026-10-09T21:40:00+00:00",
+   "predictions": []
+  }
+ ]
+}

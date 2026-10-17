@@ -33,6 +33,10 @@ FROZEN = 149  # baseline_end slot for run-grouping tests: 96 real points before 
 
 
 def detect_frozen(df: pd.DataFrame, **kw):
+    # Run-building mechanics on the rolling baseline: these 3-day frames are too short for the
+    # 72 h same-time-of-day pH baseline, and the runs are deliberately close, so no merging here.
+    kw.setdefault("hour_of_day_parameters", ())
+    kw.setdefault("merge_within", None)
     return detect_anomalies(df, baseline_end=df.index[FROZEN].to_pydatetime(), **kw)
 
 
@@ -220,3 +224,91 @@ def test_includes_simulated_from_flag_column():
     assert by["conductivity"].includes_simulated is True
     assert by["turbidity"].includes_simulated is False  # no flag column
     assert by["ph"].includes_simulated is False  # flag column all False
+
+
+# ---- same-time-of-day pH baseline and event merging ------------------------------------------
+from datetime import datetime, timedelta, timezone  # noqa: E402
+
+from backend.app.detection.sensor_anomaly import hour_of_day_baseline, merge_events  # noqa: E402
+from backend.app.schemas import SensorEvent  # noqa: E402
+
+
+def diurnal_frame(days: int = 5) -> pd.DataFrame:
+    """pH swinging 8.2-8.7 every day (like the demo gauge) on a 15-min grid; flat other columns."""
+    n = days * 96
+    idx = grid(n)
+    hours = (idx.hour + idx.minute / 60).to_numpy()
+    df = pd.DataFrame({
+        "conductivity": 400.0, "turbidity": 1.0,
+        "ph": np.round(8.45 + 0.25 * np.sin(2 * np.pi * (hours - 14) / 24), 1),
+        "discharge": 100.0,
+    }, index=idx)
+    for c in ("conductivity", "turbidity", "ph", "discharge"):
+        df[f"{c}_qualifiers"] = "A"
+    return df
+
+
+def test_hour_of_day_baseline_uses_same_time_on_earlier_days():
+    df = diurnal_frame()
+    mean, _ = hour_of_day_baseline(df["ph"])
+    day4 = df.index[3 * 96:]
+    # A perfectly repeating cycle: the baseline equals the value at that time of day.
+    np.testing.assert_allclose(mean[day4].to_numpy(), df.loc[day4, "ph"].to_numpy(), atol=0.1)
+    assert mean.iloc[:90].isna().all()  # under one day of history: too few same-time points
+
+
+def test_daily_cycle_alone_raises_no_ph_events():
+    df = diurnal_frame()
+    assert detect_anomalies(df, parameters=("ph",), start=df.index[3 * 96].to_pydatetime()) == []
+
+
+def test_ph_drop_at_daily_high_is_detected_against_same_time_baseline():
+    df = diurnal_frame()
+    peak = df["ph"].iloc[3 * 96:4 * 96].idxmax()
+    i = df.index.get_loc(peak)
+    df.iloc[i:i + 4, df.columns.get_loc("ph")] -= 0.8
+    events = detect_anomalies(df, parameters=("ph",), baseline_end=peak.to_pydatetime(),
+                              start=peak.to_pydatetime())
+    assert [e.direction for e in events] == ["drop"]
+    assert events[0].score >= 4
+
+
+def test_hour_of_day_baseline_respects_baseline_end():
+    df = diurnal_frame()
+    be = df.index[3 * 96]
+    df.loc[df.index > be, "ph"] = 5.0  # anything after be must not enter the baseline
+    mean, _ = hour_of_day_baseline(df["ph"], baseline_end=be.to_pydatetime())
+    assert (mean[df.index > be].dropna() > 8).all()
+
+
+def _ev(param, direction, start_min, end_min, score=5.0, n=2, sim=False):
+    t0 = datetime(2026, 10, 9, 20, tzinfo=timezone.utc)
+    return SensorEvent(
+        timestamp=t0 + timedelta(minutes=start_min), parameter=param, score=score, value=1.0,
+        baseline_mean=0.0, baseline_std=1.0, direction=direction,
+        peak_timestamp=t0 + timedelta(minutes=start_min), end_timestamp=t0 + timedelta(minutes=end_min),
+        n_points=n, includes_simulated=sim,
+    )
+
+
+def test_merge_joins_same_parameter_and_direction_under_one_hour():
+    a, b = _ev("ph", "drop", 0, 30, score=6, n=3), _ev("ph", "drop", 75, 90, score=9, n=2, sim=True)
+    (m,) = merge_events([a, b])  # gap 45 min
+    assert m.timestamp == a.timestamp and m.end_timestamp == b.end_timestamp
+    assert m.score == 9 and m.peak_timestamp == b.peak_timestamp
+    assert m.n_points == 5 and m.includes_simulated
+
+
+def test_merge_keeps_events_an_hour_or_more_apart_or_different():
+    assert len(merge_events([_ev("ph", "drop", 0, 30), _ev("ph", "drop", 90, 100)])) == 2  # 60 min
+    assert len(merge_events([_ev("ph", "drop", 0, 30), _ev("ph", "rise", 45, 60)])) == 2
+    assert len(merge_events([_ev("ph", "drop", 0, 30), _ev("turbidity", "drop", 45, 60)])) == 2
+
+
+def test_detect_merges_by_default():
+    df = noisy_frame()
+    df.loc[df.index[[150, 151, 154, 155]], "conductivity"] += 100  # two runs 45 min apart (onset to onset)
+    kw = dict(hour_of_day_parameters=(), baseline_end=df.index[FROZEN].to_pydatetime())
+    assert len(detect_anomalies(df, merge_within=None, **kw)) == 2
+    (e,) = detect_anomalies(df, **kw)
+    assert e.n_points == 4 and e.end_timestamp == df.index[155]

@@ -24,9 +24,9 @@ SKIP_REASON = "gap: no real value, not written"
 class SpillParams:
     start: datetime  # tz-aware UTC; spill onset
     conductivity_delta: float = 250.0  # uS/cm added at peak
-    # pH units added at peak; result clipped to [0, 14]. Large enough to stand out from the diurnal
-    # swing (~8.2-8.7 at the demo gauge), which a -0.6 shift at the daily high does not.
-    ph_delta: float = -1.5
+    # pH units added at peak; result clipped to [0, 14]. Detected against the same-time-of-day
+    # baseline (sensor_anomaly), which removes the daily 8.2-8.7 swing at the demo gauge.
+    ph_delta: float = -1.0
     turbidity_delta: float = 15.0  # FNU added at peak; result clipped at >= 0
     rise_minutes: float = 45.0  # linear rise from 0 to peak
     decay_hours: float = 6.0  # e-folding decay after the peak
