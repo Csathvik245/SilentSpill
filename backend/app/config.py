@@ -53,6 +53,10 @@ class Settings(BaseSettings):
     reach_comid: int  # an NHDPlusID; the env name is kept from the brief
     nwis_site_id: str
     noaa_station_id: str
+    # Gauge location (NAD83) and name as published by USGS for NWIS_SITE_ID.
+    gauge_latitude: float = 38.9768
+    gauge_longitude: float = -78.3361
+    gauge_name: str = "North Fork Shenandoah River near Strasburg, VA"
     rain_threshold_inches: float
     rain_window_hours: int
     scenario_timestamp: datetime  # spill start for the demo; also ends the violation window
@@ -72,6 +76,14 @@ class Settings(BaseSettings):
     cache_dir: Path = Path("cache")
     random_seed: int = 42
     violation_window_years: int = 5
+    # API: comma-separated origins allowed by CORS (the frontend's dev server), and the SSE replay
+    # speed in scenario seconds per wall-clock second (600: one 15-min sensor tick every 1.5 s).
+    cors_origins: str = "http://localhost:5173,http://127.0.0.1:5173,http://localhost:3000,http://127.0.0.1:3000"
+    stream_speed: float = 600.0
+
+    @property
+    def cors_origin_list(self) -> list[str]:
+        return [o.strip() for o in self.cors_origins.split(",") if o.strip()]
 
     @field_validator(*_PATH_FIELDS, mode="after")
     @classmethod

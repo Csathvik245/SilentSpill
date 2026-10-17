@@ -1,0 +1,16 @@
+{
+  "simulated": true,
+  "requires_human_review": true,
+  "status": "ok",
+  "simulation_mode": true,
+  "data_ready": {
+    "baseline_snapshot": true,
+    "reach_fixture": true,
+    "nhdplus_gpkg": true,
+    "echo_data": true,
+    "tri_data": true,
+    "roboflow_cache": true,
+    "groq_configured": false,
+    "naip_imagery": false
+  }
+}

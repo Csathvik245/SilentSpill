@@ -1,0 +1,92 @@
+{
+  "simulated": true,
+  "requires_human_review": true,
+  "incident_id": "storm-20260922T0000Z",
+  "triage": {
+    "simulated": true,
+    "requires_human_review": true,
+    "classification": "storm_runoff",
+    "fusion_classification": "storm_runoff",
+    "confidence": 0.65,
+    "reasons": [
+      "No camera analysis was available for this window.",
+      "3 gauge event(s) (turbidity rise, conductivity drop) match the storm-runoff pattern (turbidity rise with rain at or above the threshold) and are not counted as corroboration.",
+      "Every gauge event is consistent with storm runoff and the camera does not confirm a plume; this rests on the gauge and rain record alone (single-source).",
+      "Camera and gauge observations are compared with a ±3.0 h allowance (river travel time over the reach between them).",
+      "Storm filter result: storm_runoff.",
+      "Triage follows the sensor and camera fusion result; it does not identify a source."
+    ]
+  },
+  "trace": {
+    "simulated": true,
+    "requires_human_review": true,
+    "candidates": [],
+    "candidate_notes": {},
+    "assumptions": [
+      "Storm runoff gets no candidate list: the anomaly is consistent with rain, so no permit holder is named."
+    ]
+  },
+  "compliance": {
+    "simulated": true,
+    "requires_human_review": true,
+    "facts": []
+  },
+  "report": {
+    "simulated": true,
+    "requires_human_review": true,
+    "banner": "SIMULATED DEMONSTRATION. The spill, plume footage and sensor spike are synthetic. This draft requires human review before any action.",
+    "summary": "Real observed data, not simulated: the gauge anomalies are classified as storm_runoff (confidence 0.65), consistent with 1.23 in of rain in the daily totals (threshold 0.5 in). Storm runoff gets no candidate list, and no permit holder is named. This draft requires human review before any action.",
+    "timeline": [
+      {
+        "timestamp": "2026-09-21T00:00:00Z",
+        "event": "Daily total at GHCND:USW00013731: 0.28 in of rain (daily totals only)."
+      },
+      {
+        "timestamp": "2026-09-22T00:00:00Z",
+        "event": "Daily total at GHCND:USW00013731: 0.95 in of rain (daily totals only)."
+      },
+      {
+        "timestamp": "2026-09-22T01:30:00Z",
+        "event": "Gauge turbidity rise begins; peak at 2026-09-22 01:30 UTC, ends 2026-09-22 01:30 UTC."
+      },
+      {
+        "timestamp": "2026-09-22T01:30:00Z",
+        "event": "Fusion classification: storm_runoff (confidence 0.65, sources: sensor)."
+      },
+      {
+        "timestamp": "2026-09-22T10:00:00Z",
+        "event": "Gauge turbidity rise begins; peak at 2026-09-22 10:45 UTC, ends 2026-09-22 11:45 UTC."
+      },
+      {
+        "timestamp": "2026-09-22T10:45:00Z",
+        "event": "Gauge conductivity drop begins; peak at 2026-09-22 11:15 UTC, ends 2026-09-22 12:00 UTC."
+      }
+    ],
+    "ranked_candidates": [],
+    "confidence": 0.65,
+    "assumptions": [
+      "Storm runoff gets no candidate list: the anomaly is consistent with rain, so no permit holder is named."
+    ],
+    "limitations": [
+      "This case uses real observed gauge and rain data, not simulated; there is no camera footage for it.",
+      "Facility coordinates are reported locations from ECHO (outfall points where available, otherwise facility geocodes), not surveyed discharge points.",
+      "Rain is daily totals only (the event day and the day before); timing within a day is unknown, and a missing day is reported as no rain reading, not zero rain.",
+      "Travel times shown with ≥ are lower bounds: some reaches on the path have no EROM velocity, and missing velocities are never filled in.",
+      "Conductivity→TDS and turbidity→TSS parameter matches are proxies: indirect indicators, not the same measurement.",
+      "No camera footage for this case, so the Roboflow debris model was not run; it detects trash and people, not plumes.",
+      "Violations are reported or alleged ECHO records, counted only within the stated window; historical violations are shown separately and not ranked.",
+      "TRI is annual self-reported data and cannot confirm a live event."
+    ],
+    "classification": "storm_runoff",
+    "data_origin": "real observed data, not simulated",
+    "report_mode": "fallback",
+    "fallback_reason": "GROQ_API_KEY or GROQ_MODEL not set",
+    "guardrail_notes": []
+  },
+  "agent_modes": {
+    "triage": "fallback",
+    "trace": "skipped",
+    "compliance": "skipped",
+    "report": "fallback"
+  }
+}

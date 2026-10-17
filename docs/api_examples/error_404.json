@@ -1,0 +1,5 @@
+{
+  "simulated": true,
+  "requires_human_review": true,
+  "detail": "unknown incident 'unknown-id'; run POST /scenario/run first"
+}

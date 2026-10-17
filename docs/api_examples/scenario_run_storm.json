@@ -1,0 +1,15 @@
+{
+  "simulated": true,
+  "requires_human_review": true,
+  "incident_id": "storm-20260922T0000Z",
+  "status": "completed",
+  "case": "storm",
+  "classification": "storm_runoff",
+  "report_mode": "fallback",
+  "agent_modes": {
+    "triage": "fallback",
+    "trace": "skipped",
+    "compliance": "skipped",
+    "report": "fallback"
+  }
+}

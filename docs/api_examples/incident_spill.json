@@ -1,0 +1,830 @@
+{
+  "simulated": true,
+  "requires_human_review": true,
+  "incident_id": "spill-20261009T2000Z",
+  "triage": {
+    "simulated": true,
+    "requires_human_review": true,
+    "classification": "incident",
+    "fusion_classification": "incident",
+    "confidence": 0.95,
+    "reasons": [
+      "Camera clip 'spill' shows dye-coloured water from 2026-10-09 20:02 to 2026-10-09 21:49 UTC in 216 of 240 frames (peak plume confidence 1.00).",
+      "Gauge anomalies in 3 parameter(s) (conductivity rise, turbidity rise, pH drop) fall within the ±3.0 h allowance of the camera plume, so two independent sources agree (not single-source).",
+      "Camera and gauge observations are compared with a ±3.0 h allowance (river travel time over the reach between them).",
+      "Classified as a possible incident for human review; it does not identify a source.",
+      "Storm filter result: flag_for_review.",
+      "Triage follows the sensor and camera fusion result; it does not identify a source."
+    ]
+  },
+  "trace": {
+    "simulated": true,
+    "requires_human_review": true,
+    "candidates": [
+      {
+        "facility_id": "VA0052621",
+        "name": "VALLEY MILK PRODUCTS LLC",
+        "frs_id": "110000341194",
+        "latitude": 38.985,
+        "longitude": -78.36,
+        "location_type": "outfall",
+        "location_note": "Reported outfall location (ECHO permitted feature) 001; not a surveyed discharge point.",
+        "distance_km_to_reach": 0.010733496183242186,
+        "nearest_reach_nhdplusid": 10000500083644,
+        "upstream_distance_km": 2.02075429,
+        "travel_time": {
+          "hours": 7.357208998648063,
+          "travel_time_hours_min": 7.357208998648063,
+          "is_lower_bound": false,
+          "km_with_velocity": 7.574557109999999,
+          "km_total": 7.574557109999999,
+          "missing_reach_count": 0,
+          "reaches_missing_velocity": [],
+          "reason": null,
+          "display": "7.4 h"
+        },
+        "numeric_violation_count": 3,
+        "reporting_violation_count": 5,
+        "historical_numeric_violation_count": 6,
+        "violation_window_start": "2021-10-09",
+        "violation_window_end": "2026-10-09",
+        "violation_window_label": "reported numeric limit violations, 2021–2026",
+        "violations": [
+          {
+            "parameter": "NOAEL Static 48Hr Acute Ceriodaphnia dubia",
+            "monitoring_period_end": "2023-12-31",
+            "violation_desc": "DMR, Limited - Numeric Violation",
+            "exceedance_pct": 50.0,
+            "status": null,
+            "outfall": "001",
+            "source_fields": [
+              "PARAMETER_DESC",
+              "VIOLATION_DESC",
+              "MONITORING_PERIOD_END_DATE",
+              "EXCEEDENCE_PCT",
+              "PERM_FEATURE_NMBR"
+            ]
+          },
+          {
+            "parameter": "Oxygen, dissolved [DO]",
+            "monitoring_period_end": "2022-06-30",
+            "violation_desc": "DMR, Limited - Numeric Violation",
+            "exceedance_pct": 1.0,
+            "status": null,
+            "outfall": "001",
+            "source_fields": [
+              "PARAMETER_DESC",
+              "VIOLATION_DESC",
+              "MONITORING_PERIOD_END_DATE",
+              "EXCEEDENCE_PCT",
+              "PERM_FEATURE_NMBR"
+            ]
+          },
+          {
+            "parameter": "Oxygen, dissolved [DO]",
+            "monitoring_period_end": "2022-05-31",
+            "violation_desc": "DMR, Limited - Numeric Violation",
+            "exceedance_pct": 5.0,
+            "status": null,
+            "outfall": "001",
+            "source_fields": [
+              "PARAMETER_DESC",
+              "VIOLATION_DESC",
+              "MONITORING_PERIOD_END_DATE",
+              "EXCEEDENCE_PCT",
+              "PERM_FEATURE_NMBR"
+            ]
+          }
+        ],
+        "matched_parameters": [],
+        "tri_releases": [],
+        "tri_match": null,
+        "tri_match_confidence": null,
+        "rank": 1,
+        "rank_basis": "river distance upstream of the spill reach (km), then distance to the river (km); not travel time"
+      },
+      {
+        "facility_id": "VAG408560",
+        "name": "ERBACH ENTERPRISES LLC PROPERTY 2",
+        "frs_id": "110071437515",
+        "latitude": 38.98511,
+        "longitude": -78.396488,
+        "location_type": "outfall",
+        "location_note": "Reported outfall location (ECHO permitted feature) 001; not a surveyed discharge point.",
+        "distance_km_to_reach": 0.08292030155136107,
+        "nearest_reach_nhdplusid": 10000500008235,
+        "upstream_distance_km": 7.13152533,
+        "travel_time": {
+          "hours": null,
+          "travel_time_hours_min": 9.128923682471024,
+          "is_lower_bound": true,
+          "km_with_velocity": 10.291679760000001,
+          "km_total": 10.563315600000001,
+          "missing_reach_count": 1,
+          "reaches_missing_velocity": [
+            10000500008235
+          ],
+          "reason": "1 of 18 reaches on the path (0.3 of 10.6 km) has no EROM velocity; time over those reaches is not counted, so this is a lower bound.",
+          "display": "≥ 9.1 h (velocity available for 10.3 of 10.6 km)"
+        },
+        "numeric_violation_count": 2,
+        "reporting_violation_count": 0,
+        "historical_numeric_violation_count": 0,
+        "violation_window_start": "2021-10-09",
+        "violation_window_end": "2026-10-09",
+        "violation_window_label": "reported numeric limit violations, 2021–2026",
+        "violations": [
+          {
+            "parameter": "Solids, total suspended",
+            "monitoring_period_end": "2025-08-31",
+            "violation_desc": "DMR, Limited - Numeric Violation",
+            "exceedance_pct": 205.0,
+            "status": null,
+            "outfall": "001",
+            "source_fields": [
+              "PARAMETER_DESC",
+              "VIOLATION_DESC",
+              "MONITORING_PERIOD_END_DATE",
+              "EXCEEDENCE_PCT",
+              "PERM_FEATURE_NMBR"
+            ]
+          },
+          {
+            "parameter": "Solids, total suspended",
+            "monitoring_period_end": "2024-08-31",
+            "violation_desc": "DMR, Limited - Numeric Violation",
+            "exceedance_pct": 126.0,
+            "status": null,
+            "outfall": "001",
+            "source_fields": [
+              "PARAMETER_DESC",
+              "VIOLATION_DESC",
+              "MONITORING_PERIOD_END_DATE",
+              "EXCEEDENCE_PCT",
+              "PERM_FEATURE_NMBR"
+            ]
+          }
+        ],
+        "matched_parameters": [
+          {
+            "sensor_parameter": "turbidity",
+            "echo_parameter": "Solids, total suspended",
+            "is_proxy": true,
+            "note": "Total suspended solids (TSS) is used as a proxy for turbidity; it is an indirect indicator."
+          }
+        ],
+        "tri_releases": [],
+        "tri_match": null,
+        "tri_match_confidence": null,
+        "rank": 2,
+        "rank_basis": "river distance upstream of the spill reach (km), then distance to the river (km); not travel time"
+      },
+      {
+        "facility_id": "VAG408449",
+        "name": "ERBACH ENTERPRISES LLC PROPERTY",
+        "frs_id": "110070596880",
+        "latitude": 38.98498,
+        "longitude": -78.398097,
+        "location_type": "outfall",
+        "location_note": "Reported outfall location (ECHO permitted feature) 001; not a surveyed discharge point.",
+        "distance_km_to_reach": 0.008317411334078616,
+        "nearest_reach_nhdplusid": 10000500019726,
+        "upstream_distance_km": 7.40316117,
+        "travel_time": {
+          "hours": null,
+          "travel_time_hours_min": 9.450572738117135,
+          "is_lower_bound": true,
+          "km_with_velocity": 10.69460949,
+          "km_total": 10.96624533,
+          "missing_reach_count": 1,
+          "reaches_missing_velocity": [
+            10000500008235
+          ],
+          "reason": "1 of 19 reaches on the path (0.3 of 11.0 km) has no EROM velocity; time over those reaches is not counted, so this is a lower bound.",
+          "display": "≥ 9.4 h (velocity available for 10.7 of 11.0 km)"
+        },
+        "numeric_violation_count": 3,
+        "reporting_violation_count": 0,
+        "historical_numeric_violation_count": 2,
+        "violation_window_start": "2021-10-09",
+        "violation_window_end": "2026-10-09",
+        "violation_window_label": "reported numeric limit violations, 2021–2026",
+        "violations": [
+          {
+            "parameter": "E. coli",
+            "monitoring_period_end": "2025-08-31",
+            "violation_desc": "DMR, Limited - Numeric Violation",
+            "exceedance_pct": 703.0,
+            "status": null,
+            "outfall": "001",
+            "source_fields": [
+              "PARAMETER_DESC",
+              "VIOLATION_DESC",
+              "MONITORING_PERIOD_END_DATE",
+              "EXCEEDENCE_PCT",
+              "PERM_FEATURE_NMBR"
+            ]
+          },
+          {
+            "parameter": "Oxygen, dissolved [DO]",
+            "monitoring_period_end": "2025-08-31",
+            "violation_desc": "DMR, Limited - Numeric Violation",
+            "exceedance_pct": 52.0,
+            "status": null,
+            "outfall": "001",
+            "source_fields": [
+              "PARAMETER_DESC",
+              "VIOLATION_DESC",
+              "MONITORING_PERIOD_END_DATE",
+              "EXCEEDENCE_PCT",
+              "PERM_FEATURE_NMBR"
+            ]
+          },
+          {
+            "parameter": "E. coli",
+            "monitoring_period_end": "2024-08-31",
+            "violation_desc": "DMR, Limited - Numeric Violation",
+            "exceedance_pct": 730.0,
+            "status": null,
+            "outfall": "001",
+            "source_fields": [
+              "PARAMETER_DESC",
+              "VIOLATION_DESC",
+              "MONITORING_PERIOD_END_DATE",
+              "EXCEEDENCE_PCT",
+              "PERM_FEATURE_NMBR"
+            ]
+          }
+        ],
+        "matched_parameters": [],
+        "tri_releases": [],
+        "tri_match": null,
+        "tri_match_confidence": null,
+        "rank": 3,
+        "rank_basis": "river distance upstream of the spill reach (km), then distance to the river (km); not travel time"
+      },
+      {
+        "facility_id": "VAG408158",
+        "name": "SHENANDOAH VALLEY BOARDING AND TRAINING LLC",
+        "frs_id": "110070602369",
+        "latitude": 38.961667,
+        "longitude": -78.406667,
+        "location_type": "outfall",
+        "location_note": "Reported outfall location (ECHO permitted feature) 001; not a surveyed discharge point.",
+        "distance_km_to_reach": 0.15788581127540094,
+        "nearest_reach_nhdplusid": 10000500025390,
+        "upstream_distance_km": 17.572440880000002,
+        "travel_time": {
+          "hours": null,
+          "travel_time_hours_min": 18.715513670955737,
+          "is_lower_bound": true,
+          "km_with_velocity": 20.60547814,
+          "km_total": 20.76818204,
+          "missing_reach_count": 2,
+          "reaches_missing_velocity": [
+            10000500025390,
+            10000500048649
+          ],
+          "reason": "2 of 35 reaches on the path (0.2 of 20.8 km) have no EROM velocity; time over those reaches is not counted, so this is a lower bound.",
+          "display": "≥ 18.7 h (velocity available for 20.6 of 20.8 km)"
+        },
+        "numeric_violation_count": 2,
+        "reporting_violation_count": 5,
+        "historical_numeric_violation_count": 0,
+        "violation_window_start": "2021-10-09",
+        "violation_window_end": "2026-10-09",
+        "violation_window_label": "reported numeric limit violations, 2021–2026",
+        "violations": [
+          {
+            "parameter": "BOD, 5-day, 20 deg. C",
+            "monitoring_period_end": "2024-08-31",
+            "violation_desc": "DMR, Limited - Numeric Violation",
+            "exceedance_pct": 247.0,
+            "status": null,
+            "outfall": "001",
+            "source_fields": [
+              "PARAMETER_DESC",
+              "VIOLATION_DESC",
+              "MONITORING_PERIOD_END_DATE",
+              "EXCEEDENCE_PCT",
+              "PERM_FEATURE_NMBR"
+            ]
+          },
+          {
+            "parameter": "BOD, 5-day, 20 deg. C",
+            "monitoring_period_end": "2022-08-31",
+            "violation_desc": "DMR, Limited - Numeric Violation",
+            "exceedance_pct": 113.0,
+            "status": null,
+            "outfall": "001",
+            "source_fields": [
+              "PARAMETER_DESC",
+              "VIOLATION_DESC",
+              "MONITORING_PERIOD_END_DATE",
+              "EXCEEDENCE_PCT",
+              "PERM_FEATURE_NMBR"
+            ]
+          }
+        ],
+        "matched_parameters": [],
+        "tri_releases": [],
+        "tri_match": null,
+        "tri_match_confidence": null,
+        "rank": 4,
+        "rank_basis": "river distance upstream of the spill reach (km), then distance to the river (km); not travel time"
+      }
+    ],
+    "candidate_notes": {
+      "VA0052621": "Rank 1 by river distance: 2.02 km upstream; river travel time 7.4 h; 3 reported numeric limit violations, 2021–2026. No reported parameter matches the anomalous sensor parameters.",
+      "VAG408560": "Rank 2 by river distance: 7.13 km upstream; river travel time ≥ 9.1 h (velocity available for 10.3 of 10.6 km); 2 reported numeric limit violations, 2021–2026. Reported parameter match: Solids, total suspended for turbidity (proxy).",
+      "VAG408449": "Rank 3 by river distance: 7.4 km upstream; river travel time ≥ 9.4 h (velocity available for 10.7 of 11.0 km); 3 reported numeric limit violations, 2021–2026. No reported parameter matches the anomalous sensor parameters.",
+      "VAG408158": "Rank 4 by river distance: 17.57 km upstream; river travel time ≥ 18.7 h (velocity available for 20.6 of 20.8 km); 2 reported numeric limit violations, 2021–2026. No reported parameter matches the anomalous sensor parameters."
+    },
+    "assumptions": [
+      "Candidates are ranked by river distance upstream of the spill reach, then distance to the river; not by travel time.",
+      "Travel times use the mean annual EROM velocity, treated as ft/s (a documented assumption); missing velocities are never filled in.",
+      "Only permits with at least one reported numeric limit violation in the window are listed."
+    ]
+  },
+  "compliance": {
+    "simulated": true,
+    "requires_human_review": true,
+    "facts": [
+      {
+        "facility_id": "VA0052621",
+        "statement": "3 reported numeric limit violations, 2021–2026 (reported or alleged).",
+        "value": "3",
+        "source_field": "numeric_violation_count",
+        "source_file": "VA_NPDES_EFF_VIOLATIONS.csv"
+      },
+      {
+        "facility_id": "VA0052621",
+        "statement": "6 reported numeric limit violations before the window (historical, not ranked).",
+        "value": "6",
+        "source_field": "historical_numeric_violation_count",
+        "source_file": "VA_NPDES_EFF_VIOLATIONS.csv"
+      },
+      {
+        "facility_id": "VA0052621",
+        "statement": "5 reporting violations (overdue reports, not pollution measurements; not ranked).",
+        "value": "5",
+        "source_field": "reporting_violation_count",
+        "source_file": "VA_NPDES_EFF_VIOLATIONS.csv"
+      },
+      {
+        "facility_id": "VA0052621",
+        "statement": "Reported numeric limit violation parameter in the window: NOAEL Static 48Hr Acute Ceriodaphnia dubia.",
+        "value": "NOAEL Static 48Hr Acute Ceriodaphnia dubia",
+        "source_field": "violations[].parameter",
+        "source_file": "VA_NPDES_EFF_VIOLATIONS.csv"
+      },
+      {
+        "facility_id": "VA0052621",
+        "statement": "Reported numeric limit violation parameter in the window: Oxygen, dissolved [DO].",
+        "value": "Oxygen, dissolved [DO]",
+        "source_field": "violations[].parameter",
+        "source_file": "VA_NPDES_EFF_VIOLATIONS.csv"
+      },
+      {
+        "facility_id": "VAG408560",
+        "statement": "2 reported numeric limit violations, 2021–2026 (reported or alleged).",
+        "value": "2",
+        "source_field": "numeric_violation_count",
+        "source_file": "VA_NPDES_EFF_VIOLATIONS.csv"
+      },
+      {
+        "facility_id": "VAG408560",
+        "statement": "Reported numeric limit violation parameter in the window: Solids, total suspended.",
+        "value": "Solids, total suspended",
+        "source_field": "violations[].parameter",
+        "source_file": "VA_NPDES_EFF_VIOLATIONS.csv"
+      },
+      {
+        "facility_id": "VAG408449",
+        "statement": "3 reported numeric limit violations, 2021–2026 (reported or alleged).",
+        "value": "3",
+        "source_field": "numeric_violation_count",
+        "source_file": "VA_NPDES_EFF_VIOLATIONS.csv"
+      },
+      {
+        "facility_id": "VAG408449",
+        "statement": "2 reported numeric limit violations before the window (historical, not ranked).",
+        "value": "2",
+        "source_field": "historical_numeric_violation_count",
+        "source_file": "VA_NPDES_EFF_VIOLATIONS.csv"
+      },
+      {
+        "facility_id": "VAG408449",
+        "statement": "Reported numeric limit violation parameter in the window: E. coli.",
+        "value": "E. coli",
+        "source_field": "violations[].parameter",
+        "source_file": "VA_NPDES_EFF_VIOLATIONS.csv"
+      },
+      {
+        "facility_id": "VAG408449",
+        "statement": "Reported numeric limit violation parameter in the window: Oxygen, dissolved [DO].",
+        "value": "Oxygen, dissolved [DO]",
+        "source_field": "violations[].parameter",
+        "source_file": "VA_NPDES_EFF_VIOLATIONS.csv"
+      },
+      {
+        "facility_id": "VAG408158",
+        "statement": "2 reported numeric limit violations, 2021–2026 (reported or alleged).",
+        "value": "2",
+        "source_field": "numeric_violation_count",
+        "source_file": "VA_NPDES_EFF_VIOLATIONS.csv"
+      },
+      {
+        "facility_id": "VAG408158",
+        "statement": "5 reporting violations (overdue reports, not pollution measurements; not ranked).",
+        "value": "5",
+        "source_field": "reporting_violation_count",
+        "source_file": "VA_NPDES_EFF_VIOLATIONS.csv"
+      },
+      {
+        "facility_id": "VAG408158",
+        "statement": "Reported numeric limit violation parameter in the window: BOD, 5-day, 20 deg. C.",
+        "value": "BOD, 5-day, 20 deg. C",
+        "source_field": "violations[].parameter",
+        "source_file": "VA_NPDES_EFF_VIOLATIONS.csv"
+      }
+    ]
+  },
+  "report": {
+    "simulated": true,
+    "requires_human_review": true,
+    "banner": "SIMULATED DEMONSTRATION. The spill, plume footage and sensor spike are synthetic. This draft requires human review before any action.",
+    "summary": "Simulated spill scenario: the gauge and camera evidence is classified as a possible incident (confidence 0.95) for human review; anomalous parameters: conductivity, pH, turbidity. 4 facilities with reported violations near this reach are listed upstream, ranked by river distance, not travel time. Rank 1: VALLEY MILK PRODUCTS LLC (VA0052621), 2.02 km upstream, river travel time 7.4 h, 3 reported numeric limit violations, 2021–2026. Rank 2: ERBACH ENTERPRISES LLC PROPERTY 2 (VAG408560), 7.13 km upstream, river travel time ≥ 9.1 h (velocity available for 10.3 of 10.6 km), 2 reported numeric limit violations, 2021–2026; reported Solids, total suspended matches turbidity (proxy). Rank 3: ERBACH ENTERPRISES LLC PROPERTY (VAG408449), 7.4 km upstream, river travel time ≥ 9.4 h (velocity available for 10.7 of 11.0 km), 3 reported numeric limit violations, 2021–2026. Rank 4: SHENANDOAH VALLEY BOARDING AND TRAINING LLC (VAG408158), 17.57 km upstream, river travel time ≥ 18.7 h (velocity available for 20.6 of 20.8 km), 2 reported numeric limit violations, 2021–2026. The listed records are consistent with nearby permitted discharges but do not identify a source. This draft requires human review before any action.",
+    "timeline": [
+      {
+        "timestamp": "2026-10-09T20:00:00Z",
+        "event": "Simulated spill release begins."
+      },
+      {
+        "timestamp": "2026-10-09T20:02:00Z",
+        "event": "Camera first shows a plume (simulated) (216 of 240 frames)."
+      },
+      {
+        "timestamp": "2026-10-09T20:02:00Z",
+        "event": "Fusion classification: incident (confidence 0.95, sources: sensor, vision)."
+      },
+      {
+        "timestamp": "2026-10-09T20:15:00Z",
+        "event": "Gauge conductivity rise begins (includes simulated values); peak at 2026-10-09 20:45 UTC, ends 2026-10-10 09:45 UTC."
+      },
+      {
+        "timestamp": "2026-10-09T20:15:00Z",
+        "event": "Gauge turbidity rise begins (includes simulated values); peak at 2026-10-09 20:45 UTC, ends 2026-10-10 14:00 UTC."
+      },
+      {
+        "timestamp": "2026-10-09T20:30:00Z",
+        "event": "Gauge pH drop begins (includes simulated values); peak at 2026-10-09 20:45 UTC, ends 2026-10-10 01:45 UTC."
+      },
+      {
+        "timestamp": "2026-10-09T21:49:30Z",
+        "event": "Last camera frame with a plume (simulated)."
+      }
+    ],
+    "ranked_candidates": [
+      {
+        "facility_id": "VA0052621",
+        "name": "VALLEY MILK PRODUCTS LLC",
+        "frs_id": "110000341194",
+        "latitude": 38.985,
+        "longitude": -78.36,
+        "location_type": "outfall",
+        "location_note": "Reported outfall location (ECHO permitted feature) 001; not a surveyed discharge point.",
+        "distance_km_to_reach": 0.010733496183242186,
+        "nearest_reach_nhdplusid": 10000500083644,
+        "upstream_distance_km": 2.02075429,
+        "travel_time": {
+          "hours": 7.357208998648063,
+          "travel_time_hours_min": 7.357208998648063,
+          "is_lower_bound": false,
+          "km_with_velocity": 7.574557109999999,
+          "km_total": 7.574557109999999,
+          "missing_reach_count": 0,
+          "reaches_missing_velocity": [],
+          "reason": null,
+          "display": "7.4 h"
+        },
+        "numeric_violation_count": 3,
+        "reporting_violation_count": 5,
+        "historical_numeric_violation_count": 6,
+        "violation_window_start": "2021-10-09",
+        "violation_window_end": "2026-10-09",
+        "violation_window_label": "reported numeric limit violations, 2021–2026",
+        "violations": [
+          {
+            "parameter": "NOAEL Static 48Hr Acute Ceriodaphnia dubia",
+            "monitoring_period_end": "2023-12-31",
+            "violation_desc": "DMR, Limited - Numeric Violation",
+            "exceedance_pct": 50.0,
+            "status": null,
+            "outfall": "001",
+            "source_fields": [
+              "PARAMETER_DESC",
+              "VIOLATION_DESC",
+              "MONITORING_PERIOD_END_DATE",
+              "EXCEEDENCE_PCT",
+              "PERM_FEATURE_NMBR"
+            ]
+          },
+          {
+            "parameter": "Oxygen, dissolved [DO]",
+            "monitoring_period_end": "2022-06-30",
+            "violation_desc": "DMR, Limited - Numeric Violation",
+            "exceedance_pct": 1.0,
+            "status": null,
+            "outfall": "001",
+            "source_fields": [
+              "PARAMETER_DESC",
+              "VIOLATION_DESC",
+              "MONITORING_PERIOD_END_DATE",
+              "EXCEEDENCE_PCT",
+              "PERM_FEATURE_NMBR"
+            ]
+          },
+          {
+            "parameter": "Oxygen, dissolved [DO]",
+            "monitoring_period_end": "2022-05-31",
+            "violation_desc": "DMR, Limited - Numeric Violation",
+            "exceedance_pct": 5.0,
+            "status": null,
+            "outfall": "001",
+            "source_fields": [
+              "PARAMETER_DESC",
+              "VIOLATION_DESC",
+              "MONITORING_PERIOD_END_DATE",
+              "EXCEEDENCE_PCT",
+              "PERM_FEATURE_NMBR"
+            ]
+          }
+        ],
+        "matched_parameters": [],
+        "tri_releases": [],
+        "tri_match": null,
+        "tri_match_confidence": null,
+        "rank": 1,
+        "rank_basis": "river distance upstream of the spill reach (km), then distance to the river (km); not travel time"
+      },
+      {
+        "facility_id": "VAG408560",
+        "name": "ERBACH ENTERPRISES LLC PROPERTY 2",
+        "frs_id": "110071437515",
+        "latitude": 38.98511,
+        "longitude": -78.396488,
+        "location_type": "outfall",
+        "location_note": "Reported outfall location (ECHO permitted feature) 001; not a surveyed discharge point.",
+        "distance_km_to_reach": 0.08292030155136107,
+        "nearest_reach_nhdplusid": 10000500008235,
+        "upstream_distance_km": 7.13152533,
+        "travel_time": {
+          "hours": null,
+          "travel_time_hours_min": 9.128923682471024,
+          "is_lower_bound": true,
+          "km_with_velocity": 10.291679760000001,
+          "km_total": 10.563315600000001,
+          "missing_reach_count": 1,
+          "reaches_missing_velocity": [
+            10000500008235
+          ],
+          "reason": "1 of 18 reaches on the path (0.3 of 10.6 km) has no EROM velocity; time over those reaches is not counted, so this is a lower bound.",
+          "display": "≥ 9.1 h (velocity available for 10.3 of 10.6 km)"
+        },
+        "numeric_violation_count": 2,
+        "reporting_violation_count": 0,
+        "historical_numeric_violation_count": 0,
+        "violation_window_start": "2021-10-09",
+        "violation_window_end": "2026-10-09",
+        "violation_window_label": "reported numeric limit violations, 2021–2026",
+        "violations": [
+          {
+            "parameter": "Solids, total suspended",
+            "monitoring_period_end": "2025-08-31",
+            "violation_desc": "DMR, Limited - Numeric Violation",
+            "exceedance_pct": 205.0,
+            "status": null,
+            "outfall": "001",
+            "source_fields": [
+              "PARAMETER_DESC",
+              "VIOLATION_DESC",
+              "MONITORING_PERIOD_END_DATE",
+              "EXCEEDENCE_PCT",
+              "PERM_FEATURE_NMBR"
+            ]
+          },
+          {
+            "parameter": "Solids, total suspended",
+            "monitoring_period_end": "2024-08-31",
+            "violation_desc": "DMR, Limited - Numeric Violation",
+            "exceedance_pct": 126.0,
+            "status": null,
+            "outfall": "001",
+            "source_fields": [
+              "PARAMETER_DESC",
+              "VIOLATION_DESC",
+              "MONITORING_PERIOD_END_DATE",
+              "EXCEEDENCE_PCT",
+              "PERM_FEATURE_NMBR"
+            ]
+          }
+        ],
+        "matched_parameters": [
+          {
+            "sensor_parameter": "turbidity",
+            "echo_parameter": "Solids, total suspended",
+            "is_proxy": true,
+            "note": "Total suspended solids (TSS) is used as a proxy for turbidity; it is an indirect indicator."
+          }
+        ],
+        "tri_releases": [],
+        "tri_match": null,
+        "tri_match_confidence": null,
+        "rank": 2,
+        "rank_basis": "river distance upstream of the spill reach (km), then distance to the river (km); not travel time"
+      },
+      {
+        "facility_id": "VAG408449",
+        "name": "ERBACH ENTERPRISES LLC PROPERTY",
+        "frs_id": "110070596880",
+        "latitude": 38.98498,
+        "longitude": -78.398097,
+        "location_type": "outfall",
+        "location_note": "Reported outfall location (ECHO permitted feature) 001; not a surveyed discharge point.",
+        "distance_km_to_reach": 0.008317411334078616,
+        "nearest_reach_nhdplusid": 10000500019726,
+        "upstream_distance_km": 7.40316117,
+        "travel_time": {
+          "hours": null,
+          "travel_time_hours_min": 9.450572738117135,
+          "is_lower_bound": true,
+          "km_with_velocity": 10.69460949,
+          "km_total": 10.96624533,
+          "missing_reach_count": 1,
+          "reaches_missing_velocity": [
+            10000500008235
+          ],
+          "reason": "1 of 19 reaches on the path (0.3 of 11.0 km) has no EROM velocity; time over those reaches is not counted, so this is a lower bound.",
+          "display": "≥ 9.4 h (velocity available for 10.7 of 11.0 km)"
+        },
+        "numeric_violation_count": 3,
+        "reporting_violation_count": 0,
+        "historical_numeric_violation_count": 2,
+        "violation_window_start": "2021-10-09",
+        "violation_window_end": "2026-10-09",
+        "violation_window_label": "reported numeric limit violations, 2021–2026",
+        "violations": [
+          {
+            "parameter": "E. coli",
+            "monitoring_period_end": "2025-08-31",
+            "violation_desc": "DMR, Limited - Numeric Violation",
+            "exceedance_pct": 703.0,
+            "status": null,
+            "outfall": "001",
+            "source_fields": [
+              "PARAMETER_DESC",
+              "VIOLATION_DESC",
+              "MONITORING_PERIOD_END_DATE",
+              "EXCEEDENCE_PCT",
+              "PERM_FEATURE_NMBR"
+            ]
+          },
+          {
+            "parameter": "Oxygen, dissolved [DO]",
+            "monitoring_period_end": "2025-08-31",
+            "violation_desc": "DMR, Limited - Numeric Violation",
+            "exceedance_pct": 52.0,
+            "status": null,
+            "outfall": "001",
+            "source_fields": [
+              "PARAMETER_DESC",
+              "VIOLATION_DESC",
+              "MONITORING_PERIOD_END_DATE",
+              "EXCEEDENCE_PCT",
+              "PERM_FEATURE_NMBR"
+            ]
+          },
+          {
+            "parameter": "E. coli",
+            "monitoring_period_end": "2024-08-31",
+            "violation_desc": "DMR, Limited - Numeric Violation",
+            "exceedance_pct": 730.0,
+            "status": null,
+            "outfall": "001",
+            "source_fields": [
+              "PARAMETER_DESC",
+              "VIOLATION_DESC",
+              "MONITORING_PERIOD_END_DATE",
+              "EXCEEDENCE_PCT",
+              "PERM_FEATURE_NMBR"
+            ]
+          }
+        ],
+        "matched_parameters": [],
+        "tri_releases": [],
+        "tri_match": null,
+        "tri_match_confidence": null,
+        "rank": 3,
+        "rank_basis": "river distance upstream of the spill reach (km), then distance to the river (km); not travel time"
+      },
+      {
+        "facility_id": "VAG408158",
+        "name": "SHENANDOAH VALLEY BOARDING AND TRAINING LLC",
+        "frs_id": "110070602369",
+        "latitude": 38.961667,
+        "longitude": -78.406667,
+        "location_type": "outfall",
+        "location_note": "Reported outfall location (ECHO permitted feature) 001; not a surveyed discharge point.",
+        "distance_km_to_reach": 0.15788581127540094,
+        "nearest_reach_nhdplusid": 10000500025390,
+        "upstream_distance_km": 17.572440880000002,
+        "travel_time": {
+          "hours": null,
+          "travel_time_hours_min": 18.715513670955737,
+          "is_lower_bound": true,
+          "km_with_velocity": 20.60547814,
+          "km_total": 20.76818204,
+          "missing_reach_count": 2,
+          "reaches_missing_velocity": [
+            10000500025390,
+            10000500048649
+          ],
+          "reason": "2 of 35 reaches on the path (0.2 of 20.8 km) have no EROM velocity; time over those reaches is not counted, so this is a lower bound.",
+          "display": "≥ 18.7 h (velocity available for 20.6 of 20.8 km)"
+        },
+        "numeric_violation_count": 2,
+        "reporting_violation_count": 5,
+        "historical_numeric_violation_count": 0,
+        "violation_window_start": "2021-10-09",
+        "violation_window_end": "2026-10-09",
+        "violation_window_label": "reported numeric limit violations, 2021–2026",
+        "violations": [
+          {
+            "parameter": "BOD, 5-day, 20 deg. C",
+            "monitoring_period_end": "2024-08-31",
+            "violation_desc": "DMR, Limited - Numeric Violation",
+            "exceedance_pct": 247.0,
+            "status": null,
+            "outfall": "001",
+            "source_fields": [
+              "PARAMETER_DESC",
+              "VIOLATION_DESC",
+              "MONITORING_PERIOD_END_DATE",
+              "EXCEEDENCE_PCT",
+              "PERM_FEATURE_NMBR"
+            ]
+          },
+          {
+            "parameter": "BOD, 5-day, 20 deg. C",
+            "monitoring_period_end": "2022-08-31",
+            "violation_desc": "DMR, Limited - Numeric Violation",
+            "exceedance_pct": 113.0,
+            "status": null,
+            "outfall": "001",
+            "source_fields": [
+              "PARAMETER_DESC",
+              "VIOLATION_DESC",
+              "MONITORING_PERIOD_END_DATE",
+              "EXCEEDENCE_PCT",
+              "PERM_FEATURE_NMBR"
+            ]
+          }
+        ],
+        "matched_parameters": [],
+        "tri_releases": [],
+        "tri_match": null,
+        "tri_match_confidence": null,
+        "rank": 4,
+        "rank_basis": "river distance upstream of the spill reach (km), then distance to the river (km); not travel time"
+      }
+    ],
+    "confidence": 0.95,
+    "assumptions": [
+      "Candidates are ranked by river distance upstream of the spill reach, then distance to the river; not by travel time.",
+      "Travel times use the mean annual EROM velocity, treated as ft/s (a documented assumption); missing velocities are never filled in.",
+      "Only permits with at least one reported numeric limit violation in the window are listed."
+    ],
+    "limitations": [
+      "The spill, the gauge sensor spike and the plume camera footage are simulated: the spike is injected into a real gauge baseline and the footage is rendered.",
+      "Facility coordinates are reported locations from ECHO (outfall points where available, otherwise facility geocodes), not surveyed discharge points.",
+      "Rain is daily totals only (the event day and the day before); timing within a day is unknown, and a missing day is reported as no rain reading, not zero rain. 2 of 2 days checked had no rain reading.",
+      "Travel times shown with ≥ are lower bounds: some reaches on the path have no EROM velocity, and missing velocities are never filled in.",
+      "Conductivity→TDS and turbidity→TSS parameter matches are proxies: indirect indicators, not the same measurement.",
+      "The Roboflow debris model detected nothing on the sampled frames (ok: 0 predictions on 12 sampled frames (cached 2026-10-17T21:21:36+00:00)); it detects trash and people, not plumes.",
+      "Violations are reported or alleged ECHO records, counted only within the stated window; historical violations are shown separately and not ranked.",
+      "TRI is annual self-reported data and cannot confirm a live event."
+    ],
+    "classification": "incident",
+    "data_origin": "simulated spill injected into real baseline",
+    "report_mode": "fallback",
+    "fallback_reason": "GROQ_API_KEY or GROQ_MODEL not set",
+    "guardrail_notes": []
+  },
+  "agent_modes": {
+    "triage": "fallback",
+    "trace": "fallback",
+    "compliance": "fallback",
+    "report": "fallback"
+  }
+}

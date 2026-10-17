@@ -1,0 +1,1304 @@
+id: 0
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":0,"kind":"sensor_tick","scenario_time":"2026-10-09T18:00:00Z","payload":{"values":{"conductivity":409.0,"turbidity":0.5,"ph":8.6,"discharge":121.0},"simulated":false,"anomalous_parameters":[]}}
+
+id: 1
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":1,"kind":"sensor_tick","scenario_time":"2026-10-09T18:15:00Z","payload":{"values":{"conductivity":409.0,"turbidity":0.4,"ph":8.7,"discharge":121.0},"simulated":false,"anomalous_parameters":[]}}
+
+id: 2
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":2,"kind":"sensor_tick","scenario_time":"2026-10-09T18:30:00Z","payload":{"values":{"conductivity":408.0,"turbidity":0.5,"ph":8.7,"discharge":118.0},"simulated":false,"anomalous_parameters":[]}}
+
+id: 3
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":3,"kind":"sensor_tick","scenario_time":"2026-10-09T18:45:00Z","payload":{"values":{"conductivity":406.0,"turbidity":0.4,"ph":8.7,"discharge":115.0},"simulated":false,"anomalous_parameters":[]}}
+
+id: 4
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":4,"kind":"sensor_tick","scenario_time":"2026-10-09T19:00:00Z","payload":{"values":{"conductivity":405.0,"turbidity":0.5,"ph":8.7,"discharge":118.0},"simulated":false,"anomalous_parameters":[]}}
+
+id: 5
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":5,"kind":"sensor_tick","scenario_time":"2026-10-09T19:15:00Z","payload":{"values":{"conductivity":404.0,"turbidity":0.5,"ph":8.7,"discharge":118.0},"simulated":false,"anomalous_parameters":[]}}
+
+id: 6
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":6,"kind":"sensor_tick","scenario_time":"2026-10-09T19:30:00Z","payload":{"values":{"conductivity":403.0,"turbidity":0.4,"ph":8.7,"discharge":115.0},"simulated":false,"anomalous_parameters":[]}}
+
+id: 7
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":7,"kind":"sensor_tick","scenario_time":"2026-10-09T19:45:00Z","payload":{"values":{"conductivity":402.0,"turbidity":0.5,"ph":8.7,"discharge":115.0},"simulated":false,"anomalous_parameters":[]}}
+
+id: 8
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":8,"kind":"sensor_tick","scenario_time":"2026-10-09T20:00:00Z","payload":{"values":{"conductivity":401.0,"turbidity":0.4,"ph":8.7,"discharge":115.0},"simulated":false,"anomalous_parameters":[]}}
+
+id: 9
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":9,"kind":"plume_detection","scenario_time":"2026-10-09T20:02:00Z","payload":{"frame_index":24,"area_fraction":0.00356,"confidence":0.1187,"clip":"spill"}}
+
+id: 10
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":10,"kind":"plume_detection","scenario_time":"2026-10-09T20:02:30Z","payload":{"frame_index":25,"area_fraction":0.00455,"confidence":0.1516,"clip":"spill"}}
+
+id: 11
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":11,"kind":"plume_detection","scenario_time":"2026-10-09T20:03:00Z","payload":{"frame_index":26,"area_fraction":0.00583,"confidence":0.1945,"clip":"spill"}}
+
+id: 12
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":12,"kind":"plume_detection","scenario_time":"2026-10-09T20:03:30Z","payload":{"frame_index":27,"area_fraction":0.00692,"confidence":0.2307,"clip":"spill"}}
+
+id: 13
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":13,"kind":"plume_detection","scenario_time":"2026-10-09T20:04:00Z","payload":{"frame_index":28,"area_fraction":0.0086,"confidence":0.2868,"clip":"spill"}}
+
+id: 14
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":14,"kind":"plume_detection","scenario_time":"2026-10-09T20:04:30Z","payload":{"frame_index":29,"area_fraction":0.00939,"confidence":0.3132,"clip":"spill"}}
+
+id: 15
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":15,"kind":"plume_detection","scenario_time":"2026-10-09T20:05:00Z","payload":{"frame_index":30,"area_fraction":0.01088,"confidence":0.3626,"clip":"spill"}}
+
+id: 16
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":16,"kind":"plume_detection","scenario_time":"2026-10-09T20:05:30Z","payload":{"frame_index":31,"area_fraction":0.01226,"confidence":0.4088,"clip":"spill"}}
+
+id: 17
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":17,"kind":"plume_detection","scenario_time":"2026-10-09T20:06:00Z","payload":{"frame_index":32,"area_fraction":0.01335,"confidence":0.445,"clip":"spill"}}
+
+id: 18
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":18,"kind":"plume_detection","scenario_time":"2026-10-09T20:06:30Z","payload":{"frame_index":33,"area_fraction":0.01513,"confidence":0.5044,"clip":"spill"}}
+
+id: 19
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":19,"kind":"plume_detection","scenario_time":"2026-10-09T20:07:00Z","payload":{"frame_index":34,"area_fraction":0.01642,"confidence":0.5472,"clip":"spill"}}
+
+id: 20
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":20,"kind":"plume_detection","scenario_time":"2026-10-09T20:07:30Z","payload":{"frame_index":35,"area_fraction":0.0179,"confidence":0.5967,"clip":"spill"}}
+
+id: 21
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":21,"kind":"plume_detection","scenario_time":"2026-10-09T20:08:00Z","payload":{"frame_index":36,"area_fraction":0.01899,"confidence":0.6329,"clip":"spill"}}
+
+id: 22
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":22,"kind":"plume_detection","scenario_time":"2026-10-09T20:08:30Z","payload":{"frame_index":37,"area_fraction":0.02057,"confidence":0.6857,"clip":"spill"}}
+
+id: 23
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":23,"kind":"plume_detection","scenario_time":"2026-10-09T20:09:00Z","payload":{"frame_index":38,"area_fraction":0.02245,"confidence":0.7483,"clip":"spill"}}
+
+id: 24
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":24,"kind":"plume_detection","scenario_time":"2026-10-09T20:09:30Z","payload":{"frame_index":39,"area_fraction":0.02393,"confidence":0.7977,"clip":"spill"}}
+
+id: 25
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":25,"kind":"plume_detection","scenario_time":"2026-10-09T20:10:00Z","payload":{"frame_index":40,"area_fraction":0.02522,"confidence":0.8406,"clip":"spill"}}
+
+id: 26
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":26,"kind":"plume_detection","scenario_time":"2026-10-09T20:10:30Z","payload":{"frame_index":41,"area_fraction":0.0266,"confidence":0.8867,"clip":"spill"}}
+
+id: 27
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":27,"kind":"plume_detection","scenario_time":"2026-10-09T20:11:00Z","payload":{"frame_index":42,"area_fraction":0.02838,"confidence":0.9461,"clip":"spill"}}
+
+id: 28
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":28,"kind":"plume_detection","scenario_time":"2026-10-09T20:11:30Z","payload":{"frame_index":43,"area_fraction":0.03046,"confidence":1.0,"clip":"spill"}}
+
+id: 29
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":29,"kind":"plume_detection","scenario_time":"2026-10-09T20:12:00Z","payload":{"frame_index":44,"area_fraction":0.03244,"confidence":1.0,"clip":"spill"}}
+
+id: 30
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":30,"kind":"plume_detection","scenario_time":"2026-10-09T20:12:30Z","payload":{"frame_index":45,"area_fraction":0.03382,"confidence":1.0,"clip":"spill"}}
+
+id: 31
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":31,"kind":"plume_detection","scenario_time":"2026-10-09T20:13:00Z","payload":{"frame_index":46,"area_fraction":0.0361,"confidence":1.0,"clip":"spill"}}
+
+id: 32
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":32,"kind":"plume_detection","scenario_time":"2026-10-09T20:13:30Z","payload":{"frame_index":47,"area_fraction":0.03768,"confidence":1.0,"clip":"spill"}}
+
+id: 33
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":33,"kind":"plume_detection","scenario_time":"2026-10-09T20:14:00Z","payload":{"frame_index":48,"area_fraction":0.04005,"confidence":1.0,"clip":"spill"}}
+
+id: 34
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":34,"kind":"plume_detection","scenario_time":"2026-10-09T20:14:30Z","payload":{"frame_index":49,"area_fraction":0.04163,"confidence":1.0,"clip":"spill"}}
+
+id: 35
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":35,"kind":"sensor_tick","scenario_time":"2026-10-09T20:15:00Z","payload":{"values":{"conductivity":484.0951,"turbidity":5.6126,"ph":8.3771,"discharge":115.0},"simulated":true,"anomalous_parameters":["conductivity","turbidity"]}}
+
+id: 36
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":36,"kind":"plume_detection","scenario_time":"2026-10-09T20:15:00Z","payload":{"frame_index":50,"area_fraction":0.04401,"confidence":1.0,"clip":"spill"}}
+
+id: 37
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":37,"kind":"plume_detection","scenario_time":"2026-10-09T20:15:30Z","payload":{"frame_index":51,"area_fraction":0.04539,"confidence":1.0,"clip":"spill"}}
+
+id: 38
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":38,"kind":"plume_detection","scenario_time":"2026-10-09T20:16:00Z","payload":{"frame_index":52,"area_fraction":0.04697,"confidence":1.0,"clip":"spill"}}
+
+id: 39
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":39,"kind":"plume_detection","scenario_time":"2026-10-09T20:16:30Z","payload":{"frame_index":53,"area_fraction":0.04925,"confidence":1.0,"clip":"spill"}}
+
+id: 40
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":40,"kind":"plume_detection","scenario_time":"2026-10-09T20:17:00Z","payload":{"frame_index":54,"area_fraction":0.05123,"confidence":1.0,"clip":"spill"}}
+
+id: 41
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":41,"kind":"plume_detection","scenario_time":"2026-10-09T20:17:30Z","payload":{"frame_index":55,"area_fraction":0.05301,"confidence":1.0,"clip":"spill"}}
+
+id: 42
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":42,"kind":"plume_detection","scenario_time":"2026-10-09T20:18:00Z","payload":{"frame_index":56,"area_fraction":0.05538,"confidence":1.0,"clip":"spill"}}
+
+id: 43
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":43,"kind":"plume_detection","scenario_time":"2026-10-09T20:18:30Z","payload":{"frame_index":57,"area_fraction":0.05756,"confidence":1.0,"clip":"spill"}}
+
+id: 44
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":44,"kind":"plume_detection","scenario_time":"2026-10-09T20:19:00Z","payload":{"frame_index":58,"area_fraction":0.05914,"confidence":1.0,"clip":"spill"}}
+
+id: 45
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":45,"kind":"plume_detection","scenario_time":"2026-10-09T20:19:30Z","payload":{"frame_index":59,"area_fraction":0.06042,"confidence":1.0,"clip":"spill"}}
+
+id: 46
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":46,"kind":"plume_detection","scenario_time":"2026-10-09T20:20:00Z","payload":{"frame_index":60,"area_fraction":0.06349,"confidence":1.0,"clip":"spill"}}
+
+id: 47
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":47,"kind":"plume_detection","scenario_time":"2026-10-09T20:20:30Z","payload":{"frame_index":61,"area_fraction":0.06547,"confidence":1.0,"clip":"spill"}}
+
+id: 48
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":48,"kind":"plume_detection","scenario_time":"2026-10-09T20:21:00Z","payload":{"frame_index":62,"area_fraction":0.06715,"confidence":1.0,"clip":"spill"}}
+
+id: 49
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":49,"kind":"plume_detection","scenario_time":"2026-10-09T20:21:30Z","payload":{"frame_index":63,"area_fraction":0.06853,"confidence":1.0,"clip":"spill"}}
+
+id: 50
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":50,"kind":"plume_detection","scenario_time":"2026-10-09T20:22:00Z","payload":{"frame_index":64,"area_fraction":0.06962,"confidence":1.0,"clip":"spill"}}
+
+id: 51
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":51,"kind":"plume_detection","scenario_time":"2026-10-09T20:22:30Z","payload":{"frame_index":65,"area_fraction":0.07051,"confidence":1.0,"clip":"spill"}}
+
+id: 52
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":52,"kind":"plume_detection","scenario_time":"2026-10-09T20:23:00Z","payload":{"frame_index":66,"area_fraction":0.0713,"confidence":1.0,"clip":"spill"}}
+
+id: 53
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":53,"kind":"plume_detection","scenario_time":"2026-10-09T20:23:30Z","payload":{"frame_index":67,"area_fraction":0.0718,"confidence":1.0,"clip":"spill"}}
+
+id: 54
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":54,"kind":"plume_detection","scenario_time":"2026-10-09T20:24:00Z","payload":{"frame_index":68,"area_fraction":0.07219,"confidence":1.0,"clip":"spill"}}
+
+id: 55
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":55,"kind":"plume_detection","scenario_time":"2026-10-09T20:24:30Z","payload":{"frame_index":69,"area_fraction":0.07259,"confidence":1.0,"clip":"spill"}}
+
+id: 56
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":56,"kind":"plume_detection","scenario_time":"2026-10-09T20:25:00Z","payload":{"frame_index":70,"area_fraction":0.07278,"confidence":1.0,"clip":"spill"}}
+
+id: 57
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":57,"kind":"plume_detection","scenario_time":"2026-10-09T20:25:30Z","payload":{"frame_index":71,"area_fraction":0.07288,"confidence":1.0,"clip":"spill"}}
+
+id: 58
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":58,"kind":"plume_detection","scenario_time":"2026-10-09T20:26:00Z","payload":{"frame_index":72,"area_fraction":0.07298,"confidence":1.0,"clip":"spill"}}
+
+id: 59
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":59,"kind":"plume_detection","scenario_time":"2026-10-09T20:26:30Z","payload":{"frame_index":73,"area_fraction":0.07328,"confidence":1.0,"clip":"spill"}}
+
+id: 60
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":60,"kind":"plume_detection","scenario_time":"2026-10-09T20:27:00Z","payload":{"frame_index":74,"area_fraction":0.07367,"confidence":1.0,"clip":"spill"}}
+
+id: 61
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":61,"kind":"plume_detection","scenario_time":"2026-10-09T20:27:30Z","payload":{"frame_index":75,"area_fraction":0.07348,"confidence":1.0,"clip":"spill"}}
+
+id: 62
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":62,"kind":"plume_detection","scenario_time":"2026-10-09T20:28:00Z","payload":{"frame_index":76,"area_fraction":0.07387,"confidence":1.0,"clip":"spill"}}
+
+id: 63
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":63,"kind":"plume_detection","scenario_time":"2026-10-09T20:28:30Z","payload":{"frame_index":77,"area_fraction":0.07377,"confidence":1.0,"clip":"spill"}}
+
+id: 64
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":64,"kind":"plume_detection","scenario_time":"2026-10-09T20:29:00Z","payload":{"frame_index":78,"area_fraction":0.07466,"confidence":1.0,"clip":"spill"}}
+
+id: 65
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":65,"kind":"plume_detection","scenario_time":"2026-10-09T20:29:30Z","payload":{"frame_index":79,"area_fraction":0.07555,"confidence":1.0,"clip":"spill"}}
+
+id: 66
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":66,"kind":"sensor_tick","scenario_time":"2026-10-09T20:30:00Z","payload":{"values":{"conductivity":571.3695,"turbidity":10.0093,"ph":8.0724,"discharge":112.0},"simulated":true,"anomalous_parameters":["conductivity","ph","turbidity"]}}
+
+id: 67
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":67,"kind":"plume_detection","scenario_time":"2026-10-09T20:30:00Z","payload":{"frame_index":80,"area_fraction":0.07664,"confidence":1.0,"clip":"spill"}}
+
+id: 68
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":68,"kind":"plume_detection","scenario_time":"2026-10-09T20:30:30Z","payload":{"frame_index":81,"area_fraction":0.07862,"confidence":1.0,"clip":"spill"}}
+
+id: 69
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":69,"kind":"plume_detection","scenario_time":"2026-10-09T20:31:00Z","payload":{"frame_index":82,"area_fraction":0.07961,"confidence":1.0,"clip":"spill"}}
+
+id: 70
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":70,"kind":"plume_detection","scenario_time":"2026-10-09T20:31:30Z","payload":{"frame_index":83,"area_fraction":0.0807,"confidence":1.0,"clip":"spill"}}
+
+id: 71
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":71,"kind":"plume_detection","scenario_time":"2026-10-09T20:32:00Z","payload":{"frame_index":84,"area_fraction":0.08238,"confidence":1.0,"clip":"spill"}}
+
+id: 72
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":72,"kind":"plume_detection","scenario_time":"2026-10-09T20:32:30Z","payload":{"frame_index":85,"area_fraction":0.08297,"confidence":1.0,"clip":"spill"}}
+
+id: 73
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":73,"kind":"plume_detection","scenario_time":"2026-10-09T20:33:00Z","payload":{"frame_index":86,"area_fraction":0.08386,"confidence":1.0,"clip":"spill"}}
+
+id: 74
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":74,"kind":"plume_detection","scenario_time":"2026-10-09T20:33:30Z","payload":{"frame_index":87,"area_fraction":0.08455,"confidence":1.0,"clip":"spill"}}
+
+id: 75
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":75,"kind":"plume_detection","scenario_time":"2026-10-09T20:34:00Z","payload":{"frame_index":88,"area_fraction":0.08544,"confidence":1.0,"clip":"spill"}}
+
+id: 76
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":76,"kind":"plume_detection","scenario_time":"2026-10-09T20:34:30Z","payload":{"frame_index":89,"area_fraction":0.08614,"confidence":1.0,"clip":"spill"}}
+
+id: 77
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":77,"kind":"plume_detection","scenario_time":"2026-10-09T20:35:00Z","payload":{"frame_index":90,"area_fraction":0.08762,"confidence":1.0,"clip":"spill"}}
+
+id: 78
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":78,"kind":"plume_detection","scenario_time":"2026-10-09T20:35:30Z","payload":{"frame_index":91,"area_fraction":0.08851,"confidence":1.0,"clip":"spill"}}
+
+id: 79
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":79,"kind":"plume_detection","scenario_time":"2026-10-09T20:36:00Z","payload":{"frame_index":92,"area_fraction":0.09059,"confidence":1.0,"clip":"spill"}}
+
+id: 80
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":80,"kind":"plume_detection","scenario_time":"2026-10-09T20:36:30Z","payload":{"frame_index":93,"area_fraction":0.09237,"confidence":1.0,"clip":"spill"}}
+
+id: 81
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":81,"kind":"plume_detection","scenario_time":"2026-10-09T20:37:00Z","payload":{"frame_index":94,"area_fraction":0.09405,"confidence":1.0,"clip":"spill"}}
+
+id: 82
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":82,"kind":"plume_detection","scenario_time":"2026-10-09T20:37:30Z","payload":{"frame_index":95,"area_fraction":0.09632,"confidence":1.0,"clip":"spill"}}
+
+id: 83
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":83,"kind":"plume_detection","scenario_time":"2026-10-09T20:38:00Z","payload":{"frame_index":96,"area_fraction":0.0984,"confidence":1.0,"clip":"spill"}}
+
+id: 84
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":84,"kind":"plume_detection","scenario_time":"2026-10-09T20:38:30Z","payload":{"frame_index":97,"area_fraction":0.10057,"confidence":1.0,"clip":"spill"}}
+
+id: 85
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":85,"kind":"plume_detection","scenario_time":"2026-10-09T20:39:00Z","payload":{"frame_index":98,"area_fraction":0.10295,"confidence":1.0,"clip":"spill"}}
+
+id: 86
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":86,"kind":"plume_detection","scenario_time":"2026-10-09T20:39:30Z","payload":{"frame_index":99,"area_fraction":0.10492,"confidence":1.0,"clip":"spill"}}
+
+id: 87
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":87,"kind":"plume_detection","scenario_time":"2026-10-09T20:40:00Z","payload":{"frame_index":100,"area_fraction":0.10769,"confidence":1.0,"clip":"spill"}}
+
+id: 88
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":88,"kind":"plume_detection","scenario_time":"2026-10-09T20:40:30Z","payload":{"frame_index":101,"area_fraction":0.11027,"confidence":1.0,"clip":"spill"}}
+
+id: 89
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":89,"kind":"plume_detection","scenario_time":"2026-10-09T20:41:00Z","payload":{"frame_index":102,"area_fraction":0.11274,"confidence":1.0,"clip":"spill"}}
+
+id: 90
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":90,"kind":"plume_detection","scenario_time":"2026-10-09T20:41:30Z","payload":{"frame_index":103,"area_fraction":0.11442,"confidence":1.0,"clip":"spill"}}
+
+id: 91
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":91,"kind":"plume_detection","scenario_time":"2026-10-09T20:42:00Z","payload":{"frame_index":104,"area_fraction":0.11758,"confidence":1.0,"clip":"spill"}}
+
+id: 92
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":92,"kind":"plume_detection","scenario_time":"2026-10-09T20:42:30Z","payload":{"frame_index":105,"area_fraction":0.11976,"confidence":1.0,"clip":"spill"}}
+
+id: 93
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":93,"kind":"plume_detection","scenario_time":"2026-10-09T20:43:00Z","payload":{"frame_index":106,"area_fraction":0.12322,"confidence":1.0,"clip":"spill"}}
+
+id: 94
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":94,"kind":"plume_detection","scenario_time":"2026-10-09T20:43:30Z","payload":{"frame_index":107,"area_fraction":0.12589,"confidence":1.0,"clip":"spill"}}
+
+id: 95
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":95,"kind":"plume_detection","scenario_time":"2026-10-09T20:44:00Z","payload":{"frame_index":108,"area_fraction":0.12698,"confidence":1.0,"clip":"spill"}}
+
+id: 96
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":96,"kind":"plume_detection","scenario_time":"2026-10-09T20:44:30Z","payload":{"frame_index":109,"area_fraction":0.13034,"confidence":1.0,"clip":"spill"}}
+
+id: 97
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":97,"kind":"sensor_tick","scenario_time":"2026-10-09T20:45:00Z","payload":{"values":{"conductivity":650.9588,"turbidity":15.4924,"ph":7.7095,"discharge":112.0},"simulated":true,"anomalous_parameters":["conductivity","ph","turbidity"]}}
+
+id: 98
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":98,"kind":"plume_detection","scenario_time":"2026-10-09T20:45:00Z","payload":{"frame_index":110,"area_fraction":0.13212,"confidence":1.0,"clip":"spill"}}
+
+id: 99
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":99,"kind":"plume_detection","scenario_time":"2026-10-09T20:45:30Z","payload":{"frame_index":111,"area_fraction":0.1341,"confidence":1.0,"clip":"spill"}}
+
+id: 100
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":100,"kind":"plume_detection","scenario_time":"2026-10-09T20:46:00Z","payload":{"frame_index":112,"area_fraction":0.13706,"confidence":1.0,"clip":"spill"}}
+
+id: 101
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":101,"kind":"plume_detection","scenario_time":"2026-10-09T20:46:30Z","payload":{"frame_index":113,"area_fraction":0.13776,"confidence":1.0,"clip":"spill"}}
+
+id: 102
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":102,"kind":"plume_detection","scenario_time":"2026-10-09T20:47:00Z","payload":{"frame_index":114,"area_fraction":0.14122,"confidence":1.0,"clip":"spill"}}
+
+id: 103
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":103,"kind":"plume_detection","scenario_time":"2026-10-09T20:47:30Z","payload":{"frame_index":115,"area_fraction":0.1425,"confidence":1.0,"clip":"spill"}}
+
+id: 104
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":104,"kind":"plume_detection","scenario_time":"2026-10-09T20:48:00Z","payload":{"frame_index":116,"area_fraction":0.14419,"confidence":1.0,"clip":"spill"}}
+
+id: 105
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":105,"kind":"plume_detection","scenario_time":"2026-10-09T20:48:30Z","payload":{"frame_index":117,"area_fraction":0.14606,"confidence":1.0,"clip":"spill"}}
+
+id: 106
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":106,"kind":"plume_detection","scenario_time":"2026-10-09T20:49:00Z","payload":{"frame_index":118,"area_fraction":0.14814,"confidence":1.0,"clip":"spill"}}
+
+id: 107
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":107,"kind":"plume_detection","scenario_time":"2026-10-09T20:49:30Z","payload":{"frame_index":119,"area_fraction":0.15022,"confidence":1.0,"clip":"spill"}}
+
+id: 108
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":108,"kind":"plume_detection","scenario_time":"2026-10-09T20:50:00Z","payload":{"frame_index":120,"area_fraction":0.15309,"confidence":1.0,"clip":"spill"}}
+
+id: 109
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":109,"kind":"plume_detection","scenario_time":"2026-10-09T20:50:30Z","payload":{"frame_index":121,"area_fraction":0.15447,"confidence":1.0,"clip":"spill"}}
+
+id: 110
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":110,"kind":"plume_detection","scenario_time":"2026-10-09T20:51:00Z","payload":{"frame_index":122,"area_fraction":0.15615,"confidence":1.0,"clip":"spill"}}
+
+id: 111
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":111,"kind":"plume_detection","scenario_time":"2026-10-09T20:51:30Z","payload":{"frame_index":123,"area_fraction":0.15872,"confidence":1.0,"clip":"spill"}}
+
+id: 112
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":112,"kind":"plume_detection","scenario_time":"2026-10-09T20:52:00Z","payload":{"frame_index":124,"area_fraction":0.1611,"confidence":1.0,"clip":"spill"}}
+
+id: 113
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":113,"kind":"plume_detection","scenario_time":"2026-10-09T20:52:30Z","payload":{"frame_index":125,"area_fraction":0.16337,"confidence":1.0,"clip":"spill"}}
+
+id: 114
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":114,"kind":"plume_detection","scenario_time":"2026-10-09T20:53:00Z","payload":{"frame_index":126,"area_fraction":0.16555,"confidence":1.0,"clip":"spill"}}
+
+id: 115
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":115,"kind":"plume_detection","scenario_time":"2026-10-09T20:53:30Z","payload":{"frame_index":127,"area_fraction":0.16782,"confidence":1.0,"clip":"spill"}}
+
+id: 116
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":116,"kind":"plume_detection","scenario_time":"2026-10-09T20:54:00Z","payload":{"frame_index":128,"area_fraction":0.17089,"confidence":1.0,"clip":"spill"}}
+
+id: 117
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":117,"kind":"plume_detection","scenario_time":"2026-10-09T20:54:30Z","payload":{"frame_index":129,"area_fraction":0.17346,"confidence":1.0,"clip":"spill"}}
+
+id: 118
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":118,"kind":"plume_detection","scenario_time":"2026-10-09T20:55:00Z","payload":{"frame_index":130,"area_fraction":0.17603,"confidence":1.0,"clip":"spill"}}
+
+id: 119
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":119,"kind":"plume_detection","scenario_time":"2026-10-09T20:55:30Z","payload":{"frame_index":131,"area_fraction":0.17929,"confidence":1.0,"clip":"spill"}}
+
+id: 120
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":120,"kind":"plume_detection","scenario_time":"2026-10-09T20:56:00Z","payload":{"frame_index":132,"area_fraction":0.18107,"confidence":1.0,"clip":"spill"}}
+
+id: 121
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":121,"kind":"plume_detection","scenario_time":"2026-10-09T20:56:30Z","payload":{"frame_index":133,"area_fraction":0.18275,"confidence":1.0,"clip":"spill"}}
+
+id: 122
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":122,"kind":"plume_detection","scenario_time":"2026-10-09T20:57:00Z","payload":{"frame_index":134,"area_fraction":0.18493,"confidence":1.0,"clip":"spill"}}
+
+id: 123
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":123,"kind":"plume_detection","scenario_time":"2026-10-09T20:57:30Z","payload":{"frame_index":135,"area_fraction":0.1871,"confidence":1.0,"clip":"spill"}}
+
+id: 124
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":124,"kind":"plume_detection","scenario_time":"2026-10-09T20:58:00Z","payload":{"frame_index":136,"area_fraction":0.18928,"confidence":1.0,"clip":"spill"}}
+
+id: 125
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":125,"kind":"plume_detection","scenario_time":"2026-10-09T20:58:30Z","payload":{"frame_index":137,"area_fraction":0.19155,"confidence":1.0,"clip":"spill"}}
+
+id: 126
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":126,"kind":"plume_detection","scenario_time":"2026-10-09T20:59:00Z","payload":{"frame_index":138,"area_fraction":0.19422,"confidence":1.0,"clip":"spill"}}
+
+id: 127
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":127,"kind":"plume_detection","scenario_time":"2026-10-09T20:59:30Z","payload":{"frame_index":139,"area_fraction":0.19561,"confidence":1.0,"clip":"spill"}}
+
+id: 128
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":128,"kind":"sensor_tick","scenario_time":"2026-10-09T21:00:00Z","payload":{"values":{"conductivity":632.6606,"turbidity":15.1236,"ph":7.7155,"discharge":110.0},"simulated":true,"anomalous_parameters":["conductivity","ph","turbidity"]}}
+
+id: 129
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":129,"kind":"plume_detection","scenario_time":"2026-10-09T21:00:00Z","payload":{"frame_index":140,"area_fraction":0.19778,"confidence":1.0,"clip":"spill"}}
+
+id: 130
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":130,"kind":"plume_detection","scenario_time":"2026-10-09T21:00:30Z","payload":{"frame_index":141,"area_fraction":0.20016,"confidence":1.0,"clip":"spill"}}
+
+id: 131
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":131,"kind":"plume_detection","scenario_time":"2026-10-09T21:01:00Z","payload":{"frame_index":142,"area_fraction":0.20223,"confidence":1.0,"clip":"spill"}}
+
+id: 132
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":132,"kind":"plume_detection","scenario_time":"2026-10-09T21:01:30Z","payload":{"frame_index":143,"area_fraction":0.20421,"confidence":1.0,"clip":"spill"}}
+
+id: 133
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":133,"kind":"plume_detection","scenario_time":"2026-10-09T21:02:00Z","payload":{"frame_index":144,"area_fraction":0.20669,"confidence":1.0,"clip":"spill"}}
+
+id: 134
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":134,"kind":"plume_detection","scenario_time":"2026-10-09T21:02:30Z","payload":{"frame_index":145,"area_fraction":0.20797,"confidence":1.0,"clip":"spill"}}
+
+id: 135
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":135,"kind":"plume_detection","scenario_time":"2026-10-09T21:03:00Z","payload":{"frame_index":146,"area_fraction":0.20926,"confidence":1.0,"clip":"spill"}}
+
+id: 136
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":136,"kind":"plume_detection","scenario_time":"2026-10-09T21:03:30Z","payload":{"frame_index":147,"area_fraction":0.21242,"confidence":1.0,"clip":"spill"}}
+
+id: 137
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":137,"kind":"plume_detection","scenario_time":"2026-10-09T21:04:00Z","payload":{"frame_index":148,"area_fraction":0.2143,"confidence":1.0,"clip":"spill"}}
+
+id: 138
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":138,"kind":"plume_detection","scenario_time":"2026-10-09T21:04:30Z","payload":{"frame_index":149,"area_fraction":0.21737,"confidence":1.0,"clip":"spill"}}
+
+id: 139
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":139,"kind":"plume_detection","scenario_time":"2026-10-09T21:05:00Z","payload":{"frame_index":150,"area_fraction":0.21855,"confidence":1.0,"clip":"spill"}}
+
+id: 140
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":140,"kind":"plume_detection","scenario_time":"2026-10-09T21:05:30Z","payload":{"frame_index":151,"area_fraction":0.22112,"confidence":1.0,"clip":"spill"}}
+
+id: 141
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":141,"kind":"plume_detection","scenario_time":"2026-10-09T21:06:00Z","payload":{"frame_index":152,"area_fraction":0.2234,"confidence":1.0,"clip":"spill"}}
+
+id: 142
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":142,"kind":"plume_detection","scenario_time":"2026-10-09T21:06:30Z","payload":{"frame_index":153,"area_fraction":0.22607,"confidence":1.0,"clip":"spill"}}
+
+id: 143
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":143,"kind":"plume_detection","scenario_time":"2026-10-09T21:07:00Z","payload":{"frame_index":154,"area_fraction":0.22824,"confidence":1.0,"clip":"spill"}}
+
+id: 144
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":144,"kind":"plume_detection","scenario_time":"2026-10-09T21:07:30Z","payload":{"frame_index":155,"area_fraction":0.23002,"confidence":1.0,"clip":"spill"}}
+
+id: 145
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":145,"kind":"plume_detection","scenario_time":"2026-10-09T21:08:00Z","payload":{"frame_index":156,"area_fraction":0.23339,"confidence":1.0,"clip":"spill"}}
+
+id: 146
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":146,"kind":"plume_detection","scenario_time":"2026-10-09T21:08:30Z","payload":{"frame_index":157,"area_fraction":0.23398,"confidence":1.0,"clip":"spill"}}
+
+id: 147
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":147,"kind":"plume_detection","scenario_time":"2026-10-09T21:09:00Z","payload":{"frame_index":158,"area_fraction":0.23695,"confidence":1.0,"clip":"spill"}}
+
+id: 148
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":148,"kind":"plume_detection","scenario_time":"2026-10-09T21:09:30Z","payload":{"frame_index":159,"area_fraction":0.23883,"confidence":1.0,"clip":"spill"}}
+
+id: 149
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":149,"kind":"plume_detection","scenario_time":"2026-10-09T21:10:00Z","payload":{"frame_index":160,"area_fraction":0.24179,"confidence":1.0,"clip":"spill"}}
+
+id: 150
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":150,"kind":"plume_detection","scenario_time":"2026-10-09T21:10:30Z","payload":{"frame_index":161,"area_fraction":0.24318,"confidence":1.0,"clip":"spill"}}
+
+id: 151
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":151,"kind":"plume_detection","scenario_time":"2026-10-09T21:11:00Z","payload":{"frame_index":162,"area_fraction":0.24693,"confidence":1.0,"clip":"spill"}}
+
+id: 152
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":152,"kind":"plume_detection","scenario_time":"2026-10-09T21:11:30Z","payload":{"frame_index":163,"area_fraction":0.24852,"confidence":1.0,"clip":"spill"}}
+
+id: 153
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":153,"kind":"plume_detection","scenario_time":"2026-10-09T21:12:00Z","payload":{"frame_index":164,"area_fraction":0.25237,"confidence":1.0,"clip":"spill"}}
+
+id: 154
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":154,"kind":"plume_detection","scenario_time":"2026-10-09T21:12:30Z","payload":{"frame_index":165,"area_fraction":0.25316,"confidence":1.0,"clip":"spill"}}
+
+id: 155
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":155,"kind":"plume_detection","scenario_time":"2026-10-09T21:13:00Z","payload":{"frame_index":166,"area_fraction":0.25663,"confidence":1.0,"clip":"spill"}}
+
+id: 156
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":156,"kind":"plume_detection","scenario_time":"2026-10-09T21:13:30Z","payload":{"frame_index":167,"area_fraction":0.25761,"confidence":1.0,"clip":"spill"}}
+
+id: 157
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":157,"kind":"plume_detection","scenario_time":"2026-10-09T21:14:00Z","payload":{"frame_index":168,"area_fraction":0.26108,"confidence":1.0,"clip":"spill"}}
+
+id: 158
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":158,"kind":"plume_detection","scenario_time":"2026-10-09T21:14:30Z","payload":{"frame_index":169,"area_fraction":0.26384,"confidence":1.0,"clip":"spill"}}
+
+id: 159
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":159,"kind":"sensor_tick","scenario_time":"2026-10-09T21:15:00Z","payload":{"values":{"conductivity":629.4667,"turbidity":14.3942,"ph":7.7488,"discharge":110.0},"simulated":true,"anomalous_parameters":["conductivity","ph","turbidity"]}}
+
+id: 160
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":160,"kind":"plume_detection","scenario_time":"2026-10-09T21:15:00Z","payload":{"frame_index":170,"area_fraction":0.26612,"confidence":1.0,"clip":"spill"}}
+
+id: 161
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":161,"kind":"plume_detection","scenario_time":"2026-10-09T21:15:30Z","payload":{"frame_index":171,"area_fraction":0.26869,"confidence":1.0,"clip":"spill"}}
+
+id: 162
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":162,"kind":"plume_detection","scenario_time":"2026-10-09T21:16:00Z","payload":{"frame_index":172,"area_fraction":0.27116,"confidence":1.0,"clip":"spill"}}
+
+id: 163
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":163,"kind":"plume_detection","scenario_time":"2026-10-09T21:16:30Z","payload":{"frame_index":173,"area_fraction":0.27462,"confidence":1.0,"clip":"spill"}}
+
+id: 164
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":164,"kind":"plume_detection","scenario_time":"2026-10-09T21:17:00Z","payload":{"frame_index":174,"area_fraction":0.27551,"confidence":1.0,"clip":"spill"}}
+
+id: 165
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":165,"kind":"plume_detection","scenario_time":"2026-10-09T21:17:30Z","payload":{"frame_index":175,"area_fraction":0.27759,"confidence":1.0,"clip":"spill"}}
+
+id: 166
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":166,"kind":"plume_detection","scenario_time":"2026-10-09T21:18:00Z","payload":{"frame_index":176,"area_fraction":0.28036,"confidence":1.0,"clip":"spill"}}
+
+id: 167
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":167,"kind":"plume_detection","scenario_time":"2026-10-09T21:18:30Z","payload":{"frame_index":177,"area_fraction":0.28174,"confidence":1.0,"clip":"spill"}}
+
+id: 168
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":168,"kind":"plume_detection","scenario_time":"2026-10-09T21:19:00Z","payload":{"frame_index":178,"area_fraction":0.28481,"confidence":1.0,"clip":"spill"}}
+
+id: 169
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":169,"kind":"plume_detection","scenario_time":"2026-10-09T21:19:30Z","payload":{"frame_index":179,"area_fraction":0.28689,"confidence":1.0,"clip":"spill"}}
+
+id: 170
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":170,"kind":"plume_detection","scenario_time":"2026-10-09T21:20:00Z","payload":{"frame_index":180,"area_fraction":0.28689,"confidence":1.0,"clip":"spill"}}
+
+id: 171
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":171,"kind":"plume_detection","scenario_time":"2026-10-09T21:20:30Z","payload":{"frame_index":181,"area_fraction":0.29045,"confidence":1.0,"clip":"spill"}}
+
+id: 172
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":172,"kind":"plume_detection","scenario_time":"2026-10-09T21:21:00Z","payload":{"frame_index":182,"area_fraction":0.29163,"confidence":1.0,"clip":"spill"}}
+
+id: 173
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":173,"kind":"plume_detection","scenario_time":"2026-10-09T21:21:30Z","payload":{"frame_index":183,"area_fraction":0.29361,"confidence":1.0,"clip":"spill"}}
+
+id: 174
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":174,"kind":"plume_detection","scenario_time":"2026-10-09T21:22:00Z","payload":{"frame_index":184,"area_fraction":0.29509,"confidence":1.0,"clip":"spill"}}
+
+id: 175
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":175,"kind":"plume_detection","scenario_time":"2026-10-09T21:22:30Z","payload":{"frame_index":185,"area_fraction":0.29796,"confidence":1.0,"clip":"spill"}}
+
+id: 176
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":176,"kind":"plume_detection","scenario_time":"2026-10-09T21:23:00Z","payload":{"frame_index":186,"area_fraction":0.30034,"confidence":1.0,"clip":"spill"}}
+
+id: 177
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":177,"kind":"plume_detection","scenario_time":"2026-10-09T21:23:30Z","payload":{"frame_index":187,"area_fraction":0.30202,"confidence":1.0,"clip":"spill"}}
+
+id: 178
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":178,"kind":"plume_detection","scenario_time":"2026-10-09T21:24:00Z","payload":{"frame_index":188,"area_fraction":0.304,"confidence":1.0,"clip":"spill"}}
+
+id: 179
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":179,"kind":"plume_detection","scenario_time":"2026-10-09T21:24:30Z","payload":{"frame_index":189,"area_fraction":0.30726,"confidence":1.0,"clip":"spill"}}
+
+id: 180
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":180,"kind":"plume_detection","scenario_time":"2026-10-09T21:25:00Z","payload":{"frame_index":190,"area_fraction":0.31032,"confidence":1.0,"clip":"spill"}}
+
+id: 181
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":181,"kind":"plume_detection","scenario_time":"2026-10-09T21:25:30Z","payload":{"frame_index":191,"area_fraction":0.3128,"confidence":1.0,"clip":"spill"}}
+
+id: 182
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":182,"kind":"plume_detection","scenario_time":"2026-10-09T21:26:00Z","payload":{"frame_index":192,"area_fraction":0.31477,"confidence":1.0,"clip":"spill"}}
+
+id: 183
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":183,"kind":"plume_detection","scenario_time":"2026-10-09T21:26:30Z","payload":{"frame_index":193,"area_fraction":0.31774,"confidence":1.0,"clip":"spill"}}
+
+id: 184
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":184,"kind":"plume_detection","scenario_time":"2026-10-09T21:27:00Z","payload":{"frame_index":194,"area_fraction":0.32011,"confidence":1.0,"clip":"spill"}}
+
+id: 185
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":185,"kind":"plume_detection","scenario_time":"2026-10-09T21:27:30Z","payload":{"frame_index":195,"area_fraction":0.32407,"confidence":1.0,"clip":"spill"}}
+
+id: 186
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":186,"kind":"plume_detection","scenario_time":"2026-10-09T21:28:00Z","payload":{"frame_index":196,"area_fraction":0.32526,"confidence":1.0,"clip":"spill"}}
+
+id: 187
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":187,"kind":"plume_detection","scenario_time":"2026-10-09T21:28:30Z","payload":{"frame_index":197,"area_fraction":0.32763,"confidence":1.0,"clip":"spill"}}
+
+id: 188
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":188,"kind":"plume_detection","scenario_time":"2026-10-09T21:29:00Z","payload":{"frame_index":198,"area_fraction":0.32911,"confidence":1.0,"clip":"spill"}}
+
+id: 189
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":189,"kind":"plume_detection","scenario_time":"2026-10-09T21:29:30Z","payload":{"frame_index":199,"area_fraction":0.33248,"confidence":1.0,"clip":"spill"}}
+
+id: 190
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":190,"kind":"sensor_tick","scenario_time":"2026-10-09T21:30:00Z","payload":{"values":{"conductivity":613.9368,"turbidity":13.3567,"ph":7.8077,"discharge":110.0},"simulated":true,"anomalous_parameters":["conductivity","ph","turbidity"]}}
+
+id: 191
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":191,"kind":"plume_detection","scenario_time":"2026-10-09T21:30:00Z","payload":{"frame_index":200,"area_fraction":0.33495,"confidence":1.0,"clip":"spill"}}
+
+id: 192
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":192,"kind":"plume_detection","scenario_time":"2026-10-09T21:30:30Z","payload":{"frame_index":201,"area_fraction":0.33643,"confidence":1.0,"clip":"spill"}}
+
+id: 193
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":193,"kind":"plume_detection","scenario_time":"2026-10-09T21:31:00Z","payload":{"frame_index":202,"area_fraction":0.3391,"confidence":1.0,"clip":"spill"}}
+
+id: 194
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":194,"kind":"plume_detection","scenario_time":"2026-10-09T21:31:30Z","payload":{"frame_index":203,"area_fraction":0.34177,"confidence":1.0,"clip":"spill"}}
+
+id: 195
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":195,"kind":"plume_detection","scenario_time":"2026-10-09T21:32:00Z","payload":{"frame_index":204,"area_fraction":0.34286,"confidence":1.0,"clip":"spill"}}
+
+id: 196
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":196,"kind":"plume_detection","scenario_time":"2026-10-09T21:32:30Z","payload":{"frame_index":205,"area_fraction":0.34494,"confidence":1.0,"clip":"spill"}}
+
+id: 197
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":197,"kind":"plume_detection","scenario_time":"2026-10-09T21:33:00Z","payload":{"frame_index":206,"area_fraction":0.3479,"confidence":1.0,"clip":"spill"}}
+
+id: 198
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":198,"kind":"plume_detection","scenario_time":"2026-10-09T21:33:30Z","payload":{"frame_index":207,"area_fraction":0.34988,"confidence":1.0,"clip":"spill"}}
+
+id: 199
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":199,"kind":"plume_detection","scenario_time":"2026-10-09T21:34:00Z","payload":{"frame_index":208,"area_fraction":0.35265,"confidence":1.0,"clip":"spill"}}
+
+id: 200
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":200,"kind":"plume_detection","scenario_time":"2026-10-09T21:34:30Z","payload":{"frame_index":209,"area_fraction":0.3568,"confidence":1.0,"clip":"spill"}}
+
+id: 201
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":201,"kind":"plume_detection","scenario_time":"2026-10-09T21:35:00Z","payload":{"frame_index":210,"area_fraction":0.35819,"confidence":1.0,"clip":"spill"}}
+
+id: 202
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":202,"kind":"plume_detection","scenario_time":"2026-10-09T21:35:30Z","payload":{"frame_index":211,"area_fraction":0.36116,"confidence":1.0,"clip":"spill"}}
+
+id: 203
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":203,"kind":"plume_detection","scenario_time":"2026-10-09T21:36:00Z","payload":{"frame_index":212,"area_fraction":0.36284,"confidence":1.0,"clip":"spill"}}
+
+id: 204
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":204,"kind":"plume_detection","scenario_time":"2026-10-09T21:36:30Z","payload":{"frame_index":213,"area_fraction":0.3662,"confidence":1.0,"clip":"spill"}}
+
+id: 205
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":205,"kind":"plume_detection","scenario_time":"2026-10-09T21:37:00Z","payload":{"frame_index":214,"area_fraction":0.36788,"confidence":1.0,"clip":"spill"}}
+
+id: 206
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":206,"kind":"plume_detection","scenario_time":"2026-10-09T21:37:30Z","payload":{"frame_index":215,"area_fraction":0.36956,"confidence":1.0,"clip":"spill"}}
+
+id: 207
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":207,"kind":"plume_detection","scenario_time":"2026-10-09T21:38:00Z","payload":{"frame_index":216,"area_fraction":0.37253,"confidence":1.0,"clip":"spill"}}
+
+id: 208
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":208,"kind":"plume_detection","scenario_time":"2026-10-09T21:38:30Z","payload":{"frame_index":217,"area_fraction":0.37451,"confidence":1.0,"clip":"spill"}}
+
+id: 209
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":209,"kind":"plume_detection","scenario_time":"2026-10-09T21:39:00Z","payload":{"frame_index":218,"area_fraction":0.37797,"confidence":1.0,"clip":"spill"}}
+
+id: 210
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":210,"kind":"plume_detection","scenario_time":"2026-10-09T21:39:30Z","payload":{"frame_index":219,"area_fraction":0.38004,"confidence":1.0,"clip":"spill"}}
+
+id: 211
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":211,"kind":"plume_detection","scenario_time":"2026-10-09T21:40:00Z","payload":{"frame_index":220,"area_fraction":0.38202,"confidence":1.0,"clip":"spill"}}
+
+id: 212
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":212,"kind":"plume_detection","scenario_time":"2026-10-09T21:40:30Z","payload":{"frame_index":221,"area_fraction":0.38261,"confidence":1.0,"clip":"spill"}}
+
+id: 213
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":213,"kind":"plume_detection","scenario_time":"2026-10-09T21:41:00Z","payload":{"frame_index":222,"area_fraction":0.38538,"confidence":1.0,"clip":"spill"}}
+
+id: 214
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":214,"kind":"plume_detection","scenario_time":"2026-10-09T21:41:30Z","payload":{"frame_index":223,"area_fraction":0.38657,"confidence":1.0,"clip":"spill"}}
+
+id: 215
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":215,"kind":"plume_detection","scenario_time":"2026-10-09T21:42:00Z","payload":{"frame_index":224,"area_fraction":0.38914,"confidence":1.0,"clip":"spill"}}
+
+id: 216
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":216,"kind":"plume_detection","scenario_time":"2026-10-09T21:42:30Z","payload":{"frame_index":225,"area_fraction":0.39033,"confidence":1.0,"clip":"spill"}}
+
+id: 217
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":217,"kind":"plume_detection","scenario_time":"2026-10-09T21:43:00Z","payload":{"frame_index":226,"area_fraction":0.39142,"confidence":1.0,"clip":"spill"}}
+
+id: 218
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":218,"kind":"plume_detection","scenario_time":"2026-10-09T21:43:30Z","payload":{"frame_index":227,"area_fraction":0.3928,"confidence":1.0,"clip":"spill"}}
+
+id: 219
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":219,"kind":"plume_detection","scenario_time":"2026-10-09T21:44:00Z","payload":{"frame_index":228,"area_fraction":0.39468,"confidence":1.0,"clip":"spill"}}
+
+id: 220
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":220,"kind":"plume_detection","scenario_time":"2026-10-09T21:44:30Z","payload":{"frame_index":229,"area_fraction":0.39676,"confidence":1.0,"clip":"spill"}}
+
+id: 221
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":221,"kind":"sensor_tick","scenario_time":"2026-10-09T21:45:00Z","payload":{"values":{"conductivity":616.1974,"turbidity":13.0268,"ph":7.8548,"discharge":110.0},"simulated":true,"anomalous_parameters":["conductivity","ph","turbidity"]}}
+
+id: 222
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":222,"kind":"plume_detection","scenario_time":"2026-10-09T21:45:00Z","payload":{"frame_index":230,"area_fraction":0.39854,"confidence":1.0,"clip":"spill"}}
+
+id: 223
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":223,"kind":"plume_detection","scenario_time":"2026-10-09T21:45:30Z","payload":{"frame_index":231,"area_fraction":0.40071,"confidence":1.0,"clip":"spill"}}
+
+id: 224
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":224,"kind":"plume_detection","scenario_time":"2026-10-09T21:46:00Z","payload":{"frame_index":232,"area_fraction":0.40338,"confidence":1.0,"clip":"spill"}}
+
+id: 225
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":225,"kind":"plume_detection","scenario_time":"2026-10-09T21:46:30Z","payload":{"frame_index":233,"area_fraction":0.40655,"confidence":1.0,"clip":"spill"}}
+
+id: 226
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":226,"kind":"plume_detection","scenario_time":"2026-10-09T21:47:00Z","payload":{"frame_index":234,"area_fraction":0.40862,"confidence":1.0,"clip":"spill"}}
+
+id: 227
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":227,"kind":"plume_detection","scenario_time":"2026-10-09T21:47:30Z","payload":{"frame_index":235,"area_fraction":0.4103,"confidence":1.0,"clip":"spill"}}
+
+id: 228
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":228,"kind":"plume_detection","scenario_time":"2026-10-09T21:48:00Z","payload":{"frame_index":236,"area_fraction":0.41297,"confidence":1.0,"clip":"spill"}}
+
+id: 229
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":229,"kind":"plume_detection","scenario_time":"2026-10-09T21:48:30Z","payload":{"frame_index":237,"area_fraction":0.41555,"confidence":1.0,"clip":"spill"}}
+
+id: 230
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":230,"kind":"plume_detection","scenario_time":"2026-10-09T21:49:00Z","payload":{"frame_index":238,"area_fraction":0.41861,"confidence":1.0,"clip":"spill"}}
+
+id: 231
+event: plume_detection
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":231,"kind":"plume_detection","scenario_time":"2026-10-09T21:49:30Z","payload":{"frame_index":239,"area_fraction":0.4198,"confidence":1.0,"clip":"spill"}}
+
+id: 232
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":232,"kind":"sensor_tick","scenario_time":"2026-10-09T22:00:00Z","payload":{"values":{"conductivity":597.8376,"turbidity":12.6226,"ph":7.8583,"discharge":110.0},"simulated":true,"anomalous_parameters":["conductivity","ph","turbidity"]}}
+
+id: 233
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":233,"kind":"sensor_tick","scenario_time":"2026-10-09T22:15:00Z","payload":{"values":{"conductivity":591.1983,"turbidity":12.2686,"ph":7.8294,"discharge":107.0},"simulated":true,"anomalous_parameters":["conductivity","ph","turbidity"]}}
+
+id: 234
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":234,"kind":"sensor_tick","scenario_time":"2026-10-09T22:30:00Z","payload":{"values":{"conductivity":587.8018,"turbidity":11.7501,"ph":7.8437,"discharge":107.0},"simulated":true,"anomalous_parameters":["conductivity","ph","turbidity"]}}
+
+id: 235
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":235,"kind":"sensor_tick","scenario_time":"2026-10-09T22:45:00Z","payload":{"values":{"conductivity":590.642,"turbidity":10.9828,"ph":7.8922,"discharge":107.0},"simulated":true,"anomalous_parameters":["conductivity","ph","turbidity"]}}
+
+id: 236
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":236,"kind":"sensor_tick","scenario_time":"2026-10-09T23:00:00Z","payload":{"values":{"conductivity":567.6276,"turbidity":11.1585,"ph":7.9,"discharge":104.0},"simulated":true,"anomalous_parameters":["conductivity","ph","turbidity"]}}
+
+id: 237
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":237,"kind":"sensor_tick","scenario_time":"2026-10-09T23:15:00Z","payload":{"values":{"conductivity":564.2468,"turbidity":10.144,"ph":7.9574,"discharge":107.0},"simulated":true,"anomalous_parameters":["conductivity","ph","turbidity"]}}
+
+id: 238
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":238,"kind":"sensor_tick","scenario_time":"2026-10-09T23:30:00Z","payload":{"values":{"conductivity":562.1696,"turbidity":10.1396,"ph":7.9536,"discharge":104.0},"simulated":true,"anomalous_parameters":["conductivity","ph","turbidity"]}}
+
+id: 239
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":239,"kind":"sensor_tick","scenario_time":"2026-10-09T23:45:00Z","payload":{"values":{"conductivity":549.6053,"turbidity":9.7298,"ph":7.8892,"discharge":104.0},"simulated":true,"anomalous_parameters":["conductivity","ph","turbidity"]}}
+
+id: 240
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":240,"kind":"sensor_tick","scenario_time":"2026-10-10T00:00:00Z","payload":{"values":{"conductivity":547.3987,"turbidity":9.4852,"ph":7.903,"discharge":101.0},"simulated":true,"anomalous_parameters":["conductivity","ph","turbidity"]}}
+
+id: 241
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":241,"kind":"sensor_tick","scenario_time":"2026-10-10T00:15:00Z","payload":{"values":{"conductivity":544.3502,"turbidity":9.2431,"ph":7.9408,"discharge":101.0},"simulated":true,"anomalous_parameters":["conductivity","ph","turbidity"]}}
+
+id: 242
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":242,"kind":"sensor_tick","scenario_time":"2026-10-10T00:30:00Z","payload":{"values":{"conductivity":538.3496,"turbidity":9.0519,"ph":7.9881,"discharge":101.0},"simulated":true,"anomalous_parameters":["conductivity","ph","turbidity"]}}
+
+id: 243
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":243,"kind":"sensor_tick","scenario_time":"2026-10-10T00:45:00Z","payload":{"values":{"conductivity":528.543,"turbidity":8.5377,"ph":7.8964,"discharge":104.0},"simulated":true,"anomalous_parameters":["conductivity","ph","turbidity"]}}
+
+id: 244
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":244,"kind":"sensor_tick","scenario_time":"2026-10-10T01:00:00Z","payload":{"values":{"conductivity":530.6376,"turbidity":8.3015,"ph":7.9203,"discharge":101.0},"simulated":true,"anomalous_parameters":["conductivity","ph","turbidity"]}}
+
+id: 245
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":245,"kind":"sensor_tick","scenario_time":"2026-10-10T01:15:00Z","payload":{"values":{"conductivity":514.1297,"turbidity":7.6201,"ph":7.9324,"discharge":101.0},"simulated":true,"anomalous_parameters":["conductivity","ph","turbidity"]}}
+
+id: 246
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":246,"kind":"sensor_tick","scenario_time":"2026-10-10T01:30:00Z","payload":{"values":{"conductivity":517.2643,"turbidity":7.5581,"ph":7.9372,"discharge":98.5},"simulated":true,"anomalous_parameters":["conductivity","ph","turbidity"]}}
+
+id: 247
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":247,"kind":"sensor_tick","scenario_time":"2026-10-10T01:45:00Z","payload":{"values":{"conductivity":509.5129,"turbidity":7.1868,"ph":7.9714,"discharge":98.5},"simulated":true,"anomalous_parameters":["conductivity","ph","turbidity"]}}
+
+id: 248
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":248,"kind":"sensor_tick","scenario_time":"2026-10-10T02:00:00Z","payload":{"values":{"conductivity":504.6174,"turbidity":6.6403,"ph":7.9991,"discharge":98.5},"simulated":true,"anomalous_parameters":["conductivity","turbidity"]}}
+
+id: 249
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":249,"kind":"sensor_tick","scenario_time":"2026-10-10T02:15:00Z","payload":{"values":{"conductivity":498.2051,"turbidity":6.5234,"ph":7.9942,"discharge":101.0},"simulated":true,"anomalous_parameters":["conductivity","turbidity"]}}
+
+id: 250
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":250,"kind":"sensor_tick","scenario_time":"2026-10-10T02:30:00Z","payload":{"values":{"conductivity":498.8691,"turbidity":6.3803,"ph":8.0214,"discharge":101.0},"simulated":true,"anomalous_parameters":["conductivity","turbidity"]}}
+
+id: 251
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":251,"kind":"sensor_tick","scenario_time":"2026-10-10T02:45:00Z","payload":{"values":{"conductivity":494.6959,"turbidity":6.1938,"ph":7.9355,"discharge":101.0},"simulated":true,"anomalous_parameters":["conductivity","turbidity"]}}
+
+id: 252
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":252,"kind":"sensor_tick","scenario_time":"2026-10-10T03:00:00Z","payload":{"values":{"conductivity":487.4647,"turbidity":5.8324,"ph":7.951,"discharge":101.0},"simulated":true,"anomalous_parameters":["conductivity","turbidity"]}}
+
+id: 253
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":253,"kind":"sensor_tick","scenario_time":"2026-10-10T03:15:00Z","payload":{"values":{"conductivity":482.5807,"turbidity":5.6055,"ph":7.9566,"discharge":104.0},"simulated":true,"anomalous_parameters":["conductivity","turbidity"]}}
+
+id: 254
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":254,"kind":"sensor_tick","scenario_time":"2026-10-10T03:30:00Z","payload":{"values":{"conductivity":483.1935,"turbidity":5.535,"ph":7.9707,"discharge":101.0},"simulated":true,"anomalous_parameters":["conductivity","turbidity"]}}
+
+id: 255
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":255,"kind":"sensor_tick","scenario_time":"2026-10-10T03:45:00Z","payload":{"values":{"conductivity":481.4048,"turbidity":5.3117,"ph":7.9895,"discharge":104.0},"simulated":true,"anomalous_parameters":["conductivity","turbidity"]}}
+
+id: 256
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":256,"kind":"sensor_tick","scenario_time":"2026-10-10T04:00:00Z","payload":{"values":{"conductivity":476.4951,"turbidity":4.8859,"ph":8.0164,"discharge":104.0},"simulated":true,"anomalous_parameters":["conductivity","turbidity"]}}
+
+id: 257
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":257,"kind":"sensor_tick","scenario_time":"2026-10-10T04:15:00Z","payload":{"values":{"conductivity":469.784,"turbidity":5.1491,"ph":8.0221,"discharge":107.0},"simulated":true,"anomalous_parameters":["conductivity","turbidity"]}}
+
+id: 258
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":258,"kind":"sensor_tick","scenario_time":"2026-10-10T04:30:00Z","payload":{"values":{"conductivity":467.8368,"turbidity":5.1829,"ph":8.0283,"discharge":107.0},"simulated":true,"anomalous_parameters":["conductivity","turbidity"]}}
+
+id: 259
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":259,"kind":"sensor_tick","scenario_time":"2026-10-10T04:45:00Z","payload":{"values":{"conductivity":466.195,"turbidity":4.6432,"ph":8.0306,"discharge":110.0},"simulated":true,"anomalous_parameters":["conductivity","turbidity"]}}
+
+id: 260
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":260,"kind":"sensor_tick","scenario_time":"2026-10-10T05:00:00Z","payload":{"values":{"conductivity":463.8203,"turbidity":4.554,"ph":8.0544,"discharge":110.0},"simulated":true,"anomalous_parameters":["conductivity","turbidity"]}}
+
+id: 261
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":261,"kind":"sensor_tick","scenario_time":"2026-10-10T05:15:00Z","payload":{"values":{"conductivity":463.1587,"turbidity":4.5852,"ph":8.07,"discharge":110.0},"simulated":true,"anomalous_parameters":["conductivity","turbidity"]}}
+
+id: 262
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":262,"kind":"sensor_tick","scenario_time":"2026-10-10T05:30:00Z","payload":{"values":{"conductivity":459.5707,"turbidity":4.138,"ph":8.0715,"discharge":110.0},"simulated":true,"anomalous_parameters":["conductivity","turbidity"]}}
+
+id: 263
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":263,"kind":"sensor_tick","scenario_time":"2026-10-10T05:45:00Z","payload":{"values":{"conductivity":456.9032,"turbidity":4.0703,"ph":8.0804,"discharge":110.0},"simulated":true,"anomalous_parameters":["conductivity","turbidity"]}}
+
+id: 264
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":264,"kind":"sensor_tick","scenario_time":"2026-10-10T06:00:00Z","payload":{"values":{"conductivity":455.5411,"turbidity":3.8873,"ph":7.9757,"discharge":112.0},"simulated":true,"anomalous_parameters":["conductivity","turbidity"]}}
+
+id: 265
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":265,"kind":"sensor_tick","scenario_time":"2026-10-10T06:15:00Z","payload":{"values":{"conductivity":451.7466,"turbidity":3.7997,"ph":7.9936,"discharge":112.0},"simulated":true,"anomalous_parameters":["conductivity","turbidity"]}}
+
+id: 266
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":266,"kind":"sensor_tick","scenario_time":"2026-10-10T06:30:00Z","payload":{"values":{"conductivity":453.2352,"turbidity":3.6853,"ph":7.9982,"discharge":115.0},"simulated":true,"anomalous_parameters":["conductivity","turbidity"]}}
+
+id: 267
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":267,"kind":"sensor_tick","scenario_time":"2026-10-10T06:45:00Z","payload":{"values":{"conductivity":450.2918,"turbidity":3.4788,"ph":8.0179,"discharge":115.0},"simulated":true,"anomalous_parameters":["conductivity","turbidity"]}}
+
+id: 268
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":268,"kind":"sensor_tick","scenario_time":"2026-10-10T07:00:00Z","payload":{"values":{"conductivity":445.0329,"turbidity":3.3053,"ph":8.021,"discharge":115.0},"simulated":true,"anomalous_parameters":["conductivity","turbidity"]}}
+
+id: 269
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":269,"kind":"sensor_tick","scenario_time":"2026-10-10T07:15:00Z","payload":{"values":{"conductivity":445.2713,"turbidity":3.1916,"ph":8.0274,"discharge":115.0},"simulated":true,"anomalous_parameters":["conductivity","turbidity"]}}
+
+id: 270
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":270,"kind":"sensor_tick","scenario_time":"2026-10-10T07:30:00Z","payload":{"values":{"conductivity":441.4009,"turbidity":3.2631,"ph":8.0318,"discharge":118.0},"simulated":true,"anomalous_parameters":["conductivity","turbidity"]}}
+
+id: 271
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":271,"kind":"sensor_tick","scenario_time":"2026-10-10T07:45:00Z","payload":{"values":{"conductivity":443.3642,"turbidity":3.128,"ph":8.0261,"discharge":115.0},"simulated":true,"anomalous_parameters":["conductivity","turbidity"]}}
+
+id: 272
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":272,"kind":"sensor_tick","scenario_time":"2026-10-10T08:00:00Z","payload":{"values":{"conductivity":438.2006,"turbidity":3.0188,"ph":8.0565,"discharge":115.0},"simulated":true,"anomalous_parameters":["conductivity","turbidity"]}}
+
+id: 273
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":273,"kind":"sensor_tick","scenario_time":"2026-10-10T08:15:00Z","payload":{"values":{"conductivity":436.8773,"turbidity":2.8659,"ph":8.0547,"discharge":118.0},"simulated":true,"anomalous_parameters":["conductivity","turbidity"]}}
+
+id: 274
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":274,"kind":"sensor_tick","scenario_time":"2026-10-10T08:30:00Z","payload":{"values":{"conductivity":436.1244,"turbidity":2.9264,"ph":8.0544,"discharge":118.0},"simulated":true,"anomalous_parameters":["conductivity","turbidity"]}}
+
+id: 275
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":275,"kind":"sensor_tick","scenario_time":"2026-10-10T08:45:00Z","payload":{"values":{"conductivity":434.6728,"turbidity":2.628,"ph":8.0689,"discharge":118.0},"simulated":true,"anomalous_parameters":["conductivity","turbidity"]}}
+
+id: 276
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":276,"kind":"sensor_tick","scenario_time":"2026-10-10T09:00:00Z","payload":{"values":{"conductivity":432.9796,"turbidity":2.7505,"ph":8.0704,"discharge":118.0},"simulated":true,"anomalous_parameters":["conductivity","turbidity"]}}
+
+id: 277
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":277,"kind":"sensor_tick","scenario_time":"2026-10-10T09:15:00Z","payload":{"values":{"conductivity":432.2503,"turbidity":2.6397,"ph":8.0718,"discharge":121.0},"simulated":true,"anomalous_parameters":["conductivity","turbidity"]}}
+
+id: 278
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":278,"kind":"sensor_tick","scenario_time":"2026-10-10T09:30:00Z","payload":{"values":{"conductivity":429.7968,"turbidity":2.5525,"ph":8.084,"discharge":118.0},"simulated":true,"anomalous_parameters":["conductivity","turbidity"]}}
+
+id: 279
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":279,"kind":"sensor_tick","scenario_time":"2026-10-10T09:45:00Z","payload":{"values":{"conductivity":431.4685,"turbidity":2.9616,"ph":8.0883,"discharge":121.0},"simulated":true,"anomalous_parameters":["conductivity","turbidity"]}}
+
+id: 280
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":280,"kind":"sensor_tick","scenario_time":"2026-10-10T10:00:00Z","payload":{"values":{"conductivity":426.7268,"turbidity":2.4673,"ph":8.087,"discharge":121.0},"simulated":true,"anomalous_parameters":["turbidity"]}}
+
+id: 281
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":281,"kind":"sensor_tick","scenario_time":"2026-10-10T10:15:00Z","payload":{"values":{"conductivity":426.226,"turbidity":2.3499,"ph":8.0947,"discharge":118.0},"simulated":true,"anomalous_parameters":["turbidity"]}}
+
+id: 282
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":282,"kind":"sensor_tick","scenario_time":"2026-10-10T10:30:00Z","payload":{"values":{"conductivity":425.6127,"turbidity":2.2607,"ph":8.1003,"discharge":118.0},"simulated":true,"anomalous_parameters":["turbidity"]}}
+
+id: 283
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":283,"kind":"sensor_tick","scenario_time":"2026-10-10T10:45:00Z","payload":{"values":{"conductivity":423.3136,"turbidity":2.5235,"ph":8.1025,"discharge":118.0},"simulated":true,"anomalous_parameters":["turbidity"]}}
+
+id: 284
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":284,"kind":"sensor_tick","scenario_time":"2026-10-10T11:00:00Z","payload":{"values":{"conductivity":424.3652,"turbidity":3.0072,"ph":8.1073,"discharge":118.0},"simulated":true,"anomalous_parameters":["turbidity"]}}
+
+id: 285
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":285,"kind":"sensor_tick","scenario_time":"2026-10-10T11:15:00Z","payload":{"values":{"conductivity":424.1785,"turbidity":2.3218,"ph":8.1102,"discharge":118.0},"simulated":true,"anomalous_parameters":["turbidity"]}}
+
+id: 286
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":286,"kind":"sensor_tick","scenario_time":"2026-10-10T11:30:00Z","payload":{"values":{"conductivity":423.1044,"turbidity":2.1428,"ph":8.1133,"discharge":118.0},"simulated":true,"anomalous_parameters":["turbidity"]}}
+
+id: 287
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":287,"kind":"sensor_tick","scenario_time":"2026-10-10T11:45:00Z","payload":{"values":{"conductivity":422.6341,"turbidity":1.9807,"ph":8.1209,"discharge":118.0},"simulated":true,"anomalous_parameters":["turbidity"]}}
+
+id: 288
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":288,"kind":"sensor_tick","scenario_time":"2026-10-10T12:00:00Z","payload":{"values":{"conductivity":422.6587,"turbidity":1.9747,"ph":8.1172,"discharge":115.0},"simulated":true,"anomalous_parameters":["turbidity"]}}
+
+id: 289
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":289,"kind":"sensor_tick","scenario_time":"2026-10-10T12:15:00Z","payload":{"values":{"conductivity":420.6634,"turbidity":1.7952,"ph":8.1212,"discharge":118.0},"simulated":true,"anomalous_parameters":["turbidity"]}}
+
+id: 290
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":290,"kind":"sensor_tick","scenario_time":"2026-10-10T12:30:00Z","payload":{"values":{"conductivity":420.6238,"turbidity":1.7737,"ph":8.1262,"discharge":118.0},"simulated":true,"anomalous_parameters":["turbidity"]}}
+
+id: 291
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":291,"kind":"sensor_tick","scenario_time":"2026-10-10T12:45:00Z","payload":{"values":{"conductivity":420.3682,"turbidity":1.7528,"ph":8.1309,"discharge":118.0},"simulated":true,"anomalous_parameters":["turbidity"]}}
+
+id: 292
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":292,"kind":"sensor_tick","scenario_time":"2026-10-10T13:00:00Z","payload":{"values":{"conductivity":420.3655,"turbidity":1.619,"ph":8.1332,"discharge":118.0},"simulated":true,"anomalous_parameters":["turbidity"]}}
+
+id: 293
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":293,"kind":"sensor_tick","scenario_time":"2026-10-10T13:15:00Z","payload":{"values":{"conductivity":417.999,"turbidity":1.5347,"ph":8.1362,"discharge":118.0},"simulated":true,"anomalous_parameters":["turbidity"]}}
+
+id: 294
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":294,"kind":"sensor_tick","scenario_time":"2026-10-10T13:30:00Z","payload":{"values":{"conductivity":416.7692,"turbidity":1.5106,"ph":8.2403,"discharge":118.0},"simulated":true,"anomalous_parameters":["turbidity"]}}
+
+id: 295
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":295,"kind":"sensor_tick","scenario_time":"2026-10-10T13:45:00Z","payload":{"values":{"conductivity":417.1081,"turbidity":1.4831,"ph":8.2435,"discharge":118.0},"simulated":true,"anomalous_parameters":["turbidity"]}}
+
+id: 296
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":296,"kind":"sensor_tick","scenario_time":"2026-10-10T14:00:00Z","payload":{"values":{"conductivity":415.8992,"turbidity":1.4717,"ph":8.2441,"discharge":115.0},"simulated":true,"anomalous_parameters":["turbidity"]}}
+
+id: 297
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":297,"kind":"sensor_tick","scenario_time":"2026-10-10T14:15:00Z","payload":{"values":{"conductivity":415.7468,"turbidity":1.4079,"ph":8.3437,"discharge":115.0},"simulated":true,"anomalous_parameters":[]}}
+
+id: 298
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":298,"kind":"sensor_tick","scenario_time":"2026-10-10T14:30:00Z","payload":{"values":{"conductivity":414.7054,"turbidity":1.3842,"ph":8.3484,"discharge":118.0},"simulated":true,"anomalous_parameters":[]}}
+
+id: 299
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":299,"kind":"sensor_tick","scenario_time":"2026-10-10T14:45:00Z","payload":{"values":{"conductivity":413.5127,"turbidity":1.2488,"ph":8.3518,"discharge":118.0},"simulated":true,"anomalous_parameters":[]}}
+
+id: 300
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":300,"kind":"sensor_tick","scenario_time":"2026-10-10T15:00:00Z","payload":{"values":{"conductivity":413.0206,"turbidity":1.3567,"ph":8.3486,"discharge":118.0},"simulated":true,"anomalous_parameters":[]}}
+
+id: 301
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":301,"kind":"sensor_tick","scenario_time":"2026-10-10T15:15:00Z","payload":{"values":{"conductivity":412.1584,"turbidity":1.2569,"ph":8.4546,"discharge":118.0},"simulated":true,"anomalous_parameters":[]}}
+
+id: 302
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":302,"kind":"sensor_tick","scenario_time":"2026-10-10T15:30:00Z","payload":{"values":{"conductivity":411.7896,"turbidity":1.2829,"ph":8.4556,"discharge":115.0},"simulated":true,"anomalous_parameters":[]}}
+
+id: 303
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":303,"kind":"sensor_tick","scenario_time":"2026-10-10T15:45:00Z","payload":{"values":{"conductivity":410.3055,"turbidity":1.1914,"ph":8.4587,"discharge":115.0},"simulated":true,"anomalous_parameters":[]}}
+
+id: 304
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":304,"kind":"sensor_tick","scenario_time":"2026-10-10T16:00:00Z","payload":{"values":{"conductivity":410.0567,"turbidity":1.1967,"ph":8.4609,"discharge":118.0},"simulated":true,"anomalous_parameters":[]}}
+
+id: 305
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":305,"kind":"sensor_tick","scenario_time":"2026-10-10T16:15:00Z","payload":{"values":{"conductivity":409.4386,"turbidity":1.1509,"ph":8.5613,"discharge":115.0},"simulated":true,"anomalous_parameters":[]}}
+
+id: 306
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":306,"kind":"sensor_tick","scenario_time":"2026-10-10T16:30:00Z","payload":{"values":{"conductivity":408.8887,"turbidity":1.1363,"ph":8.5604,"discharge":115.0},"simulated":true,"anomalous_parameters":[]}}
+
+id: 307
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":307,"kind":"sensor_tick","scenario_time":"2026-10-10T16:45:00Z","payload":{"values":{"conductivity":408.625,"turbidity":1.0817,"ph":8.5624,"discharge":118.0},"simulated":true,"anomalous_parameters":[]}}
+
+id: 308
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":308,"kind":"sensor_tick","scenario_time":"2026-10-10T17:00:00Z","payload":{"values":{"conductivity":408.2539,"turbidity":1.1185,"ph":8.5662,"discharge":118.0},"simulated":true,"anomalous_parameters":[]}}
+
+id: 309
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":309,"kind":"sensor_tick","scenario_time":"2026-10-10T17:15:00Z","payload":{"values":{"conductivity":408.631,"turbidity":0.9887,"ph":8.5682,"discharge":115.0},"simulated":true,"anomalous_parameters":[]}}
+
+id: 310
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":310,"kind":"sensor_tick","scenario_time":"2026-10-10T17:30:00Z","payload":{"values":{"conductivity":408.0541,"turbidity":0.9669,"ph":8.5681,"discharge":115.0},"simulated":true,"anomalous_parameters":[]}}
+
+id: 311
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":311,"kind":"sensor_tick","scenario_time":"2026-10-10T17:45:00Z","payload":{"values":{"conductivity":407.519,"turbidity":1.0497,"ph":8.571,"discharge":115.0},"simulated":true,"anomalous_parameters":[]}}
+
+id: 312
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":312,"kind":"sensor_tick","scenario_time":"2026-10-10T18:00:00Z","payload":{"values":{"conductivity":408.1834,"turbidity":0.9272,"ph":8.5708,"discharge":118.0},"simulated":true,"anomalous_parameters":[]}}
+
+id: 313
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":313,"kind":"sensor_tick","scenario_time":"2026-10-10T18:15:00Z","payload":{"values":{"conductivity":408.044,"turbidity":1.0187,"ph":8.5714,"discharge":118.0},"simulated":true,"anomalous_parameters":[]}}
+
+id: 314
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":314,"kind":"sensor_tick","scenario_time":"2026-10-10T18:30:00Z","payload":{"values":{"conductivity":407.7326,"turbidity":0.9997,"ph":8.5733,"discharge":115.0},"simulated":true,"anomalous_parameters":[]}}
+
+id: 315
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":315,"kind":"sensor_tick","scenario_time":"2026-10-10T18:45:00Z","payload":{"values":{"conductivity":407.2521,"turbidity":0.8823,"ph":8.5742,"discharge":115.0},"simulated":true,"anomalous_parameters":[]}}
+
+id: 316
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":316,"kind":"sensor_tick","scenario_time":"2026-10-10T19:00:00Z","payload":{"values":{"conductivity":407.5145,"turbidity":0.872,"ph":8.5743,"discharge":115.0},"simulated":true,"anomalous_parameters":[]}}
+
+id: 317
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":317,"kind":"sensor_tick","scenario_time":"2026-10-10T19:15:00Z","payload":{"values":{"conductivity":406.7448,"turbidity":0.8654,"ph":8.5773,"discharge":115.0},"simulated":true,"anomalous_parameters":[]}}
+
+id: 318
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":318,"kind":"sensor_tick","scenario_time":"2026-10-10T19:30:00Z","payload":{"values":{"conductivity":406.6839,"turbidity":0.8207,"ph":8.5771,"discharge":115.0},"simulated":true,"anomalous_parameters":[]}}
+
+id: 319
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":319,"kind":"sensor_tick","scenario_time":"2026-10-10T19:45:00Z","payload":{"values":{"conductivity":407.5598,"turbidity":0.8137,"ph":8.5781,"discharge":115.0},"simulated":true,"anomalous_parameters":[]}}
+
+id: 320
+event: sensor_tick
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":320,"kind":"sensor_tick","scenario_time":"2026-10-10T20:00:00Z","payload":{"values":{"conductivity":407.1152,"turbidity":0.8118,"ph":8.5791,"discharge":115.0},"simulated":true,"anomalous_parameters":[]}}
+
+id: 321
+event: agent_output
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":321,"kind":"agent_output","scenario_time":"2026-10-10T20:00:00Z","payload":{"agent":"triage","mode":"fallback","output":{"simulated":true,"requires_human_review":true,"classification":"incident","fusion_classification":"incident","confidence":0.95,"reasons":["Camera clip 'spill' shows dye-coloured water from 2026-10-09 20:02 to 2026-10-09 21:49 UTC in 216 of 240 frames (peak plume confidence 1.00).","Gauge anomalies in 3 parameter(s) (conductivity rise, turbidity rise, pH drop) fall within the ±3.0 h allowance of the camera plume, so two independent sources agree (not single-source).","Camera and gauge observations are compared with a ±3.0 h allowance (river travel time over the reach between them).","Classified as a possible incident for human review; it does not identify a source.","Storm filter result: flag_for_review.","Triage follows the sensor and camera fusion result; it does not identify a source."]}}}
+
+id: 322
+event: agent_output
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":322,"kind":"agent_output","scenario_time":"2026-10-10T20:00:00Z","payload":{"agent":"trace","mode":"fallback","output":{"simulated":true,"requires_human_review":true,"candidates":[{"facility_id":"VA0052621","name":"VALLEY MILK PRODUCTS LLC","frs_id":"110000341194","latitude":38.985,"longitude":-78.36,"location_type":"outfall","location_note":"Reported outfall location (ECHO permitted feature) 001; not a surveyed discharge point.","distance_km_to_reach":0.010733496183242186,"nearest_reach_nhdplusid":10000500083644,"upstream_distance_km":2.02075429,"travel_time":{"hours":7.357208998648063,"travel_time_hours_min":7.357208998648063,"is_lower_bound":false,"km_with_velocity":7.574557109999999,"km_total":7.574557109999999,"missing_reach_count":0,"reaches_missing_velocity":[],"reason":null,"display":"7.4 h"},"numeric_violation_count":3,"reporting_violation_count":5,"historical_numeric_violation_count":6,"violation_window_start":"2021-10-09","violation_window_end":"2026-10-09","violation_window_label":"reported numeric limit violations, 2021–2026","violations":[{"parameter":"NOAEL Static 48Hr Acute Ceriodaphnia dubia","monitoring_period_end":"2023-12-31","violation_desc":"DMR, Limited - Numeric Violation","exceedance_pct":50.0,"status":null,"outfall":"001","source_fields":["PARAMETER_DESC","VIOLATION_DESC","MONITORING_PERIOD_END_DATE","EXCEEDENCE_PCT","PERM_FEATURE_NMBR"]},{"parameter":"Oxygen, dissolved [DO]","monitoring_period_end":"2022-06-30","violation_desc":"DMR, Limited - Numeric Violation","exceedance_pct":1.0,"status":null,"outfall":"001","source_fields":["PARAMETER_DESC","VIOLATION_DESC","MONITORING_PERIOD_END_DATE","EXCEEDENCE_PCT","PERM_FEATURE_NMBR"]},{"parameter":"Oxygen, dissolved [DO]","monitoring_period_end":"2022-05-31","violation_desc":"DMR, Limited - Numeric Violation","exceedance_pct":5.0,"status":null,"outfall":"001","source_fields":["PARAMETER_DESC","VIOLATION_DESC","MONITORING_PERIOD_END_DATE","EXCEEDENCE_PCT","PERM_FEATURE_NMBR"]}],"matched_parameters":[],"tri_releases":[],"tri_match":null,"tri_match_confidence":null,"rank":1,"rank_basis":"river distance upstream of the spill reach (km), then distance to the river (km); not travel time"},{"facility_id":"VAG408560","name":"ERBACH ENTERPRISES LLC PROPERTY 2","frs_id":"110071437515","latitude":38.98511,"longitude":-78.396488,"location_type":"outfall","location_note":"Reported outfall location (ECHO permitted feature) 001; not a surveyed discharge point.","distance_km_to_reach":0.08292030155136107,"nearest_reach_nhdplusid":10000500008235,"upstream_distance_km":7.13152533,"travel_time":{"hours":null,"travel_time_hours_min":9.128923682471024,"is_lower_bound":true,"km_with_velocity":10.291679760000001,"km_total":10.563315600000001,"missing_reach_count":1,"reaches_missing_velocity":[10000500008235],"reason":"1 of 18 reaches on the path (0.3 of 10.6 km) has no EROM velocity; time over those reaches is not counted, so this is a lower bound.","display":"≥ 9.1 h (velocity available for 10.3 of 10.6 km)"},"numeric_violation_count":2,"reporting_violation_count":0,"historical_numeric_violation_count":0,"violation_window_start":"2021-10-09","violation_window_end":"2026-10-09","violation_window_label":"reported numeric limit violations, 2021–2026","violations":[{"parameter":"Solids, total suspended","monitoring_period_end":"2025-08-31","violation_desc":"DMR, Limited - Numeric Violation","exceedance_pct":205.0,"status":null,"outfall":"001","source_fields":["PARAMETER_DESC","VIOLATION_DESC","MONITORING_PERIOD_END_DATE","EXCEEDENCE_PCT","PERM_FEATURE_NMBR"]},{"parameter":"Solids, total suspended","monitoring_period_end":"2024-08-31","violation_desc":"DMR, Limited - Numeric Violation","exceedance_pct":126.0,"status":null,"outfall":"001","source_fields":["PARAMETER_DESC","VIOLATION_DESC","MONITORING_PERIOD_END_DATE","EXCEEDENCE_PCT","PERM_FEATURE_NMBR"]}],"matched_parameters":[{"sensor_parameter":"turbidity","echo_parameter":"Solids, total suspended","is_proxy":true,"note":"Total suspended solids (TSS) is used as a proxy for turbidity; it is an indirect indicator."}],"tri_releases":[],"tri_match":null,"tri_match_confidence":null,"rank":2,"rank_basis":"river distance upstream of the spill reach (km), then distance to the river (km); not travel time"},{"facility_id":"VAG408449","name":"ERBACH ENTERPRISES LLC PROPERTY","frs_id":"110070596880","latitude":38.98498,"longitude":-78.398097,"location_type":"outfall","location_note":"Reported outfall location (ECHO permitted feature) 001; not a surveyed discharge point.","distance_km_to_reach":0.008317411334078616,"nearest_reach_nhdplusid":10000500019726,"upstream_distance_km":7.40316117,"travel_time":{"hours":null,"travel_time_hours_min":9.450572738117135,"is_lower_bound":true,"km_with_velocity":10.69460949,"km_total":10.96624533,"missing_reach_count":1,"reaches_missing_velocity":[10000500008235],"reason":"1 of 19 reaches on the path (0.3 of 11.0 km) has no EROM velocity; time over those reaches is not counted, so this is a lower bound.","display":"≥ 9.4 h (velocity available for 10.7 of 11.0 km)"},"numeric_violation_count":3,"reporting_violation_count":0,"historical_numeric_violation_count":2,"violation_window_start":"2021-10-09","violation_window_end":"2026-10-09","violation_window_label":"reported numeric limit violations, 2021–2026","violations":[{"parameter":"E. coli","monitoring_period_end":"2025-08-31","violation_desc":"DMR, Limited - Numeric Violation","exceedance_pct":703.0,"status":null,"outfall":"001","source_fields":["PARAMETER_DESC","VIOLATION_DESC","MONITORING_PERIOD_END_DATE","EXCEEDENCE_PCT","PERM_FEATURE_NMBR"]},{"parameter":"Oxygen, dissolved [DO]","monitoring_period_end":"2025-08-31","violation_desc":"DMR, Limited - Numeric Violation","exceedance_pct":52.0,"status":null,"outfall":"001","source_fields":["PARAMETER_DESC","VIOLATION_DESC","MONITORING_PERIOD_END_DATE","EXCEEDENCE_PCT","PERM_FEATURE_NMBR"]},{"parameter":"E. coli","monitoring_period_end":"2024-08-31","violation_desc":"DMR, Limited - Numeric Violation","exceedance_pct":730.0,"status":null,"outfall":"001","source_fields":["PARAMETER_DESC","VIOLATION_DESC","MONITORING_PERIOD_END_DATE","EXCEEDENCE_PCT","PERM_FEATURE_NMBR"]}],"matched_parameters":[],"tri_releases":[],"tri_match":null,"tri_match_confidence":null,"rank":3,"rank_basis":"river distance upstream of the spill reach (km), then distance to the river (km); not travel time"},{"facility_id":"VAG408158","name":"SHENANDOAH VALLEY BOARDING AND TRAINING LLC","frs_id":"110070602369","latitude":38.961667,"longitude":-78.406667,"location_type":"outfall","location_note":"Reported outfall location (ECHO permitted feature) 001; not a surveyed discharge point.","distance_km_to_reach":0.15788581127540094,"nearest_reach_nhdplusid":10000500025390,"upstream_distance_km":17.572440880000002,"travel_time":{"hours":null,"travel_time_hours_min":18.715513670955737,"is_lower_bound":true,"km_with_velocity":20.60547814,"km_total":20.76818204,"missing_reach_count":2,"reaches_missing_velocity":[10000500025390,10000500048649],"reason":"2 of 35 reaches on the path (0.2 of 20.8 km) have no EROM velocity; time over those reaches is not counted, so this is a lower bound.","display":"≥ 18.7 h (velocity available for 20.6 of 20.8 km)"},"numeric_violation_count":2,"reporting_violation_count":5,"historical_numeric_violation_count":0,"violation_window_start":"2021-10-09","violation_window_end":"2026-10-09","violation_window_label":"reported numeric limit violations, 2021–2026","violations":[{"parameter":"BOD, 5-day, 20 deg. C","monitoring_period_end":"2024-08-31","violation_desc":"DMR, Limited - Numeric Violation","exceedance_pct":247.0,"status":null,"outfall":"001","source_fields":["PARAMETER_DESC","VIOLATION_DESC","MONITORING_PERIOD_END_DATE","EXCEEDENCE_PCT","PERM_FEATURE_NMBR"]},{"parameter":"BOD, 5-day, 20 deg. C","monitoring_period_end":"2022-08-31","violation_desc":"DMR, Limited - Numeric Violation","exceedance_pct":113.0,"status":null,"outfall":"001","source_fields":["PARAMETER_DESC","VIOLATION_DESC","MONITORING_PERIOD_END_DATE","EXCEEDENCE_PCT","PERM_FEATURE_NMBR"]}],"matched_parameters":[],"tri_releases":[],"tri_match":null,"tri_match_confidence":null,"rank":4,"rank_basis":"river distance upstream of the spill reach (km), then distance to the river (km); not travel time"}],"candidate_notes":{"VA0052621":"Rank 1 by river distance: 2.02 km upstream; river travel time 7.4 h; 3 reported numeric limit violations, 2021–2026. No reported parameter matches the anomalous sensor parameters.","VAG408560":"Rank 2 by river distance: 7.13 km upstream; river travel time ≥ 9.1 h (velocity available for 10.3 of 10.6 km); 2 reported numeric limit violations, 2021–2026. Reported parameter match: Solids, total suspended for turbidity (proxy).","VAG408449":"Rank 3 by river distance: 7.4 km upstream; river travel time ≥ 9.4 h (velocity available for 10.7 of 11.0 km); 3 reported numeric limit violations, 2021–2026. No reported parameter matches the anomalous sensor parameters.","VAG408158":"Rank 4 by river distance: 17.57 km upstream; river travel time ≥ 18.7 h (velocity available for 20.6 of 20.8 km); 2 reported numeric limit violations, 2021–2026. No reported parameter matches the anomalous sensor parameters."},"assumptions":["Candidates are ranked by river distance upstream of the spill reach, then distance to the river; not by travel time.","Travel times use the mean annual EROM velocity, treated as ft/s (a documented assumption); missing velocities are never filled in.","Only permits with at least one reported numeric limit violation in the window are listed."]}}}
+
+id: 323
+event: agent_output
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":323,"kind":"agent_output","scenario_time":"2026-10-10T20:00:00Z","payload":{"agent":"compliance","mode":"fallback","output":{"simulated":true,"requires_human_review":true,"facts":[{"facility_id":"VA0052621","statement":"3 reported numeric limit violations, 2021–2026 (reported or alleged).","value":"3","source_field":"numeric_violation_count","source_file":"VA_NPDES_EFF_VIOLATIONS.csv"},{"facility_id":"VA0052621","statement":"6 reported numeric limit violations before the window (historical, not ranked).","value":"6","source_field":"historical_numeric_violation_count","source_file":"VA_NPDES_EFF_VIOLATIONS.csv"},{"facility_id":"VA0052621","statement":"5 reporting violations (overdue reports, not pollution measurements; not ranked).","value":"5","source_field":"reporting_violation_count","source_file":"VA_NPDES_EFF_VIOLATIONS.csv"},{"facility_id":"VA0052621","statement":"Reported numeric limit violation parameter in the window: NOAEL Static 48Hr Acute Ceriodaphnia dubia.","value":"NOAEL Static 48Hr Acute Ceriodaphnia dubia","source_field":"violations[].parameter","source_file":"VA_NPDES_EFF_VIOLATIONS.csv"},{"facility_id":"VA0052621","statement":"Reported numeric limit violation parameter in the window: Oxygen, dissolved [DO].","value":"Oxygen, dissolved [DO]","source_field":"violations[].parameter","source_file":"VA_NPDES_EFF_VIOLATIONS.csv"},{"facility_id":"VAG408560","statement":"2 reported numeric limit violations, 2021–2026 (reported or alleged).","value":"2","source_field":"numeric_violation_count","source_file":"VA_NPDES_EFF_VIOLATIONS.csv"},{"facility_id":"VAG408560","statement":"Reported numeric limit violation parameter in the window: Solids, total suspended.","value":"Solids, total suspended","source_field":"violations[].parameter","source_file":"VA_NPDES_EFF_VIOLATIONS.csv"},{"facility_id":"VAG408449","statement":"3 reported numeric limit violations, 2021–2026 (reported or alleged).","value":"3","source_field":"numeric_violation_count","source_file":"VA_NPDES_EFF_VIOLATIONS.csv"},{"facility_id":"VAG408449","statement":"2 reported numeric limit violations before the window (historical, not ranked).","value":"2","source_field":"historical_numeric_violation_count","source_file":"VA_NPDES_EFF_VIOLATIONS.csv"},{"facility_id":"VAG408449","statement":"Reported numeric limit violation parameter in the window: E. coli.","value":"E. coli","source_field":"violations[].parameter","source_file":"VA_NPDES_EFF_VIOLATIONS.csv"},{"facility_id":"VAG408449","statement":"Reported numeric limit violation parameter in the window: Oxygen, dissolved [DO].","value":"Oxygen, dissolved [DO]","source_field":"violations[].parameter","source_file":"VA_NPDES_EFF_VIOLATIONS.csv"},{"facility_id":"VAG408158","statement":"2 reported numeric limit violations, 2021–2026 (reported or alleged).","value":"2","source_field":"numeric_violation_count","source_file":"VA_NPDES_EFF_VIOLATIONS.csv"},{"facility_id":"VAG408158","statement":"5 reporting violations (overdue reports, not pollution measurements; not ranked).","value":"5","source_field":"reporting_violation_count","source_file":"VA_NPDES_EFF_VIOLATIONS.csv"},{"facility_id":"VAG408158","statement":"Reported numeric limit violation parameter in the window: BOD, 5-day, 20 deg. C.","value":"BOD, 5-day, 20 deg. C","source_field":"violations[].parameter","source_file":"VA_NPDES_EFF_VIOLATIONS.csv"}]}}}
+
+id: 324
+event: agent_output
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":324,"kind":"agent_output","scenario_time":"2026-10-10T20:00:00Z","payload":{"agent":"report","mode":"fallback","output":{"simulated":true,"requires_human_review":true,"banner":"SIMULATED DEMONSTRATION. The spill, plume footage and sensor spike are synthetic. This draft requires human review before any action.","summary":"Simulated spill scenario: the gauge and camera evidence is classified as a possible incident (confidence 0.95) for human review; anomalous parameters: conductivity, pH, turbidity. 4 facilities with reported violations near this reach are listed upstream, ranked by river distance, not travel time. Rank 1: VALLEY MILK PRODUCTS LLC (VA0052621), 2.02 km upstream, river travel time 7.4 h, 3 reported numeric limit violations, 2021–2026. Rank 2: ERBACH ENTERPRISES LLC PROPERTY 2 (VAG408560), 7.13 km upstream, river travel time ≥ 9.1 h (velocity available for 10.3 of 10.6 km), 2 reported numeric limit violations, 2021–2026; reported Solids, total suspended matches turbidity (proxy). Rank 3: ERBACH ENTERPRISES LLC PROPERTY (VAG408449), 7.4 km upstream, river travel time ≥ 9.4 h (velocity available for 10.7 of 11.0 km), 3 reported numeric limit violations, 2021–2026. Rank 4: SHENANDOAH VALLEY BOARDING AND TRAINING LLC (VAG408158), 17.57 km upstream, river travel time ≥ 18.7 h (velocity available for 20.6 of 20.8 km), 2 reported numeric limit violations, 2021–2026. The listed records are consistent with nearby permitted discharges but do not identify a source. This draft requires human review before any action.","timeline":[{"timestamp":"2026-10-09T20:00:00Z","event":"Simulated spill release begins."},{"timestamp":"2026-10-09T20:02:00Z","event":"Camera first shows a plume (simulated) (216 of 240 frames)."},{"timestamp":"2026-10-09T20:02:00Z","event":"Fusion classification: incident (confidence 0.95, sources: sensor, vision)."},{"timestamp":"2026-10-09T20:15:00Z","event":"Gauge conductivity rise begins (includes simulated values); peak at 2026-10-09 20:45 UTC, ends 2026-10-10 09:45 UTC."},{"timestamp":"2026-10-09T20:15:00Z","event":"Gauge turbidity rise begins (includes simulated values); peak at 2026-10-09 20:45 UTC, ends 2026-10-10 14:00 UTC."},{"timestamp":"2026-10-09T20:30:00Z","event":"Gauge pH drop begins (includes simulated values); peak at 2026-10-09 20:45 UTC, ends 2026-10-10 01:45 UTC."},{"timestamp":"2026-10-09T21:49:30Z","event":"Last camera frame with a plume (simulated)."}],"ranked_candidates":[{"facility_id":"VA0052621","name":"VALLEY MILK PRODUCTS LLC","frs_id":"110000341194","latitude":38.985,"longitude":-78.36,"location_type":"outfall","location_note":"Reported outfall location (ECHO permitted feature) 001; not a surveyed discharge point.","distance_km_to_reach":0.010733496183242186,"nearest_reach_nhdplusid":10000500083644,"upstream_distance_km":2.02075429,"travel_time":{"hours":7.357208998648063,"travel_time_hours_min":7.357208998648063,"is_lower_bound":false,"km_with_velocity":7.574557109999999,"km_total":7.574557109999999,"missing_reach_count":0,"reaches_missing_velocity":[],"reason":null,"display":"7.4 h"},"numeric_violation_count":3,"reporting_violation_count":5,"historical_numeric_violation_count":6,"violation_window_start":"2021-10-09","violation_window_end":"2026-10-09","violation_window_label":"reported numeric limit violations, 2021–2026","violations":[{"parameter":"NOAEL Static 48Hr Acute Ceriodaphnia dubia","monitoring_period_end":"2023-12-31","violation_desc":"DMR, Limited - Numeric Violation","exceedance_pct":50.0,"status":null,"outfall":"001","source_fields":["PARAMETER_DESC","VIOLATION_DESC","MONITORING_PERIOD_END_DATE","EXCEEDENCE_PCT","PERM_FEATURE_NMBR"]},{"parameter":"Oxygen, dissolved [DO]","monitoring_period_end":"2022-06-30","violation_desc":"DMR, Limited - Numeric Violation","exceedance_pct":1.0,"status":null,"outfall":"001","source_fields":["PARAMETER_DESC","VIOLATION_DESC","MONITORING_PERIOD_END_DATE","EXCEEDENCE_PCT","PERM_FEATURE_NMBR"]},{"parameter":"Oxygen, dissolved [DO]","monitoring_period_end":"2022-05-31","violation_desc":"DMR, Limited - Numeric Violation","exceedance_pct":5.0,"status":null,"outfall":"001","source_fields":["PARAMETER_DESC","VIOLATION_DESC","MONITORING_PERIOD_END_DATE","EXCEEDENCE_PCT","PERM_FEATURE_NMBR"]}],"matched_parameters":[],"tri_releases":[],"tri_match":null,"tri_match_confidence":null,"rank":1,"rank_basis":"river distance upstream of the spill reach (km), then distance to the river (km); not travel time"},{"facility_id":"VAG408560","name":"ERBACH ENTERPRISES LLC PROPERTY 2","frs_id":"110071437515","latitude":38.98511,"longitude":-78.396488,"location_type":"outfall","location_note":"Reported outfall location (ECHO permitted feature) 001; not a surveyed discharge point.","distance_km_to_reach":0.08292030155136107,"nearest_reach_nhdplusid":10000500008235,"upstream_distance_km":7.13152533,"travel_time":{"hours":null,"travel_time_hours_min":9.128923682471024,"is_lower_bound":true,"km_with_velocity":10.291679760000001,"km_total":10.563315600000001,"missing_reach_count":1,"reaches_missing_velocity":[10000500008235],"reason":"1 of 18 reaches on the path (0.3 of 10.6 km) has no EROM velocity; time over those reaches is not counted, so this is a lower bound.","display":"≥ 9.1 h (velocity available for 10.3 of 10.6 km)"},"numeric_violation_count":2,"reporting_violation_count":0,"historical_numeric_violation_count":0,"violation_window_start":"2021-10-09","violation_window_end":"2026-10-09","violation_window_label":"reported numeric limit violations, 2021–2026","violations":[{"parameter":"Solids, total suspended","monitoring_period_end":"2025-08-31","violation_desc":"DMR, Limited - Numeric Violation","exceedance_pct":205.0,"status":null,"outfall":"001","source_fields":["PARAMETER_DESC","VIOLATION_DESC","MONITORING_PERIOD_END_DATE","EXCEEDENCE_PCT","PERM_FEATURE_NMBR"]},{"parameter":"Solids, total suspended","monitoring_period_end":"2024-08-31","violation_desc":"DMR, Limited - Numeric Violation","exceedance_pct":126.0,"status":null,"outfall":"001","source_fields":["PARAMETER_DESC","VIOLATION_DESC","MONITORING_PERIOD_END_DATE","EXCEEDENCE_PCT","PERM_FEATURE_NMBR"]}],"matched_parameters":[{"sensor_parameter":"turbidity","echo_parameter":"Solids, total suspended","is_proxy":true,"note":"Total suspended solids (TSS) is used as a proxy for turbidity; it is an indirect indicator."}],"tri_releases":[],"tri_match":null,"tri_match_confidence":null,"rank":2,"rank_basis":"river distance upstream of the spill reach (km), then distance to the river (km); not travel time"},{"facility_id":"VAG408449","name":"ERBACH ENTERPRISES LLC PROPERTY","frs_id":"110070596880","latitude":38.98498,"longitude":-78.398097,"location_type":"outfall","location_note":"Reported outfall location (ECHO permitted feature) 001; not a surveyed discharge point.","distance_km_to_reach":0.008317411334078616,"nearest_reach_nhdplusid":10000500019726,"upstream_distance_km":7.40316117,"travel_time":{"hours":null,"travel_time_hours_min":9.450572738117135,"is_lower_bound":true,"km_with_velocity":10.69460949,"km_total":10.96624533,"missing_reach_count":1,"reaches_missing_velocity":[10000500008235],"reason":"1 of 19 reaches on the path (0.3 of 11.0 km) has no EROM velocity; time over those reaches is not counted, so this is a lower bound.","display":"≥ 9.4 h (velocity available for 10.7 of 11.0 km)"},"numeric_violation_count":3,"reporting_violation_count":0,"historical_numeric_violation_count":2,"violation_window_start":"2021-10-09","violation_window_end":"2026-10-09","violation_window_label":"reported numeric limit violations, 2021–2026","violations":[{"parameter":"E. coli","monitoring_period_end":"2025-08-31","violation_desc":"DMR, Limited - Numeric Violation","exceedance_pct":703.0,"status":null,"outfall":"001","source_fields":["PARAMETER_DESC","VIOLATION_DESC","MONITORING_PERIOD_END_DATE","EXCEEDENCE_PCT","PERM_FEATURE_NMBR"]},{"parameter":"Oxygen, dissolved [DO]","monitoring_period_end":"2025-08-31","violation_desc":"DMR, Limited - Numeric Violation","exceedance_pct":52.0,"status":null,"outfall":"001","source_fields":["PARAMETER_DESC","VIOLATION_DESC","MONITORING_PERIOD_END_DATE","EXCEEDENCE_PCT","PERM_FEATURE_NMBR"]},{"parameter":"E. coli","monitoring_period_end":"2024-08-31","violation_desc":"DMR, Limited - Numeric Violation","exceedance_pct":730.0,"status":null,"outfall":"001","source_fields":["PARAMETER_DESC","VIOLATION_DESC","MONITORING_PERIOD_END_DATE","EXCEEDENCE_PCT","PERM_FEATURE_NMBR"]}],"matched_parameters":[],"tri_releases":[],"tri_match":null,"tri_match_confidence":null,"rank":3,"rank_basis":"river distance upstream of the spill reach (km), then distance to the river (km); not travel time"},{"facility_id":"VAG408158","name":"SHENANDOAH VALLEY BOARDING AND TRAINING LLC","frs_id":"110070602369","latitude":38.961667,"longitude":-78.406667,"location_type":"outfall","location_note":"Reported outfall location (ECHO permitted feature) 001; not a surveyed discharge point.","distance_km_to_reach":0.15788581127540094,"nearest_reach_nhdplusid":10000500025390,"upstream_distance_km":17.572440880000002,"travel_time":{"hours":null,"travel_time_hours_min":18.715513670955737,"is_lower_bound":true,"km_with_velocity":20.60547814,"km_total":20.76818204,"missing_reach_count":2,"reaches_missing_velocity":[10000500025390,10000500048649],"reason":"2 of 35 reaches on the path (0.2 of 20.8 km) have no EROM velocity; time over those reaches is not counted, so this is a lower bound.","display":"≥ 18.7 h (velocity available for 20.6 of 20.8 km)"},"numeric_violation_count":2,"reporting_violation_count":5,"historical_numeric_violation_count":0,"violation_window_start":"2021-10-09","violation_window_end":"2026-10-09","violation_window_label":"reported numeric limit violations, 2021–2026","violations":[{"parameter":"BOD, 5-day, 20 deg. C","monitoring_period_end":"2024-08-31","violation_desc":"DMR, Limited - Numeric Violation","exceedance_pct":247.0,"status":null,"outfall":"001","source_fields":["PARAMETER_DESC","VIOLATION_DESC","MONITORING_PERIOD_END_DATE","EXCEEDENCE_PCT","PERM_FEATURE_NMBR"]},{"parameter":"BOD, 5-day, 20 deg. C","monitoring_period_end":"2022-08-31","violation_desc":"DMR, Limited - Numeric Violation","exceedance_pct":113.0,"status":null,"outfall":"001","source_fields":["PARAMETER_DESC","VIOLATION_DESC","MONITORING_PERIOD_END_DATE","EXCEEDENCE_PCT","PERM_FEATURE_NMBR"]}],"matched_parameters":[],"tri_releases":[],"tri_match":null,"tri_match_confidence":null,"rank":4,"rank_basis":"river distance upstream of the spill reach (km), then distance to the river (km); not travel time"}],"confidence":0.95,"assumptions":["Candidates are ranked by river distance upstream of the spill reach, then distance to the river; not by travel time.","Travel times use the mean annual EROM velocity, treated as ft/s (a documented assumption); missing velocities are never filled in.","Only permits with at least one reported numeric limit violation in the window are listed."],"limitations":["The spill, the gauge sensor spike and the plume camera footage are simulated: the spike is injected into a real gauge baseline and the footage is rendered.","Facility coordinates are reported locations from ECHO (outfall points where available, otherwise facility geocodes), not surveyed discharge points.","Rain is daily totals only (the event day and the day before); timing within a day is unknown, and a missing day is reported as no rain reading, not zero rain. 2 of 2 days checked had no rain reading.","Travel times shown with ≥ are lower bounds: some reaches on the path have no EROM velocity, and missing velocities are never filled in.","Conductivity→TDS and turbidity→TSS parameter matches are proxies: indirect indicators, not the same measurement.","The Roboflow debris model detected nothing on the sampled frames (ok: 0 predictions on 12 sampled frames (cached 2026-10-17T21:21:36+00:00)); it detects trash and people, not plumes.","Violations are reported or alleged ECHO records, counted only within the stated window; historical violations are shown separately and not ranked.","TRI is annual self-reported data and cannot confirm a live event."],"classification":"incident","data_origin":"simulated spill injected into real baseline","report_mode":"fallback","fallback_reason":"GROQ_API_KEY or GROQ_MODEL not set","guardrail_notes":[]}}}
+
+id: 325
+event: complete
+data: {"simulated":true,"requires_human_review":true,"incident_id":"spill-20261009T2000Z","seq":325,"kind":"complete","scenario_time":"2026-10-10T20:00:00Z","payload":{"classification":"incident","report_mode":"fallback","incident_id":"spill-20261009T2000Z"}}
+

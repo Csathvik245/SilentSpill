@@ -1,0 +1,15 @@
+{
+  "simulated": true,
+  "requires_human_review": true,
+  "incident_id": "spill-20261009T2000Z",
+  "status": "completed",
+  "case": "spill",
+  "classification": "incident",
+  "report_mode": "fallback",
+  "agent_modes": {
+    "triage": "fallback",
+    "trace": "fallback",
+    "compliance": "fallback",
+    "report": "fallback"
+  }
+}

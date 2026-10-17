@@ -1,0 +1,140 @@
+{
+  "simulated": true,
+  "requires_human_review": true,
+  "incident_id": "spill-20261009T2000Z",
+  "site_id": "01634000",
+  "baseline": [
+    {
+      "timestamp": "2026-10-09T19:00:00Z",
+      "values": {
+        "conductivity": 405.0,
+        "turbidity": 0.5,
+        "ph": 8.7,
+        "discharge": 118.0
+      },
+      "simulated": false
+    },
+    {
+      "timestamp": "2026-10-09T19:15:00Z",
+      "values": {
+        "conductivity": 404.0,
+        "turbidity": 0.5,
+        "ph": 8.7,
+        "discharge": 118.0
+      },
+      "simulated": false
+    },
+    {
+      "timestamp": "2026-10-09T19:30:00Z",
+      "values": {
+        "conductivity": 403.0,
+        "turbidity": 0.4,
+        "ph": 8.7,
+        "discharge": 115.0
+      },
+      "simulated": false
+    },
+    {
+      "timestamp": "2026-10-09T19:45:00Z",
+      "values": {
+        "conductivity": 402.0,
+        "turbidity": 0.5,
+        "ph": 8.7,
+        "discharge": 115.0
+      },
+      "simulated": false
+    },
+    {
+      "timestamp": "2026-10-09T20:00:00Z",
+      "values": {
+        "conductivity": 401.0,
+        "turbidity": 0.4,
+        "ph": 8.7,
+        "discharge": 115.0
+      },
+      "simulated": false
+    },
+    {
+      "timestamp": "2026-10-09T20:15:00Z",
+      "values": {
+        "conductivity": 400.0,
+        "turbidity": 0.5,
+        "ph": 8.7,
+        "discharge": 115.0
+      },
+      "simulated": false
+    },
+    {
+      "timestamp": "2026-10-09T20:30:00Z",
+      "values": {
+        "conductivity": 400.0,
+        "turbidity": 0.4,
+        "ph": 8.7,
+        "discharge": 112.0
+      },
+      "simulated": false
+    },
+    {
+      "timestamp": "2026-10-09T20:45:00Z",
+      "values": {
+        "conductivity": 400.0,
+        "turbidity": 0.5,
+        "ph": 8.7,
+        "discharge": 112.0
+      },
+      "simulated": false
+    },
+    {
+      "timestamp": "2026-10-09T21:00:00Z",
+      "values": {
+        "conductivity": 399.0,
+        "turbidity": 0.4,
+        "ph": 8.7,
+        "discharge": 110.0
+      },
+      "simulated": false
+    }
+  ],
+  "injected": [
+    {
+      "timestamp": "2026-10-09T20:15:00Z",
+      "values": {
+        "conductivity": 484.0951,
+        "turbidity": 5.6126,
+        "ph": 8.3771,
+        "discharge": 115.0
+      },
+      "simulated": true
+    },
+    {
+      "timestamp": "2026-10-09T20:30:00Z",
+      "values": {
+        "conductivity": 571.3695,
+        "turbidity": 10.0093,
+        "ph": 8.0724,
+        "discharge": 112.0
+      },
+      "simulated": true
+    },
+    {
+      "timestamp": "2026-10-09T20:45:00Z",
+      "values": {
+        "conductivity": 650.9588,
+        "turbidity": 15.4924,
+        "ph": 7.7095,
+        "discharge": 112.0
+      },
+      "simulated": true
+    },
+    {
+      "timestamp": "2026-10-09T21:00:00Z",
+      "values": {
+        "conductivity": 632.6606,
+        "turbidity": 15.1236,
+        "ph": 7.7155,
+        "discharge": 110.0
+      },
+      "simulated": true
+    }
+  ]
+}

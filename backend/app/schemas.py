@@ -96,9 +96,15 @@ class HealthResponse(ResponseBase):
 
 
 class ReachResponse(ResponseBase):
-    reach: dict[str, Any]  # GeoJSON Feature
+    reach: dict[str, Any]  # GeoJSON Feature (LineString, upstream -> downstream)
+    max_km: float
     upstream_path: list[UpstreamReach]
+    upstream_geojson: FeatureCollection | None = None  # LineStrings of the traced reaches, if the GeoPackage is available
     gauge: GaugeInfo
+
+
+class ErrorResponse(ResponseBase):
+    detail: str
 
 
 # ---- Facilities ------------------------------------------------------------------------------
@@ -338,9 +344,17 @@ class IncidentResponse(ResponseBase):
     agent_modes: dict[str, AgentMode] = {}  # triage/trace/compliance/report -> "llm", "fallback" or "skipped"
 
 
+class ScenarioRunRequest(BaseModel):
+    case: Literal["spill", "storm"] = "spill"
+
+
 class ScenarioRunResponse(ResponseBase):
     incident_id: str
     status: Literal["completed"]
+    case: Literal["spill", "storm"]
+    classification: Literal["incident", "storm_runoff", "flag_for_review", "no_incident"]
+    report_mode: AgentMode
+    agent_modes: dict[str, AgentMode]
 
 
 class StreamEvent(ResponseBase):
