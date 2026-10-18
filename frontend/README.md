@@ -30,6 +30,27 @@ The frontend serves on `http://localhost:5173`. It reads the API from `http://lo
 
 The original simulated aerial clip is kept in `public/spill_20261009T2000Z_seed42.mp4`; a VP8 WebM playback copy is provided for browsers without MPEG-4 Part 2 decoding. The clip is only shown for the spill review. The product’s simulated-data banner is always visible; every result requires human review.
 
+## Watershed map
+
+The MapLibre view flies to a 55° pitch and a valley bearing derived from the API river geometry. Right-drag to rotate; the compass resets north. Main-stem segments are identified using the gauge-linked reach ID and river name. Animated dashes move in the digitized upstream-to-downstream direction, with a brighter, faster main stem and slower tributaries. These animation speeds illustrate direction, not measured water velocity.
+
+Terrarium elevation tiles from AWS Terrain Tiles provide 1.6× terrain, with separate hillshade tiles and a subtle sky/fog. If elevation requests fail, the view silently retains the flat tilted map. Replay plume detections trigger a warm spreading glow along the main stem; this is an event cue, not an inferred plume location. Reduced-motion preferences disable flow and spreading animations, including when changed while the app is open.
+
+For recording, use two PowerShell terminals from the repository root:
+
+```powershell
+# Terminal 1
+.\.venv\Scripts\python.exe -m uvicorn backend.app.main:app --host 127.0.0.1 --port 8000
+```
+
+```powershell
+# Terminal 2
+cd frontend
+npm.cmd run dev -- --host 127.0.0.1
+```
+
+Open `http://127.0.0.1:5173/`. If the servers are already running on these ports, use the existing instances.
+
 ## Build
 
 ```powershell
