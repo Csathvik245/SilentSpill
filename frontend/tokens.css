@@ -1,0 +1,21 @@
+:root {
+  --color-paper: #080f12;
+  --color-panel: #101a1e;
+  --color-ink: #e7f0ee;
+  --color-muted: #9badaa;
+  --color-line: #29383a;
+  --color-river: #66d2dc;
+  --color-river-soft: #16474c;
+  --color-field: #61c7b6;
+  --color-simulated: #d9a85e;
+  --color-banner: #3b2e1e;
+  --font-body: "Geist Variable", sans-serif;
+  --font-report: Georgia, serif;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --radius-card: 9px;
+  --duration-quick: 150ms;
+}

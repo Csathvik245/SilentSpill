@@ -1,0 +1,18 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@fontsource-variable/geist";
+@import "../tokens.css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root{font-family:var(--font-body);color:var(--color-ink);background:var(--color-paper);font-synthesis:none;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-optical-sizing:auto;color-scheme:dark;--background:var(--color-paper);--foreground:var(--color-ink);--card:var(--color-panel);--card-foreground:var(--color-ink);--popover:#142126;--popover-foreground:var(--color-ink);--primary:var(--color-river);--primary-foreground:#071416;--secondary:#1e3033;--secondary-foreground:var(--color-ink);--muted:#142126;--muted-foreground:var(--color-muted);--accent:#1d3034;--accent-foreground:var(--color-ink);--destructive:#df805f;--border:var(--color-line);--input:var(--color-line);--ring:var(--color-river);--radius:.45rem;--sans:var(--font-body);--ink:var(--color-ink);--line:var(--color-line)}
+*{box-sizing:border-box}
+html{min-width:320px;min-height:100%;background:var(--color-paper);overflow-x:clip}
+body{margin:0;min-width:320px;min-height:100vh;font:400 13px/1.45 var(--sans);background:var(--color-paper);overflow-x:clip}
+button{font:inherit}
+button:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid #66d2dc;outline-offset:3px}
+#root{min-height:100vh}
+::selection{background:#25585d;color:#efffff}
+
+@theme inline{--font-sans:var(--font-body);--color-background:var(--background);--color-foreground:var(--foreground);--color-card:var(--card);--color-card-foreground:var(--card-foreground);--color-popover:var(--popover);--color-popover-foreground:var(--popover-foreground);--color-primary:var(--primary);--color-primary-foreground:var(--primary-foreground);--color-secondary:var(--secondary);--color-secondary-foreground:var(--secondary-foreground);--color-muted:var(--muted);--color-muted-foreground:var(--muted-foreground);--color-accent:var(--accent);--color-accent-foreground:var(--accent-foreground);--color-destructive:var(--destructive);--color-border:var(--border);--color-input:var(--input);--color-ring:var(--ring);--radius-sm:calc(var(--radius)*.6);--radius-md:calc(var(--radius)*.8);--radius-lg:var(--radius);--radius-xl:calc(var(--radius)*1.4)}

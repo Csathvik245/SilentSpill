@@ -1,4 +1,11 @@
 ﻿.env
+.agents/
+.impeccable/
+.hallmark/
+.sandbox/
+skills-lock.json
+node_modules/
+/frontend/dist/
 /data/
 /cache/
 /2024_us.csv
