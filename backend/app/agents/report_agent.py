@@ -6,6 +6,7 @@ pass through the guardrails.
 """
 from __future__ import annotations
 
+import re
 from datetime import datetime, timezone
 from typing import Any
 
@@ -27,12 +28,14 @@ from .trace_agent import candidate_summary
 
 SYSTEM_PROMPT = """You are the Report agent in SilentSpill, a water-quality monitoring demo. You write the summary of a draft incident report that a person must review before any action.
 
-Role: summarize, in 3 to 7 plain sentences, what TOOL RESULTS show: whether the data are simulated or real observed data, the classification and its confidence, the anomalous parameters, and (only if candidates are listed) the facilities with reported violations near this reach in their given rank order, with river distance, travel time text copied exactly (keep any "≥": it marks a lower bound) and reported violation counts. If the classification is storm_runoff, say the anomaly is consistent with storm runoff given the recorded rain, and that there is no candidate list; name no facility. The timeline, candidate table and required limitations are added by code: do not repeat the limitations.
+Role: summarize, in 3 to 7 plain sentences, what TOOL RESULTS show: whether the data are simulated or real observed data, the classification and its confidence, the anomalous parameters, and (only if candidates are listed) the facilities with reported violations near this reach in their given rank order, with river distance, travel time text copied exactly (keep any "≥": it marks a lower bound) and reported violation counts. When a candidate has small_domestic_general_permit true, say plainly that it holds a small domestic general permit (give its general_permit_id). If the classification is storm_runoff, say the anomaly is consistent with storm runoff given the recorded rain, and that storm runoff gets no candidate list by design; name no facility, and never say that no facilities were found (none were searched for). The timeline, candidate table and required limitations are added by code: do not repeat the limitations.
 
 Rules:
 - Use only the values in TOOL RESULTS. Copy facility names, permit IDs and numbers exactly as written there. Never invent facilities, numbers, dates or chemicals.
 - Non-accusatory wording: never say a facility "caused" or "is responsible for" the spill, or is "the source of the spill", a "polluter", "culprit", "guilty" or "to blame"; no "dumping" or "dumped". Use "facilities with reported violations near this reach" and "consistent with". Violations are reported or alleged. The report does not identify a source.
 - Rain is daily totals only; a missing day is "no rain reading", not zero.
+- gauge_events lists every gauge anomaly (storm_filter says whether rain explains it); anomalous_parameters lists only the parameters rain does not explain. For storm_runoff, describe the gauge_events; never say there were no anomalies.
+- Write dates as YYYY-MM-DD and times as YYYY-MM-DD HH:MM UTC, as in TOOL RESULTS.
 - extra_assumptions / extra_limitations: optional, short, and only if not already in required_limitations.
 
 Return only a JSON object of this shape:
@@ -160,6 +163,7 @@ def build_context(
         if trace.candidate_notes.get(s["facility_id"]):
             s["note"] = trace.candidate_notes[s["facility_id"]]
     rain = scenario.storm.rain
+    storm_labels = {id(d.event): d.label for d in scenario.storm.decisions}
     return {
         "case": scenario.case,
         "data_origin": scenario.data_origin,
@@ -168,6 +172,16 @@ def build_context(
         "confidence": scenario.fusion.confidence,
         "triage_reasons": triage.reasons,
         "anomalous_parameters": scenario.anomalous_parameters,
+        "gauge_events": [
+            {
+                "parameter": fallback.param_label(e.parameter),
+                "direction": e.direction,
+                "onset": e.timestamp,
+                "peak": e.peak_timestamp,
+                "storm_filter": storm_labels.get(id(e), "not_applicable"),
+            }
+            for e in scenario.sensor_events
+        ],
         "rain": None if rain is None else {
             "window_total_inches": rain.window_total_inches,
             "threshold_inches": rain.threshold_inches,
@@ -188,6 +202,43 @@ def _storm_ok(summary: str) -> bool:
     return "storm" in summary.lower()
 
 
+# "No ... facilities ... found": false for storm runoff, where the list is withheld rather than empty.
+_NONE_FOUND = re.compile(r"\bno\b[^.]*\b(facilit|permit|candidate)[^.]*\b(found|identified|located)\b", re.I)
+STORM_NO_LIST = "Storm runoff gets no candidate list by design, and no permit holder is named."
+
+
+def fix_storm_none_found(summary: str, notes: list[str]) -> str:
+    """Replace sentences claiming no facilities were found with the by-design statement."""
+    out, replaced = [], False
+    for s in re.split(r"(?<=\.)\s+", summary):
+        if _NONE_FOUND.search(s):
+            if not replaced:
+                out.append(STORM_NO_LIST)
+            replaced = True
+            notes.append("report: replaced a 'no facilities found' sentence; storm runoff gets no list by design")
+        else:
+            out.append(s)
+    return " ".join(out)
+
+
+def ensure_permit_statements(summary: str, ctx: dict[str, Any], notes: list[str]) -> str:
+    """Every candidate with a small domestic general permit is stated plainly in the summary.
+
+    Added by code after the guardrails, in both modes, when no sentence names the facility ID together
+    with "small domestic". The sentence is built only from tool output.
+    """
+    sentences = [s.lower() for s in re.split(r"(?<=[.;])\s+", summary)]
+    for c in ctx.get("candidates") or []:
+        if not c.get("small_domestic_general_permit"):
+            continue
+        fid = c["facility_id"].lower()
+        if any(fid in s and "small domestic" in s for s in sentences):
+            continue
+        summary = f"{summary} {fallback.small_domestic_sentence(c)}".strip()
+        notes.append(f"report: added the small domestic general permit statement for {c['facility_id']}")
+    return summary
+
+
 def finalize(
     llm: ReportLLM, scenario: ScenarioResult, tools: Tools, triage: TriageResult, trace: TraceResult,
     ctx: dict[str, Any], timeline: list[TimelineEntry], limitations: list[str],
@@ -202,6 +253,9 @@ def finalize(
         notes.append("report: model summary unusable after guardrails; template summary used")
         parts = fallback.clean_all([fallback.report(ctx)["summary"]], ledger, extra, "report summary", notes)
         summary = parts[0] if parts else "Draft incident report; requires human review before any action."
+    if storm:
+        summary = fix_storm_none_found(summary, notes)
+    summary = ensure_permit_statements(summary, ctx, notes)
     assumptions = list(trace.assumptions)
     for a in fallback.clean_all(llm.extra_assumptions, ledger, extra, "report assumptions", notes):
         if a not in assumptions:

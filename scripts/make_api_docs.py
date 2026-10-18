@@ -133,11 +133,18 @@ produced in **`{mode}`** mode ({modes}).
 - Travel times use `travel_time.display`. A value starting with `≥` is a lower bound (some reaches
   have no velocity data); show it as written, never as an estimate.
 - Wording is non-accusatory: facilities are "facilities with reported violations near this reach".
+- Every incident response (`POST /scenario/run`, `GET /incidents/{{id}}`) and every report carry a fixed
+  `disclaimer`: "Simulated incident. Facilities are listed only because they have reported permit
+  violations upstream; no link to any real event is implied." Show it with the report.
+- Each candidate has `permit_type` (`individual`, `general` or null), `facility_type`, and
+  `small_domestic_general_permit` (true for a small domestic sewage general permit, such as Virginia's VAG40).
+  `permit_note` is a ready-to-show sentence. These never affect the ranking.
 
 ## Endpoints
 
 | Method | Path | Purpose |
 |---|---|---|
+| GET | `/` | Redirects to the interactive docs at `/docs` |
 | GET | `/health` | Readiness of local data and optional services |
 | GET | `/reach?max_km=50` | Demo reach geometry, the traced upstream network, and the gauge |
 | GET | `/facilities?comid=&max_km=50&buffer_m=1000` | Candidate facilities with reported violations (GeoJSON + details) |

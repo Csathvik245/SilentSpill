@@ -213,11 +213,27 @@ EXPECTED = {  # id: (nearest reach, distance km, upstream km, travel path)
 BAD_WORDS = ("caused", "responsible", "cause ", "polluter")
 
 
+DOMESTIC_GP = "VPDES General Permit for Domestic Sewage Discharges of Less Than or Equal to 1,000 Gallons Per Day"
+PERMITS = pd.DataFrame(
+    [
+        # npdes_id, type code, status, POTW indicator, master permit, master title, facility type code
+        ("VA0000001", "NPD", "EFF", "NON-POTW", None, None, "COR"),
+        ("VA0000002", "GPC", "EFF", "NON-POTW", "VAG400000", DOMESTIC_GP, "POF"),
+        ("VA0000003", "GPC", "EFF", "NON-POTW", "VAG840000", "General Permit for Nonmetallic Mineral Mining", "COR"),
+        ("VA0000004", "APR", "EFF", None, None, None, None),
+        # VA0000005, 08 and 09 have no permit record
+    ],
+    columns=["npdes_id", "permit_type_code", "permit_status_code", "facility_type_indicator",
+             "general_permit_id", "general_permit_name", "facility_type_code"],
+)
+
+
 def _find(G, reach_geoms, **kw):
     kw.setdefault("facilities", FACILITIES)
     kw.setdefault("outfalls", OUTFALLS)
     kw.setdefault("violations", VIOLATIONS)
     kw.setdefault("tri", TRI)
+    kw.setdefault("permits", PERMITS)
     return fac.find_candidate_facilities(G, START, 50, reach_geoms=reach_geoms, **kw)
 
 
@@ -506,7 +522,7 @@ def test_max_km_limits_trace(G, reach_geoms):
     # Trace of 3 km reaches 100 and 101 only (102/201 start at 3.0).
     ids = [c.facility_id for c in fac.find_candidate_facilities(
         G, START, 3.0, facilities=FACILITIES, outfalls=OUTFALLS, violations=VIOLATIONS, tri=TRI,
-        reach_geoms=reach_geoms)]
+        reach_geoms=reach_geoms, permits=PERMITS)]
     assert ids == ["VA0000001", "VA0000002", "VA0000008", "VA0000009"]
 
 
@@ -562,3 +578,60 @@ def test_real_reach_invariants():
     assert [c.rank for c in out] == list(range(1, len(out) + 1))
     keys = [(c.upstream_distance_km, c.distance_km_to_reach) for c in out]
     assert keys == sorted(keys)
+
+
+# ---- permit and facility type -----------------------------------------------------------------
+def test_permit_types_from_icis(cands):
+    by = {c.facility_id: c for c in cands}
+    a, b, e, z, eta = by["VA0000001"], by["VA0000002"], by["VA0000003"], by["VA0000004"], by["VA0000005"]
+    assert (a.permit_type, a.permit_type_code, a.facility_type, a.facility_type_indicator) == (
+        "individual", "NPD", "Corporation", "NON-POTW")
+    assert not a.small_domestic_general_permit and a.permit_note == "Holds an individual NPDES permit."
+    assert (b.permit_type, b.general_permit_id, b.facility_type) == ("general", "VAG400000", "Privately Owned Facility")
+    assert b.small_domestic_general_permit and "small domestic general permit" in b.permit_note
+    assert b.general_permit_name == DOMESTIC_GP
+    # A general permit that is not for domestic sewage is general, but not small domestic.
+    assert e.permit_type == "general" and not e.small_domestic_general_permit
+    assert e.permit_note.startswith("Covered by a general permit (VAG840000")
+    # Codes other than individual/general keep the code and ECHO's description, with no permit_type.
+    assert (z.permit_type, z.permit_type_code, z.permit_type_desc) == (None, "APR", "Associated Permit Record")
+    assert eta.permit_type is None and eta.permit_type_code is None and "No permit type record" in eta.permit_note
+
+
+def test_permit_type_does_not_change_ranking(G, reach_geoms):
+    # Swap every permit type: the order and ranks must not move.
+    swapped = PERMITS.assign(
+        permit_type_code=PERMITS["permit_type_code"].map({"NPD": "GPC", "GPC": "NPD", "APR": "NPD"}),
+        general_permit_name=DOMESTIC_GP,
+    )
+    for permits in (PERMITS, swapped, PERMITS.iloc[0:0]):
+        out = _find(G, reach_geoms, permits=permits)
+        assert [c.facility_id for c in out] == EXPECTED_ORDER
+        assert [c.rank for c in out] == list(range(1, len(EXPECTED_ORDER) + 1))
+
+
+def test_permit_note_is_non_accusatory(cands):
+    for c in cands:
+        assert not any(w in (c.permit_note or "").lower() for w in BAD_WORDS)
+
+
+def test_real_permit_types_on_demo_reach():
+    try:
+        settings = get_settings()
+    except ConfigError:
+        pytest.skip("no .env")
+    from backend.app.data.echo import load_permits
+    from backend.app.data.nhd_graph import load_graph
+
+    permits = load_permits()
+    assert permits["npdes_id"].is_unique
+    out = fac.find_candidate_facilities(load_graph(), settings.reach_nhdplusid, 50,
+                                        reference_date=settings.scenario_timestamp.date())
+    by = {c.facility_id: c for c in out}
+    assert by["VA0052621"].permit_type == "individual" and not by["VA0052621"].small_domestic_general_permit
+    for fid in ("VAG408560", "VAG408449", "VAG408158"):
+        c = by[fid]
+        assert c.permit_type == "general" and c.general_permit_id == "VAG400000"
+        assert c.small_domestic_general_permit and "Domestic Sewage" in c.general_permit_name
+    for c in out:
+        assert c.facility_type is not None and c.facility_type_code is not None

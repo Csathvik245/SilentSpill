@@ -24,7 +24,15 @@ from ..schemas import (
     SensorParameter,
     ViolationRecord,
 )
-from .echo import load_facilities, load_outfalls, load_violations
+from .echo import (
+    FACILITY_TYPE_DESC,
+    PERMIT_TYPE_DESC,
+    PERMIT_TYPE_KIND,
+    load_facilities,
+    load_outfalls,
+    load_permits,
+    load_violations,
+)
 from .nhd_graph import downstream_path, reach_geometries, trace_upstream, travel_time
 from .tri import load_tri, match_tri
 
@@ -192,6 +200,47 @@ def _violation_record(row: Any) -> ViolationRecord:
     )
 
 
+# A general permit whose master title names domestic sewage (in Virginia, VAG40: discharges of
+# 1,000 gallons per day or less) covers a small domestic discharge, not an industrial process.
+_DOMESTIC_MARKER = "domestic sewage"
+
+
+def permit_info(npdes_id: str, permits: pd.DataFrame) -> dict[str, Any]:
+    """CandidateFacility permit/facility-type fields for one permit, from the load_permits frame."""
+    rows = permits[permits["npdes_id"] == npdes_id]
+    if rows.empty:
+        return {"permit_note": "No permit type record for this permit in the local ICIS_PERMITS data."}
+    r = rows.iloc[0]
+    code = _opt_str(r["permit_type_code"])
+    ftype_code = _opt_str(r.get("facility_type_code"))
+    gp_id, gp_name = _opt_str(r["general_permit_id"]), _opt_str(r["general_permit_name"])
+    kind = PERMIT_TYPE_KIND.get(code or "")
+    small_domestic = kind == "general" and _DOMESTIC_MARKER in (gp_name or "").lower()
+    if small_domestic:
+        note = (
+            f"Holds a small domestic general permit ({gp_id}: {gp_name}), "
+            "not an individual industrial discharge permit."
+        )
+    elif kind == "general":
+        note = f"Covered by a general permit ({gp_id}: {gp_name})." if gp_name else "Covered by a general permit."
+    elif kind == "individual":
+        note = "Holds an individual NPDES permit."
+    else:
+        note = f"Permit type code {code} ({PERMIT_TYPE_DESC.get(code or '', 'unrecognized code')})."
+    return {
+        "permit_type": kind,
+        "permit_type_code": code,
+        "permit_type_desc": PERMIT_TYPE_DESC.get(code or ""),
+        "general_permit_id": gp_id,
+        "general_permit_name": gp_name,
+        "small_domestic_general_permit": small_domestic,
+        "facility_type": FACILITY_TYPE_DESC.get(ftype_code or ""),
+        "facility_type_code": ftype_code,
+        "facility_type_indicator": _opt_str(r["facility_type_indicator"]),
+        "permit_note": note,
+    }
+
+
 def find_candidate_facilities(
     G: nx.DiGraph,
     start_id: int,
@@ -206,6 +255,7 @@ def find_candidate_facilities(
     violations: pd.DataFrame | None = None,
     tri: pd.DataFrame | None = None,
     reach_geoms: gpd.GeoDataFrame | None = None,
+    permits: pd.DataFrame | None = None,
 ) -> list[CandidateFacility]:
     """Permits with reported numeric violations near the river upstream of start_id, ranked by distance.
 
@@ -240,8 +290,8 @@ def find_candidate_facilities(
     window_label = (
         f"reported numeric limit violations, {win_start.year}–{win_end.year}" if win_start is not None else ""
     )
-    permits = set(numeric["npdes_id"])
-    if reaches.empty or not permits:
+    violating = set(numeric["npdes_id"])
+    if reaches.empty or not violating:
         return []
 
     # 2. Points near the traced reaches.
@@ -250,7 +300,7 @@ def find_candidate_facilities(
     if outfalls is None:
         outfalls = load_outfalls()
     pts = facility_points(facilities, outfalls)
-    pts = pts[pts["npdes_id"].isin(permits)].reset_index(drop=True)
+    pts = pts[pts["npdes_id"].isin(violating)].reset_index(drop=True)
     if pts.empty:
         return []
     gpts = gpd.GeoDataFrame(
@@ -280,6 +330,8 @@ def find_candidate_facilities(
 
     if tri is None:
         tri = load_tri()
+    if permits is None:
+        permits = load_permits()
     echo_frs_ids = {s for s in (_opt_str(v) for v in facilities["frs_id"]) if s}
     fac_points = facilities.drop_duplicates("npdes_id").set_index("npdes_id")[["latitude", "longitude"]]
 
@@ -326,6 +378,7 @@ def find_candidate_facilities(
                 tri_releases=releases,
                 tri_match=how,
                 tri_match_confidence=confidence,
+                **permit_info(pid, permits),
             )
         )
 

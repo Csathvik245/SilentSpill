@@ -201,3 +201,29 @@ def test_no_secret_in_any_response(client):
     secrets = [x.get_secret_value() for x in (s.groq_api_key, s.noaa_cdo_token, s.roboflow_api_key) if x]
     bodies = [client.get(p).text for p in ("/health", f"/incidents/{SPILL_ID}", f"/incidents/{STORM_ID}")]
     assert not any(sec in b for sec in secrets for b in bodies)
+
+
+def test_root_redirects_to_docs(client):
+    r = client.get("/", follow_redirects=False)
+    assert r.status_code in (302, 307) and r.headers["location"] == "/docs"
+    assert client.get("/").status_code == 200  # the docs page itself
+
+
+def test_disclaimer_on_every_incident_response(client):
+    from backend.app.schemas import DISCLAIMER
+
+    for case, iid in (("spill", SPILL_ID), ("storm", STORM_ID)):
+        run = client.post("/scenario/run", json={"case": case}).json()
+        assert run["disclaimer"] == DISCLAIMER
+        body = client.get(f"/incidents/{iid}").json()
+        assert body["disclaimer"] == DISCLAIMER and body["report"]["disclaimer"] == DISCLAIMER
+        assert list(body["report"])[2] == "disclaimer"  # top of the report, after the flags
+    done = [d for k, d in parse_sse(client.get(f"/stream/{SPILL_ID}", params={"speed": 0}).text) if k == "agent_output"]
+    report = next(d["payload"]["output"] for d in done if d["payload"]["agent"] == "report")
+    assert report["disclaimer"] == DISCLAIMER
+
+
+def test_facilities_carry_permit_type(client):
+    for c in client.get("/facilities").json()["candidates"]:
+        assert c["permit_type"] in ("individual", "general", None)
+        assert "small_domestic_general_permit" in c and "facility_type" in c

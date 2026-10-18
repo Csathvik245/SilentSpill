@@ -657,3 +657,86 @@ def test_unexpected_exception_in_agent_falls_back(spill, monkeypatch):
 
 def test_run_scenario_exists():
     assert callable(getattr(orchestrator, "run_scenario", None))
+
+
+# ---- disclaimer and permit type ------------------------------------------------------------------
+@pytest.mark.parametrize("which", ["spill_llm", "spill_fallback", "storm_fallback"])
+def test_disclaimer_present_in_both_modes(which, request, storm):
+    from backend.app.schemas import DISCLAIMER
+
+    resp = request.getfixturevalue(which)[0]
+    assert resp.disclaimer == DISCLAIMER and resp.report.disclaimer == DISCLAIMER
+    dumped = json.loads(resp.model_dump_json())
+    assert dumped["disclaimer"] == DISCLAIMER and dumped["report"]["disclaimer"] == DISCLAIMER
+    # First report field after the shared flags: the top of the report.
+    assert list(dumped["report"])[2] == "disclaimer"
+
+
+def test_disclaimer_present_in_storm_llm_mode(storm):
+    from backend.app.schemas import DISCLAIMER
+
+    resp, _, _ = chain(storm)
+    assert resp.report.report_mode == "llm"
+    assert resp.disclaimer == DISCLAIMER and resp.report.disclaimer == DISCLAIMER
+
+
+def test_disclaimer_cannot_be_changed():
+    from pydantic import ValidationError
+
+    with pytest.raises(ValidationError):
+        IncidentReport.model_validate({"disclaimer": "x", "summary": "s", "timeline": [], "ranked_candidates": [], "confidence": 0.5,
+                                       "assumptions": [], "limitations": [], "classification": "incident",
+                                       "data_origin": "o", "report_mode": "llm"})
+
+
+def _small_domestic(spill):
+    return [c for c in spill.candidates if c.small_domestic_general_permit]
+
+
+@pytest.mark.parametrize("which", ["spill_llm", "spill_fallback"])
+def test_small_domestic_permit_stated_plainly(which, request, spill):
+    resp = request.getfixturevalue(which)[0]
+    small = _small_domestic(spill)
+    assert small, "the demo reach has VAG40 small domestic general permits upstream"
+    sentences = [s.lower() for s in re.split(r"(?<=[.;])\s+", resp.report.summary)]
+    for c in small:
+        assert any(c.facility_id.lower() in s and "small domestic general permit" in s for s in sentences), c.facility_id
+    for c in spill.candidates:
+        if not c.small_domestic_general_permit:
+            assert not any(c.facility_id.lower() in s and "small domestic" in s for s in sentences)
+
+
+def test_llm_summary_without_permit_statement_gets_it_added(spill, spill_llm):
+    resp = spill_llm[0]  # NEUTRAL_SPILL never mentions permit types
+    assert NEUTRAL_SPILL in resp.report.summary
+    for c in _small_domestic(spill):
+        assert f"{c.name} ({c.facility_id}) holds a small domestic general permit ({c.general_permit_id})." in resp.report.summary
+        assert any(c.facility_id in n and "small domestic" in n for n in resp.report.guardrail_notes)
+
+
+def test_permit_fields_do_not_change_ranking(spill, spill_llm, spill_fallback):
+    expected = sorted(spill.candidates, key=lambda c: (c.upstream_distance_km, c.distance_km_to_reach, c.facility_id))
+    for resp in (spill_llm[0], spill_fallback[0]):
+        assert [c.facility_id for c in resp.report.ranked_candidates] == [c.facility_id for c in expected]
+        assert [c.rank for c in resp.report.ranked_candidates] == list(range(1, len(expected) + 1))
+
+
+def test_storm_none_found_claim_replaced(storm):
+    responses = good_responses(storm)
+    responses["report"]["summary"] = (
+        NEUTRAL_STORM + " No candidate facilities with reported violations were found upstream of this reach."
+    )
+    resp, _, _ = chain(storm, defaults=responses)
+    s = resp.report.summary
+    assert resp.report.report_mode == "llm" and NEUTRAL_STORM in s
+    assert "were found" not in s
+    assert "no candidate list by design" in s
+    assert any("no facilities found" in n for n in resp.report.guardrail_notes)
+
+
+def test_storm_report_context_lists_gauge_events(storm):
+    _, fake, _ = chain(storm)
+    report_prompt = next(json.dumps(k) for a, k in zip(fake.routed, fake.calls) if a == "report")
+    assert "gauge_events" in report_prompt and "storm_runoff" in report_prompt
+    assert storm.anomalous_parameters == []  # rain explains every storm event, so this list is empty
+    assert any(e.parameter == "turbidity" for e in storm.sensor_events)

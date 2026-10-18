@@ -20,7 +20,7 @@ import pandas as pd
 from fastapi import FastAPI, Query, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse, StreamingResponse
+from fastapi.responses import JSONResponse, RedirectResponse, StreamingResponse
 from starlette.exceptions import HTTPException
 
 from .agents import orchestrator
@@ -236,6 +236,10 @@ def create_app(settings: Settings | None = None, client_factory: Callable[[Setti
         if rec is None:
             raise _not_found(f"unknown incident {incident_id!r}; run POST /scenario/run first")
         return rec
+
+    @app.get("/", include_in_schema=False)
+    def root() -> RedirectResponse:
+        return RedirectResponse("/docs")
 
     @app.get("/health", response_model=HealthResponse)
     def health() -> HealthResponse:

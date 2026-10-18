@@ -94,7 +94,14 @@ def candidate_note(c: dict[str, Any]) -> str:
         note += " Reported parameter match: " + ", ".join(words) + "."
     else:
         note += " No reported parameter matches the anomalous sensor parameters."
+    if c.get("permit_note"):
+        note += " " + c["permit_note"]
     return note
+
+
+def small_domestic_sentence(c: dict[str, Any]) -> str:
+    """Plain statement that a candidate holds a small domestic general permit."""
+    return f"{c['name']} ({c['facility_id']}) holds a small domestic general permit ({c['general_permit_id']})."
 
 
 def trace(ctx: dict[str, Any]) -> dict[str, Any]:
@@ -200,6 +207,10 @@ def report(ctx: dict[str, Any]) -> dict[str, Any]:
                     m = matches[0]
                     s += f"; reported {m['echo_parameter']} matches {param_label(m['sensor_parameter'])}"
                     s += " (proxy)" if m["is_proxy"] else ""
+                if c.get("small_domestic_general_permit"):
+                    s += f"; holds a small domestic general permit ({c['general_permit_id']})"
+                elif c.get("permit_type"):
+                    s += f"; {c['permit_type']} permit"
                 sentences.append(s + ".")
         else:
             sentences.append("No upstream permit holders with reported violations were found near this reach.")

@@ -72,6 +72,11 @@ def candidate_summary(c: dict[str, Any], travel: dict[str, Any] | None) -> dict[
             {k: m[k] for k in ("sensor_parameter", "echo_parameter", "is_proxy")} for m in c.get("matched_parameters", [])
         ],
         "tri_match": c.get("tri_match"),
+        "permit_type": c.get("permit_type"),
+        "general_permit_id": c.get("general_permit_id"),
+        "small_domestic_general_permit": c.get("small_domestic_general_permit", False),
+        "facility_type": c.get("facility_type"),
+        "permit_note": c.get("permit_note"),
     }
 
 

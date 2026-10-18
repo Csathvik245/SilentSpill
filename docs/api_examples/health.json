@@ -10,7 +10,7 @@
     "echo_data": true,
     "tri_data": true,
     "roboflow_cache": true,
-    "groq_configured": false,
+    "groq_configured": true,
     "naip_imagery": false
   }
 }

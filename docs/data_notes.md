@@ -152,6 +152,19 @@ Key `NPDES_ID`; also `FACILITY_NAME`, `STATE_CODE`, `GEOCODE_LATITUDE`, `GEOCODE
 - **Most rows are reporting violations, not pollutant exceedances.** "DMR, Limited - Overdue" (86,277) and "DMR, Monitor Only - Overdue" (62,714) make up about 86% of rows. "DMR, Limited - Numeric Violation" is 23,542 rows, and `EXCEEDENCE_PCT` is filled on 23,124. Candidate ranking uses numeric violations only. Overdue reports may be listed separately and must not be presented as pollution.
 - Wording: all violations are **reported** or **alleged** in the ECHO data. Use "reported violation" and never "caused" or "responsible for".
 
+### Permit and facility type (`ICIS_PERMITS.csv`, `ICIS_FACILITIES.csv`)
+
+- `ICIS_PERMITS.csv` has one row per permit version (36,809 Virginia rows). Each permit uses its `EFF` (effective) version when there is one, otherwise its highest `VERSION_NMBR`.
+- `PERMIT_TYPE_CODE` → `permit_type`: `NPD` (NPDES Individual Permit) is `individual`; `GPC` (General Permit Covered Facility) and `NGP` (NPDES Master General Permit) are `general`. Other codes (`APR`, `UFT`, `IIU`, …) keep the code and ECHO's description, with `permit_type` null. The code meanings come from the ECHO ICIS-NPDES download summary (checked 2026-10-18).
+- A covered permit's `MASTER_EXTERNAL_PERMIT_NMBR` points to its master general permit, whose `PERMIT_NAME` is the permit's title. Virginia's `VAG400000` is "VPDES General Permit for Domestic Sewage Discharges of Less Than or Equal to 1,000 Gallons Per Day". A general permit whose master title contains "domestic sewage" is flagged `small_domestic_general_permit`, and the report says so plainly.
+- `ICIS_FACILITIES.FACILITY_TYPE_CODE` → `facility_type`, e.g. `COR` Corporation, `POF` Privately Owned Facility. `ICIS_PERMITS.FACILITY_TYPE_INDICATOR` (POTW, NON-POTW, FEDERAL) is kept as `facility_type_indicator`.
+- These fields are context only. They never change the ranking, which is by river distance.
+- Demo reach: VA0052621 holds an individual permit. VAG408560, VAG408449 and VAG408158 hold the VAG40 small domestic general permit.
+
+### Disclaimer
+
+Every incident response (`/scenario/run`, `/incidents/{id}`, the CLI output) and the top of every report carry the fixed field `disclaimer`: "Simulated incident. Facilities are listed only because they have reported permit violations upstream; no link to any real event is implied." It is a schema constant, so neither the model nor the template can change it.
+
 ### Parameter proxies (assumption, documented)
 
 The sensors measure conductivity and turbidity, but ECHO reports hardly any of either (`PARAMETER_DESC` matches: conductivity 14 rows, turbidity 2 rows). Matching therefore uses these proxies, and every match is labeled as a proxy:

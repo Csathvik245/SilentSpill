@@ -6,7 +6,7 @@ SSE event, carries `"simulated": true` and `"requires_human_review": true`.
 The examples below come from a real run of this backend (`python scripts/make_api_docs.py`,
 which regenerates this file). Long lists are cut to a few items with a `"... N more"` marker; the
 full responses are in [`docs/api_examples/`](api_examples/). In this run the incident report was
-produced in **`fallback`** mode (triage `fallback`, trace `fallback`, compliance `fallback`, report `fallback`).
+produced in **`llm`** mode (triage `llm`, trace `llm`, compliance `llm`, report `llm`).
 
 ## Running the server
 
@@ -30,11 +30,18 @@ produced in **`fallback`** mode (triage `fallback`, trace `fallback`, compliance
 - Travel times use `travel_time.display`. A value starting with `≥` is a lower bound (some reaches
   have no velocity data); show it as written, never as an estimate.
 - Wording is non-accusatory: facilities are "facilities with reported violations near this reach".
+- Every incident response (`POST /scenario/run`, `GET /incidents/{id}`) and every report carry a fixed
+  `disclaimer`: "Simulated incident. Facilities are listed only because they have reported permit
+  violations upstream; no link to any real event is implied." Show it with the report.
+- Each candidate has `permit_type` (`individual`, `general` or null), `facility_type`, and
+  `small_domestic_general_permit` (true for a small domestic sewage general permit, such as Virginia's VAG40).
+  `permit_note` is a ready-to-show sentence. These never affect the ranking.
 
 ## Endpoints
 
 | Method | Path | Purpose |
 |---|---|---|
+| GET | `/` | Redirects to the interactive docs at `/docs` |
 | GET | `/health` | Readiness of local data and optional services |
 | GET | `/reach?max_km=50` | Demo reach geometry, the traced upstream network, and the gauge |
 | GET | `/facilities?comid=&max_km=50&buffer_m=1000` | Candidate facilities with reported violations (GeoJSON + details) |
@@ -60,7 +67,7 @@ produced in **`fallback`** mode (triage `fallback`, trace `fallback`, compliance
     "echo_data": true,
     "tri_data": true,
     "roboflow_cache": true,
-    "groq_configured": false,
+    "groq_configured": true,
     "naip_imagery": false
   }
 }
@@ -266,6 +273,16 @@ says whether the point is a reported outfall or only the facility location.
       "tri_releases": [],
       "tri_match": null,
       "tri_match_confidence": null,
+      "permit_type": "individual",
+      "permit_type_code": "NPD",
+      "permit_type_desc": "NPDES Individual Permit",
+      "general_permit_id": null,
+      "general_permit_name": null,
+      "small_domestic_general_permit": false,
+      "facility_type": "Corporation",
+      "facility_type_code": "COR",
+      "facility_type_indicator": "NON-POTW",
+      "permit_note": "Holds an individual NPDES permit.",
       "rank": 1,
       "rank_basis": "river distance upstream of the spill reach (km), then distance to the river (km); not travel time"
     },
@@ -338,6 +355,16 @@ says whether the point is a reported outfall or only the facility location.
       "tri_releases": [],
       "tri_match": null,
       "tri_match_confidence": null,
+      "permit_type": "general",
+      "permit_type_code": "GPC",
+      "permit_type_desc": "General Permit Covered Facility",
+      "general_permit_id": "VAG400000",
+      "general_permit_name": "VPDES General Permit for Domestic Sewage Discharges of Less Than or Equal to 1,000 Gallons Per Day",
+      "small_domestic_general_permit": true,
+      "facility_type": "Privately Owned Facility",
+      "facility_type_code": "POF",
+      "facility_type_indicator": "NON-POTW",
+      "permit_note": "Holds a small domestic general permit (VAG400000: VPDES General Permit for Domestic Sewage Discharges of Less Than or Equal to 1,000 Gallons Per Day), not an individual industrial discharge permit.",
       "rank": 2,
       "rank_basis": "river distance upstream of the spill reach (km), then distance to the river (km); not travel time"
     },
@@ -414,6 +441,16 @@ says whether the point is a reported outfall or only the facility location.
           "tri_releases": [],
           "tri_match": null,
           "tri_match_confidence": null,
+          "permit_type": "individual",
+          "permit_type_code": "NPD",
+          "permit_type_desc": "NPDES Individual Permit",
+          "general_permit_id": null,
+          "general_permit_name": null,
+          "small_domestic_general_permit": false,
+          "facility_type": "Corporation",
+          "facility_type_code": "COR",
+          "facility_type_indicator": "NON-POTW",
+          "permit_note": "Holds an individual NPDES permit.",
           "rank": 1,
           "rank_basis": "river distance upstream of the spill reach (km), then distance to the river (km); not travel time"
         }
@@ -494,6 +531,16 @@ says whether the point is a reported outfall or only the facility location.
           "tri_releases": [],
           "tri_match": null,
           "tri_match_confidence": null,
+          "permit_type": "general",
+          "permit_type_code": "GPC",
+          "permit_type_desc": "General Permit Covered Facility",
+          "general_permit_id": "VAG400000",
+          "general_permit_name": "VPDES General Permit for Domestic Sewage Discharges of Less Than or Equal to 1,000 Gallons Per Day",
+          "small_domestic_general_permit": true,
+          "facility_type": "Privately Owned Facility",
+          "facility_type_code": "POF",
+          "facility_type_indicator": "NON-POTW",
+          "permit_note": "Holds a small domestic general permit (VAG400000: VPDES General Permit for Domestic Sewage Discharges of Less Than or Equal to 1,000 Gallons Per Day), not an individual industrial discharge permit.",
           "rank": 2,
           "rank_basis": "river distance upstream of the spill reach (km), then distance to the river (km); not travel time"
         }
@@ -515,16 +562,17 @@ Spill:
 {
   "simulated": true,
   "requires_human_review": true,
+  "disclaimer": "Simulated incident. Facilities are listed only because they have reported permit violations upstream; no link to any real event is implied.",
   "incident_id": "spill-20261009T2000Z",
   "status": "completed",
   "case": "spill",
   "classification": "incident",
-  "report_mode": "fallback",
+  "report_mode": "llm",
   "agent_modes": {
-    "triage": "fallback",
-    "trace": "fallback",
-    "compliance": "fallback",
-    "report": "fallback"
+    "triage": "llm",
+    "trace": "llm",
+    "compliance": "llm",
+    "report": "llm"
   }
 }
 ```
@@ -535,16 +583,17 @@ Storm (real observed data; storm runoff gets no candidate list, so trace and com
 {
   "simulated": true,
   "requires_human_review": true,
+  "disclaimer": "Simulated incident. Facilities are listed only because they have reported permit violations upstream; no link to any real event is implied.",
   "incident_id": "storm-20260922T0000Z",
   "status": "completed",
   "case": "storm",
   "classification": "storm_runoff",
-  "report_mode": "fallback",
+  "report_mode": "llm",
   "agent_modes": {
-    "triage": "fallback",
+    "triage": "llm",
     "trace": "skipped",
     "compliance": "skipped",
-    "report": "fallback"
+    "report": "llm"
   }
 }
 ```
@@ -557,6 +606,7 @@ Spill (`incident`, ranked candidates):
 {
   "simulated": true,
   "requires_human_review": true,
+  "disclaimer": "Simulated incident. Facilities are listed only because they have reported permit violations upstream; no link to any real event is implied.",
   "incident_id": "spill-20261009T2000Z",
   "triage": {
     "simulated": true,
@@ -565,9 +615,8 @@ Spill (`incident`, ranked candidates):
     "fusion_classification": "incident",
     "confidence": 0.95,
     "reasons": [
-      "Camera clip 'spill' shows dye-coloured water from 2026-10-09 20:02 to 2026-10-09 21:49 UTC in 216 of 240 frames (peak plume confidence 1.00).",
-      "Gauge anomalies in 3 parameter(s) (conductivity rise, turbidity rise, pH drop) fall within the ±3.0 h allowance of the camera plume, so two independent sources agree (not single-source).",
-      "... 4 more"
+      "Camera clip labeled 'spill' shows dye‑coloured water from 2026-10-09 20:02 to 2026-10-09 21:49 UTC (216 of 240 frames, peak plume confidence 1.00).",
+      "Gauge anomalies in conductivity rise, turbidity rise, and pH drop occur within the ±3.0 h allowance of the camera plume, providing two independent sources of agreement."
     ]
   },
   "trace": {
@@ -635,6 +684,16 @@ Spill (`incident`, ranked candidates):
         "tri_releases": [],
         "tri_match": null,
         "tri_match_confidence": null,
+        "permit_type": "individual",
+        "permit_type_code": "NPD",
+        "permit_type_desc": "NPDES Individual Permit",
+        "general_permit_id": null,
+        "general_permit_name": null,
+        "small_domestic_general_permit": false,
+        "facility_type": "Corporation",
+        "facility_type_code": "COR",
+        "facility_type_indicator": "NON-POTW",
+        "permit_note": "Holds an individual NPDES permit.",
         "rank": 1,
         "rank_basis": "river distance upstream of the spill reach (km), then distance to the river (km); not travel time"
       },
@@ -707,21 +766,31 @@ Spill (`incident`, ranked candidates):
         "tri_releases": [],
         "tri_match": null,
         "tri_match_confidence": null,
+        "permit_type": "general",
+        "permit_type_code": "GPC",
+        "permit_type_desc": "General Permit Covered Facility",
+        "general_permit_id": "VAG400000",
+        "general_permit_name": "VPDES General Permit for Domestic Sewage Discharges of Less Than or Equal to 1,000 Gallons Per Day",
+        "small_domestic_general_permit": true,
+        "facility_type": "Privately Owned Facility",
+        "facility_type_code": "POF",
+        "facility_type_indicator": "NON-POTW",
+        "permit_note": "Holds a small domestic general permit (VAG400000: VPDES General Permit for Domestic Sewage Discharges of Less Than or Equal to 1,000 Gallons Per Day), not an individual industrial discharge permit.",
         "rank": 2,
         "rank_basis": "river distance upstream of the spill reach (km), then distance to the river (km); not travel time"
       },
       "... 2 more"
     ],
     "candidate_notes": {
-      "VA0052621": "Rank 1 by river distance: 2.02 km upstream; river travel time 7.4 h; 3 reported numeric limit violations, 2021–2026. No reported parameter matches the anomalous sensor parameters.",
-      "VAG408560": "Rank 2 by river distance: 7.13 km upstream; river travel time ≥ 9.1 h (velocity available for 10.3 of 10.6 km); 2 reported numeric limit violations, 2021–2026. Reported parameter match: Solids, total suspended for turbidity (proxy).",
-      "VAG408449": "Rank 3 by river distance: 7.4 km upstream; river travel time ≥ 9.4 h (velocity available for 10.7 of 11.0 km); 3 reported numeric limit violations, 2021–2026. No reported parameter matches the anomalous sensor parameters.",
-      "VAG408158": "Rank 4 by river distance: 17.57 km upstream; river travel time ≥ 18.7 h (velocity available for 20.6 of 20.8 km); 2 reported numeric limit violations, 2021–2026. No reported parameter matches the anomalous sensor parameters."
+      "VA0052621": "2.02 km upstream; river travel time 7.4 h; 3 reported numeric limit violations in the window; no matched parameters.",
+      "VAG408560": "7.13 km upstream; river travel time ≥ 9.1 h (velocity available for 10.3 of 10.6 km); 2 reported numeric limit violations in the window; reported turbidity matches (proxy).",
+      "VAG408449": "7.4 km upstream; river travel time ≥ 9.4 h (velocity available for 10.7 of 11.0 km); 3 reported numeric limit violations in the window; no matched parameters.",
+      "VAG408158": "17.57 km upstream; river travel time ≥ 18.7 h (velocity available for 20.6 of 20.8 km); 2 reported numeric limit violations in the window; no matched parameters."
     },
     "assumptions": [
       "Candidates are ranked by river distance upstream of the spill reach, then distance to the river; not by travel time.",
       "Travel times use the mean annual EROM velocity, treated as ft/s (a documented assumption); missing velocities are never filled in.",
-      "... 1 more"
+      "... 2 more"
     ]
   },
   "compliance": {
@@ -730,26 +799,27 @@ Spill (`incident`, ranked candidates):
     "facts": [
       {
         "facility_id": "VA0052621",
-        "statement": "3 reported numeric limit violations, 2021–2026 (reported or alleged).",
+        "statement": "3 reported numeric limit violations in the window (reported or alleged).",
         "value": "3",
         "source_field": "numeric_violation_count",
         "source_file": "VA_NPDES_EFF_VIOLATIONS.csv"
       },
       {
         "facility_id": "VA0052621",
-        "statement": "6 reported numeric limit violations before the window (historical, not ranked).",
+        "statement": "6 historical numeric limit violations.",
         "value": "6",
         "source_field": "historical_numeric_violation_count",
         "source_file": "VA_NPDES_EFF_VIOLATIONS.csv"
       },
-      "... 12 more"
+      "... 38 more"
     ]
   },
   "report": {
     "simulated": true,
     "requires_human_review": true,
+    "disclaimer": "Simulated incident. Facilities are listed only because they have reported permit violations upstream; no link to any real event is implied.",
     "banner": "SIMULATED DEMONSTRATION. The spill, plume footage and sensor spike are synthetic. This draft requires human review before any action.",
-    "summary": "Simulated spill scenario: the gauge and camera evidence is classified as a possible incident (confidence 0.95) for human review; anomalous parameters: conductivity, pH, turbidity. 4 facilities with reported violations near this reach are listed upstream, ranked by river distance, not travel time. Rank 1: VALLEY MILK PRODUCTS LLC (VA0052621), 2.02 km upstream, river travel time 7.4 h, 3 reported numeric limit violations, 2021–2026. Rank 2: ERBACH ENTERPRISES LLC PROPERTY 2 (VAG408560), 7.13 km upstream, river travel time ≥ 9.1 h (velocity available for 10.3 of 10.6 km), 2 reported numeric limit violations, 2021–2026; reported Solids, total suspended matches turbidity (proxy). Rank 3: ERBACH ENTERPRISES LLC PROPERTY (VAG408449), 7.4 km upstream, river travel time ≥ 9.4 h (velocity available for 10.7 of 11.0 km), 3 reported numeric limit violations, 2021–2026. Rank 4: SHENANDOAH VALLEY BOARDING AND TRAINING LLC (VAG408158), 17.57 km upstream, river travel time ≥ 18.7 h (velocity available for 20.6 of 20.8 km), 2 reported numeric limit violations, 2021–2026. The listed records are consistent with nearby permitted discharges but do not identify a source. This draft requires human review before any action.",
+    "summary": "The incident involves a simulated spill injected into a real baseline, and the fusion and triage systems both classify it as an incident with high confidence (0.95). Gauge data show rises in conductivity and turbidity and a drop in pH that align with the camera plume timing, and these three parameters are listed as anomalous. Rainfall records for the event day and the prior day have no readings, so rain does not explain the anomalies. Four facilities with reported violations are identified upstream: Rank 1 VALLEY MILK PRODUCTS LLC, 2.02 km upstream, travel time 7.4 h, 3 reported numeric limit violations; Rank 2 ERBACH ENTERPRISES LLC PROPERTY 2, 7.13 km upstream, travel time ≥ 9.1 h (velocity available for 10.3 of 10.6 km), 2 reported numeric limit violations; Rank 3 ERBACH ENTERPRISES LLC PROPERTY, 7.4 km upstream, travel time ≥ 9.4 h (velocity available for 10.7 of 11.0 km), 3 reported numeric limit violations; Rank 4 SHENANDOAH VALLEY BOARDING AND TRAINING LLC, 17.57 km upstream, travel time ≥ 18.7 h (velocity available for 20.6 of 20.8 km), 2 reported numeric limit violations. Facilities ranked 2, 3, and 4 each hold a small domestic general permit (VAG400000). ERBACH ENTERPRISES LLC PROPERTY 2 (VAG408560) holds a small domestic general permit (VAG400000). ERBACH ENTERPRISES LLC PROPERTY (VAG408449) holds a small domestic general permit (VAG400000). SHENANDOAH VALLEY BOARDING AND TRAINING LLC (VAG408158) holds a small domestic general permit (VAG400000).",
     "timeline": [
       {
         "timestamp": "2026-10-09T20:00:00Z",
@@ -823,6 +893,16 @@ Spill (`incident`, ranked candidates):
         "tri_releases": [],
         "tri_match": null,
         "tri_match_confidence": null,
+        "permit_type": "individual",
+        "permit_type_code": "NPD",
+        "permit_type_desc": "NPDES Individual Permit",
+        "general_permit_id": null,
+        "general_permit_name": null,
+        "small_domestic_general_permit": false,
+        "facility_type": "Corporation",
+        "facility_type_code": "COR",
+        "facility_type_indicator": "NON-POTW",
+        "permit_note": "Holds an individual NPDES permit.",
         "rank": 1,
         "rank_basis": "river distance upstream of the spill reach (km), then distance to the river (km); not travel time"
       },
@@ -895,6 +975,16 @@ Spill (`incident`, ranked candidates):
         "tri_releases": [],
         "tri_match": null,
         "tri_match_confidence": null,
+        "permit_type": "general",
+        "permit_type_code": "GPC",
+        "permit_type_desc": "General Permit Covered Facility",
+        "general_permit_id": "VAG400000",
+        "general_permit_name": "VPDES General Permit for Domestic Sewage Discharges of Less Than or Equal to 1,000 Gallons Per Day",
+        "small_domestic_general_permit": true,
+        "facility_type": "Privately Owned Facility",
+        "facility_type_code": "POF",
+        "facility_type_indicator": "NON-POTW",
+        "permit_note": "Holds a small domestic general permit (VAG400000: VPDES General Permit for Domestic Sewage Discharges of Less Than or Equal to 1,000 Gallons Per Day), not an individual industrial discharge permit.",
         "rank": 2,
         "rank_basis": "river distance upstream of the spill reach (km), then distance to the river (km); not travel time"
       },
@@ -904,7 +994,7 @@ Spill (`incident`, ranked candidates):
     "assumptions": [
       "Candidates are ranked by river distance upstream of the spill reach, then distance to the river; not by travel time.",
       "Travel times use the mean annual EROM velocity, treated as ft/s (a documented assumption); missing velocities are never filled in.",
-      "... 1 more"
+      "... 2 more"
     ],
     "limitations": [
       "The spill, the gauge sensor spike and the plume camera footage are simulated: the spike is injected into a real gauge baseline and the footage is rendered.",
@@ -913,15 +1003,19 @@ Spill (`incident`, ranked candidates):
     ],
     "classification": "incident",
     "data_origin": "simulated spill injected into real baseline",
-    "report_mode": "fallback",
-    "fallback_reason": "GROQ_API_KEY or GROQ_MODEL not set",
-    "guardrail_notes": []
+    "report_mode": "llm",
+    "fallback_reason": null,
+    "guardrail_notes": [
+      "triage: dropped a sentence with numbers not in the tool data (10)",
+      "report: added the small domestic general permit statement for VAG408560",
+      "... 2 more"
+    ]
   },
   "agent_modes": {
-    "triage": "fallback",
-    "trace": "fallback",
-    "compliance": "fallback",
-    "report": "fallback"
+    "triage": "llm",
+    "trace": "llm",
+    "compliance": "llm",
+    "report": "llm"
   }
 }
 ```
@@ -932,6 +1026,7 @@ Storm (`storm_runoff`, no candidates):
 {
   "simulated": true,
   "requires_human_review": true,
+  "disclaimer": "Simulated incident. Facilities are listed only because they have reported permit violations upstream; no link to any real event is implied.",
   "incident_id": "storm-20260922T0000Z",
   "triage": {
     "simulated": true,
@@ -940,10 +1035,9 @@ Storm (`storm_runoff`, no candidates):
     "fusion_classification": "storm_runoff",
     "confidence": 0.65,
     "reasons": [
-      "No camera analysis was available for this window.",
-      "3 gauge event(s) (turbidity rise, conductivity drop) match the storm-runoff pattern (turbidity rise with rain at or above the threshold) and are not counted as corroboration.",
-      "Every gauge event is consistent with storm runoff and the camera does not confirm a plume; this rests on the gauge and rain record alone (single-source).",
-      "... 3 more"
+      "Turbidity rises on 2026-09-22 align with 1.23 in total rain exceeding the 0.5 in threshold.",
+      "Conductivity drop coincides with the turbidity rise, matching the storm‑runoff pattern.",
+      "No camera analysis was available; the classification relies on sensor data and rain record alone."
     ]
   },
   "trace": {
@@ -963,8 +1057,9 @@ Storm (`storm_runoff`, no candidates):
   "report": {
     "simulated": true,
     "requires_human_review": true,
+    "disclaimer": "Simulated incident. Facilities are listed only because they have reported permit violations upstream; no link to any real event is implied.",
     "banner": "SIMULATED DEMONSTRATION. The spill, plume footage and sensor spike are synthetic. This draft requires human review before any action.",
-    "summary": "Real observed data, not simulated: the gauge anomalies are classified as storm_runoff (confidence 0.65), consistent with 1.23 in of rain in the daily totals (threshold 0.5 in). Storm runoff gets no candidate list, and no permit holder is named. This draft requires human review before any action.",
+    "summary": "Real observed gauge and rain data classify this incident as storm runoff (confidence 0.65). Because the pattern is explained by the storm, no anomalous parameters remain and no facility candidates are generated by design. The report does not identify a source and only notes that the observed changes are consistent with storm‑runoff conditions.",
     "timeline": [
       {
         "timestamp": "2026-09-21T00:00:00Z",
@@ -993,15 +1088,17 @@ Storm (`storm_runoff`, no candidates):
     ],
     "classification": "storm_runoff",
     "data_origin": "real observed data, not simulated",
-    "report_mode": "fallback",
-    "fallback_reason": "GROQ_API_KEY or GROQ_MODEL not set",
-    "guardrail_notes": []
+    "report_mode": "llm",
+    "fallback_reason": null,
+    "guardrail_notes": [
+      "report summary: dropped a sentence with numbers not in the tool data (22)"
+    ]
   },
   "agent_modes": {
-    "triage": "fallback",
+    "triage": "llm",
     "trace": "skipped",
     "compliance": "skipped",
-    "report": "fallback"
+    "report": "llm"
   }
 }
 ```
@@ -1145,7 +1242,7 @@ data: {
   "scenario_time": "2026-10-10T20:00:00Z",
   "payload": {
     "agent": "triage",
-    "mode": "fallback",
+    "mode": "llm",
     "output": {
       "simulated": true,
       "requires_human_review": true,
@@ -1153,8 +1250,8 @@ data: {
       "fusion_classification": "incident",
       "confidence": 0.95,
       "reasons": [
-        "Camera clip 'spill' shows dye-coloured water from 2026-10-09 20:02 to 2026-10-09 21:49 UTC in 216 of 240 frames (peak plume confidence 1.00).",
-        "... 5 more"
+        "Camera clip labeled 'spill' shows dye‑coloured water from 2026-10-09 20:02 to 2026-10-09 21:49 UTC (216 of 240 frames, peak plume confidence 1.00).",
+        "... 1 more"
       ]
     }
   }
@@ -1175,7 +1272,7 @@ data: {
   "scenario_time": "2026-10-10T20:00:00Z",
   "payload": {
     "classification": "incident",
-    "report_mode": "fallback",
+    "report_mode": "llm",
     "incident_id": "spill-20261009T2000Z"
   }
 }

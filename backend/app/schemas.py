@@ -11,6 +11,10 @@ BANNER = (
     "SIMULATED DEMONSTRATION. The spill, plume footage and sensor spike are synthetic. "
     "This draft requires human review before any action."
 )
+DISCLAIMER = (
+    "Simulated incident. Facilities are listed only because they have reported permit violations "
+    "upstream; no link to any real event is implied."
+)
 
 SensorParameter = Literal["conductivity", "turbidity", "ph", "discharge"]
 LocationType = Literal["outfall", "facility"]
@@ -156,6 +160,17 @@ class CandidateFacility(BaseModel):
     tri_releases: list[TriRelease] = []
     tri_match: Literal["frs_id", "proximity_name"] | None = None
     tri_match_confidence: Literal["high", "low"] | None = None
+    # Permit and facility type from ICIS_PERMITS / ICIS_FACILITIES; context only, never used in ranking.
+    permit_type: Literal["individual", "general"] | None = None  # None: other or unknown permit type code
+    permit_type_code: str | None = None  # ICIS PERMIT_TYPE_CODE, e.g. NPD or GPC
+    permit_type_desc: str | None = None
+    general_permit_id: str | None = None  # master general permit, e.g. VAG400000
+    general_permit_name: str | None = None
+    small_domestic_general_permit: bool = False  # covered by a general permit for small domestic sewage discharges
+    facility_type: str | None = None  # ICIS_FACILITIES FACILITY_TYPE_CODE description, e.g. Corporation
+    facility_type_code: str | None = None
+    facility_type_indicator: str | None = None  # ICIS_PERMITS: POTW, NON-POTW or FEDERAL
+    permit_note: str | None = None  # plain-language sentence about the permit type
     rank: int | None = None
     rank_basis: str | None = None
 
@@ -321,6 +336,7 @@ class TimelineEntry(BaseModel):
 
 
 class IncidentReport(ResponseBase):
+    disclaimer: Literal[DISCLAIMER] = DISCLAIMER  # fixed text, first field of the report
     banner: str = BANNER
     summary: str
     timeline: list[TimelineEntry]
@@ -336,6 +352,7 @@ class IncidentReport(ResponseBase):
 
 
 class IncidentResponse(ResponseBase):
+    disclaimer: Literal[DISCLAIMER] = DISCLAIMER
     incident_id: str
     triage: TriageResult
     trace: TraceResult
@@ -349,6 +366,7 @@ class ScenarioRunRequest(BaseModel):
 
 
 class ScenarioRunResponse(ResponseBase):
+    disclaimer: Literal[DISCLAIMER] = DISCLAIMER
     incident_id: str
     status: Literal["completed"]
     case: Literal["spill", "storm"]

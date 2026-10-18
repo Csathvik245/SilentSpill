@@ -1,15 +1,16 @@
 {
   "simulated": true,
   "requires_human_review": true,
+  "disclaimer": "Simulated incident. Facilities are listed only because they have reported permit violations upstream; no link to any real event is implied.",
   "incident_id": "storm-20260922T0000Z",
   "status": "completed",
   "case": "storm",
   "classification": "storm_runoff",
-  "report_mode": "fallback",
+  "report_mode": "llm",
   "agent_modes": {
-    "triage": "fallback",
+    "triage": "llm",
     "trace": "skipped",
     "compliance": "skipped",
-    "report": "fallback"
+    "report": "llm"
   }
 }

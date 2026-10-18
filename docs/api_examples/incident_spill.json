@@ -1,6 +1,7 @@
 {
   "simulated": true,
   "requires_human_review": true,
+  "disclaimer": "Simulated incident. Facilities are listed only because they have reported permit violations upstream; no link to any real event is implied.",
   "incident_id": "spill-20261009T2000Z",
   "triage": {
     "simulated": true,
@@ -9,12 +10,8 @@
     "fusion_classification": "incident",
     "confidence": 0.95,
     "reasons": [
-      "Camera clip 'spill' shows dye-coloured water from 2026-10-09 20:02 to 2026-10-09 21:49 UTC in 216 of 240 frames (peak plume confidence 1.00).",
-      "Gauge anomalies in 3 parameter(s) (conductivity rise, turbidity rise, pH drop) fall within the ±3.0 h allowance of the camera plume, so two independent sources agree (not single-source).",
-      "Camera and gauge observations are compared with a ±3.0 h allowance (river travel time over the reach between them).",
-      "Classified as a possible incident for human review; it does not identify a source.",
-      "Storm filter result: flag_for_review.",
-      "Triage follows the sensor and camera fusion result; it does not identify a source."
+      "Camera clip labeled 'spill' shows dye‑coloured water from 2026-10-09 20:02 to 2026-10-09 21:49 UTC (216 of 240 frames, peak plume confidence 1.00).",
+      "Gauge anomalies in conductivity rise, turbidity rise, and pH drop occur within the ±3.0 h allowance of the camera plume, providing two independent sources of agreement."
     ]
   },
   "trace": {
@@ -100,6 +97,16 @@
         "tri_releases": [],
         "tri_match": null,
         "tri_match_confidence": null,
+        "permit_type": "individual",
+        "permit_type_code": "NPD",
+        "permit_type_desc": "NPDES Individual Permit",
+        "general_permit_id": null,
+        "general_permit_name": null,
+        "small_domestic_general_permit": false,
+        "facility_type": "Corporation",
+        "facility_type_code": "COR",
+        "facility_type_indicator": "NON-POTW",
+        "permit_note": "Holds an individual NPDES permit.",
         "rank": 1,
         "rank_basis": "river distance upstream of the spill reach (km), then distance to the river (km); not travel time"
       },
@@ -176,6 +183,16 @@
         "tri_releases": [],
         "tri_match": null,
         "tri_match_confidence": null,
+        "permit_type": "general",
+        "permit_type_code": "GPC",
+        "permit_type_desc": "General Permit Covered Facility",
+        "general_permit_id": "VAG400000",
+        "general_permit_name": "VPDES General Permit for Domestic Sewage Discharges of Less Than or Equal to 1,000 Gallons Per Day",
+        "small_domestic_general_permit": true,
+        "facility_type": "Privately Owned Facility",
+        "facility_type_code": "POF",
+        "facility_type_indicator": "NON-POTW",
+        "permit_note": "Holds a small domestic general permit (VAG400000: VPDES General Permit for Domestic Sewage Discharges of Less Than or Equal to 1,000 Gallons Per Day), not an individual industrial discharge permit.",
         "rank": 2,
         "rank_basis": "river distance upstream of the spill reach (km), then distance to the river (km); not travel time"
       },
@@ -260,6 +277,16 @@
         "tri_releases": [],
         "tri_match": null,
         "tri_match_confidence": null,
+        "permit_type": "general",
+        "permit_type_code": "GPC",
+        "permit_type_desc": "General Permit Covered Facility",
+        "general_permit_id": "VAG400000",
+        "general_permit_name": "VPDES General Permit for Domestic Sewage Discharges of Less Than or Equal to 1,000 Gallons Per Day",
+        "small_domestic_general_permit": true,
+        "facility_type": "Privately Owned Facility",
+        "facility_type_code": "POF",
+        "facility_type_indicator": "NON-POTW",
+        "permit_note": "Holds a small domestic general permit (VAG400000: VPDES General Permit for Domestic Sewage Discharges of Less Than or Equal to 1,000 Gallons Per Day), not an individual industrial discharge permit.",
         "rank": 3,
         "rank_basis": "river distance upstream of the spill reach (km), then distance to the river (km); not travel time"
       },
@@ -330,20 +357,31 @@
         "tri_releases": [],
         "tri_match": null,
         "tri_match_confidence": null,
+        "permit_type": "general",
+        "permit_type_code": "GPC",
+        "permit_type_desc": "General Permit Covered Facility",
+        "general_permit_id": "VAG400000",
+        "general_permit_name": "VPDES General Permit for Domestic Sewage Discharges of Less Than or Equal to 1,000 Gallons Per Day",
+        "small_domestic_general_permit": true,
+        "facility_type": "Corporation",
+        "facility_type_code": "COR",
+        "facility_type_indicator": "NON-POTW",
+        "permit_note": "Holds a small domestic general permit (VAG400000: VPDES General Permit for Domestic Sewage Discharges of Less Than or Equal to 1,000 Gallons Per Day), not an individual industrial discharge permit.",
         "rank": 4,
         "rank_basis": "river distance upstream of the spill reach (km), then distance to the river (km); not travel time"
       }
     ],
     "candidate_notes": {
-      "VA0052621": "Rank 1 by river distance: 2.02 km upstream; river travel time 7.4 h; 3 reported numeric limit violations, 2021–2026. No reported parameter matches the anomalous sensor parameters.",
-      "VAG408560": "Rank 2 by river distance: 7.13 km upstream; river travel time ≥ 9.1 h (velocity available for 10.3 of 10.6 km); 2 reported numeric limit violations, 2021–2026. Reported parameter match: Solids, total suspended for turbidity (proxy).",
-      "VAG408449": "Rank 3 by river distance: 7.4 km upstream; river travel time ≥ 9.4 h (velocity available for 10.7 of 11.0 km); 3 reported numeric limit violations, 2021–2026. No reported parameter matches the anomalous sensor parameters.",
-      "VAG408158": "Rank 4 by river distance: 17.57 km upstream; river travel time ≥ 18.7 h (velocity available for 20.6 of 20.8 km); 2 reported numeric limit violations, 2021–2026. No reported parameter matches the anomalous sensor parameters."
+      "VA0052621": "2.02 km upstream; river travel time 7.4 h; 3 reported numeric limit violations in the window; no matched parameters.",
+      "VAG408560": "7.13 km upstream; river travel time ≥ 9.1 h (velocity available for 10.3 of 10.6 km); 2 reported numeric limit violations in the window; reported turbidity matches (proxy).",
+      "VAG408449": "7.4 km upstream; river travel time ≥ 9.4 h (velocity available for 10.7 of 11.0 km); 3 reported numeric limit violations in the window; no matched parameters.",
+      "VAG408158": "17.57 km upstream; river travel time ≥ 18.7 h (velocity available for 20.6 of 20.8 km); 2 reported numeric limit violations in the window; no matched parameters."
     },
     "assumptions": [
       "Candidates are ranked by river distance upstream of the spill reach, then distance to the river; not by travel time.",
       "Travel times use the mean annual EROM velocity, treated as ft/s (a documented assumption); missing velocities are never filled in.",
-      "Only permits with at least one reported numeric limit violation in the window are listed."
+      "Only permits with at least one reported numeric limit violation in the window are listed.",
+      "Travel times assume the mean annual EROM velocity."
     ]
   },
   "compliance": {
@@ -352,100 +390,282 @@
     "facts": [
       {
         "facility_id": "VA0052621",
-        "statement": "3 reported numeric limit violations, 2021–2026 (reported or alleged).",
+        "statement": "3 reported numeric limit violations in the window (reported or alleged).",
         "value": "3",
         "source_field": "numeric_violation_count",
         "source_file": "VA_NPDES_EFF_VIOLATIONS.csv"
       },
       {
         "facility_id": "VA0052621",
-        "statement": "6 reported numeric limit violations before the window (historical, not ranked).",
+        "statement": "6 historical numeric limit violations.",
         "value": "6",
         "source_field": "historical_numeric_violation_count",
         "source_file": "VA_NPDES_EFF_VIOLATIONS.csv"
       },
       {
         "facility_id": "VA0052621",
-        "statement": "5 reporting violations (overdue reports, not pollution measurements; not ranked).",
+        "statement": "5 reporting violations (overdue reports).",
         "value": "5",
         "source_field": "reporting_violation_count",
         "source_file": "VA_NPDES_EFF_VIOLATIONS.csv"
       },
       {
         "facility_id": "VA0052621",
-        "statement": "Reported numeric limit violation parameter in the window: NOAEL Static 48Hr Acute Ceriodaphnia dubia.",
+        "statement": "The window label is 'reported numeric limit violations, 2021–2026'.",
+        "value": "reported numeric limit violations, 2021–2026",
+        "source_field": "window_label",
+        "source_file": "VA_NPDES_EFF_VIOLATIONS.csv"
+      },
+      {
+        "facility_id": "VA0052621",
+        "statement": "Parameter NOAEL Static 48Hr Acute Ceriodaphnia dubia was reported.",
         "value": "NOAEL Static 48Hr Acute Ceriodaphnia dubia",
         "source_field": "violations[].parameter",
         "source_file": "VA_NPDES_EFF_VIOLATIONS.csv"
       },
       {
         "facility_id": "VA0052621",
-        "statement": "Reported numeric limit violation parameter in the window: Oxygen, dissolved [DO].",
+        "statement": "Monitoring period ended on 2023-12-31.",
+        "value": "2023-12-31",
+        "source_field": "violations[].monitoring_period_end",
+        "source_file": "VA_NPDES_EFF_VIOLATIONS.csv"
+      },
+      {
+        "facility_id": "VA0052621",
+        "statement": "Exceedance percentage was 50.0%.",
+        "value": "50.0",
+        "source_field": "violations[].exceedance_pct",
+        "source_file": "VA_NPDES_EFF_VIOLATIONS.csv"
+      },
+      {
+        "facility_id": "VA0052621",
+        "statement": "Parameter Oxygen, dissolved [DO] was reported.",
         "value": "Oxygen, dissolved [DO]",
         "source_field": "violations[].parameter",
         "source_file": "VA_NPDES_EFF_VIOLATIONS.csv"
       },
       {
+        "facility_id": "VA0052621",
+        "statement": "Monitoring period ended on 2022-06-30.",
+        "value": "2022-06-30",
+        "source_field": "violations[].monitoring_period_end",
+        "source_file": "VA_NPDES_EFF_VIOLATIONS.csv"
+      },
+      {
+        "facility_id": "VA0052621",
+        "statement": "Exceedance percentage was 1.0%.",
+        "value": "1.0",
+        "source_field": "violations[].exceedance_pct",
+        "source_file": "VA_NPDES_EFF_VIOLATIONS.csv"
+      },
+      {
+        "facility_id": "VA0052621",
+        "statement": "Monitoring period ended on 2022-05-31.",
+        "value": "2022-05-31",
+        "source_field": "violations[].monitoring_period_end",
+        "source_file": "VA_NPDES_EFF_VIOLATIONS.csv"
+      },
+      {
+        "facility_id": "VA0052621",
+        "statement": "Exceedance percentage was 5.0%.",
+        "value": "5.0",
+        "source_field": "violations[].exceedance_pct",
+        "source_file": "VA_NPDES_EFF_VIOLATIONS.csv"
+      },
+      {
         "facility_id": "VAG408560",
-        "statement": "2 reported numeric limit violations, 2021–2026 (reported or alleged).",
+        "statement": "2 reported numeric limit violations in the window (reported or alleged).",
         "value": "2",
         "source_field": "numeric_violation_count",
         "source_file": "VA_NPDES_EFF_VIOLATIONS.csv"
       },
       {
         "facility_id": "VAG408560",
-        "statement": "Reported numeric limit violation parameter in the window: Solids, total suspended.",
+        "statement": "0 historical numeric limit violations.",
+        "value": "0",
+        "source_field": "historical_numeric_violation_count",
+        "source_file": "VA_NPDES_EFF_VIOLATIONS.csv"
+      },
+      {
+        "facility_id": "VAG408560",
+        "statement": "0 reporting violations (overdue reports).",
+        "value": "0",
+        "source_field": "reporting_violation_count",
+        "source_file": "VA_NPDES_EFF_VIOLATIONS.csv"
+      },
+      {
+        "facility_id": "VAG408560",
+        "statement": "The window label is 'reported numeric limit violations, 2021–2026'.",
+        "value": "reported numeric limit violations, 2021–2026",
+        "source_field": "window_label",
+        "source_file": "VA_NPDES_EFF_VIOLATIONS.csv"
+      },
+      {
+        "facility_id": "VAG408560",
+        "statement": "Parameter Solids, total suspended was reported.",
         "value": "Solids, total suspended",
         "source_field": "violations[].parameter",
         "source_file": "VA_NPDES_EFF_VIOLATIONS.csv"
       },
       {
+        "facility_id": "VAG408560",
+        "statement": "Monitoring period ended on 2025-08-31.",
+        "value": "2025-08-31",
+        "source_field": "violations[].monitoring_period_end",
+        "source_file": "VA_NPDES_EFF_VIOLATIONS.csv"
+      },
+      {
+        "facility_id": "VAG408560",
+        "statement": "Exceedance percentage was 205.0%.",
+        "value": "205.0",
+        "source_field": "violations[].exceedance_pct",
+        "source_file": "VA_NPDES_EFF_VIOLATIONS.csv"
+      },
+      {
+        "facility_id": "VAG408560",
+        "statement": "Monitoring period ended on 2024-08-31.",
+        "value": "2024-08-31",
+        "source_field": "violations[].monitoring_period_end",
+        "source_file": "VA_NPDES_EFF_VIOLATIONS.csv"
+      },
+      {
+        "facility_id": "VAG408560",
+        "statement": "Exceedance percentage was 126.0%.",
+        "value": "126.0",
+        "source_field": "violations[].exceedance_pct",
+        "source_file": "VA_NPDES_EFF_VIOLATIONS.csv"
+      },
+      {
         "facility_id": "VAG408449",
-        "statement": "3 reported numeric limit violations, 2021–2026 (reported or alleged).",
+        "statement": "3 reported numeric limit violations in the window (reported or alleged).",
         "value": "3",
         "source_field": "numeric_violation_count",
         "source_file": "VA_NPDES_EFF_VIOLATIONS.csv"
       },
       {
         "facility_id": "VAG408449",
-        "statement": "2 reported numeric limit violations before the window (historical, not ranked).",
+        "statement": "2 historical numeric limit violations.",
         "value": "2",
         "source_field": "historical_numeric_violation_count",
         "source_file": "VA_NPDES_EFF_VIOLATIONS.csv"
       },
       {
         "facility_id": "VAG408449",
-        "statement": "Reported numeric limit violation parameter in the window: E. coli.",
+        "statement": "0 reporting violations (overdue reports).",
+        "value": "0",
+        "source_field": "reporting_violation_count",
+        "source_file": "VA_NPDES_EFF_VIOLATIONS.csv"
+      },
+      {
+        "facility_id": "VAG408449",
+        "statement": "The window label is 'reported numeric limit violations, 2021–2026'.",
+        "value": "reported numeric limit violations, 2021–2026",
+        "source_field": "window_label",
+        "source_file": "VA_NPDES_EFF_VIOLATIONS.csv"
+      },
+      {
+        "facility_id": "VAG408449",
+        "statement": "Parameter E. coli was reported.",
         "value": "E. coli",
         "source_field": "violations[].parameter",
         "source_file": "VA_NPDES_EFF_VIOLATIONS.csv"
       },
       {
         "facility_id": "VAG408449",
-        "statement": "Reported numeric limit violation parameter in the window: Oxygen, dissolved [DO].",
+        "statement": "Monitoring period ended on 2025-08-31.",
+        "value": "2025-08-31",
+        "source_field": "violations[].monitoring_period_end",
+        "source_file": "VA_NPDES_EFF_VIOLATIONS.csv"
+      },
+      {
+        "facility_id": "VAG408449",
+        "statement": "Exceedance percentage was 703.0%.",
+        "value": "703.0",
+        "source_field": "violations[].exceedance_pct",
+        "source_file": "VA_NPDES_EFF_VIOLATIONS.csv"
+      },
+      {
+        "facility_id": "VAG408449",
+        "statement": "Parameter Oxygen, dissolved [DO] was reported.",
         "value": "Oxygen, dissolved [DO]",
         "source_field": "violations[].parameter",
         "source_file": "VA_NPDES_EFF_VIOLATIONS.csv"
       },
       {
+        "facility_id": "VAG408449",
+        "statement": "Exceedance percentage was 52.0%.",
+        "value": "52.0",
+        "source_field": "violations[].exceedance_pct",
+        "source_file": "VA_NPDES_EFF_VIOLATIONS.csv"
+      },
+      {
+        "facility_id": "VAG408449",
+        "statement": "Monitoring period ended on 2024-08-31.",
+        "value": "2024-08-31",
+        "source_field": "violations[].monitoring_period_end",
+        "source_file": "VA_NPDES_EFF_VIOLATIONS.csv"
+      },
+      {
+        "facility_id": "VAG408449",
+        "statement": "Exceedance percentage was 730.0%.",
+        "value": "730.0",
+        "source_field": "violations[].exceedance_pct",
+        "source_file": "VA_NPDES_EFF_VIOLATIONS.csv"
+      },
+      {
         "facility_id": "VAG408158",
-        "statement": "2 reported numeric limit violations, 2021–2026 (reported or alleged).",
+        "statement": "2 reported numeric limit violations in the window (reported or alleged).",
         "value": "2",
         "source_field": "numeric_violation_count",
         "source_file": "VA_NPDES_EFF_VIOLATIONS.csv"
       },
       {
         "facility_id": "VAG408158",
-        "statement": "5 reporting violations (overdue reports, not pollution measurements; not ranked).",
+        "statement": "0 historical numeric limit violations.",
+        "value": "0",
+        "source_field": "historical_numeric_violation_count",
+        "source_file": "VA_NPDES_EFF_VIOLATIONS.csv"
+      },
+      {
+        "facility_id": "VAG408158",
+        "statement": "5 reporting violations (overdue reports).",
         "value": "5",
         "source_field": "reporting_violation_count",
         "source_file": "VA_NPDES_EFF_VIOLATIONS.csv"
       },
       {
         "facility_id": "VAG408158",
-        "statement": "Reported numeric limit violation parameter in the window: BOD, 5-day, 20 deg. C.",
+        "statement": "The window label is 'reported numeric limit violations, 2021–2026'.",
+        "value": "reported numeric limit violations, 2021–2026",
+        "source_field": "window_label",
+        "source_file": "VA_NPDES_EFF_VIOLATIONS.csv"
+      },
+      {
+        "facility_id": "VAG408158",
+        "statement": "Parameter BOD, 5-day, 20 deg. C was reported.",
         "value": "BOD, 5-day, 20 deg. C",
         "source_field": "violations[].parameter",
+        "source_file": "VA_NPDES_EFF_VIOLATIONS.csv"
+      },
+      {
+        "facility_id": "VAG408158",
+        "statement": "Monitoring period ended on 2024-08-31.",
+        "value": "2024-08-31",
+        "source_field": "violations[].monitoring_period_end",
+        "source_file": "VA_NPDES_EFF_VIOLATIONS.csv"
+      },
+      {
+        "facility_id": "VAG408158",
+        "statement": "Exceedance percentage was 247.0%.",
+        "value": "247.0",
+        "source_field": "violations[].exceedance_pct",
+        "source_file": "VA_NPDES_EFF_VIOLATIONS.csv"
+      },
+      {
+        "facility_id": "VAG408158",
+        "statement": "Monitoring period ended on 2022-08-31.",
+        "value": "2022-08-31",
+        "source_field": "violations[].monitoring_period_end",
         "source_file": "VA_NPDES_EFF_VIOLATIONS.csv"
       }
     ]
@@ -453,8 +673,9 @@
   "report": {
     "simulated": true,
     "requires_human_review": true,
+    "disclaimer": "Simulated incident. Facilities are listed only because they have reported permit violations upstream; no link to any real event is implied.",
     "banner": "SIMULATED DEMONSTRATION. The spill, plume footage and sensor spike are synthetic. This draft requires human review before any action.",
-    "summary": "Simulated spill scenario: the gauge and camera evidence is classified as a possible incident (confidence 0.95) for human review; anomalous parameters: conductivity, pH, turbidity. 4 facilities with reported violations near this reach are listed upstream, ranked by river distance, not travel time. Rank 1: VALLEY MILK PRODUCTS LLC (VA0052621), 2.02 km upstream, river travel time 7.4 h, 3 reported numeric limit violations, 2021–2026. Rank 2: ERBACH ENTERPRISES LLC PROPERTY 2 (VAG408560), 7.13 km upstream, river travel time ≥ 9.1 h (velocity available for 10.3 of 10.6 km), 2 reported numeric limit violations, 2021–2026; reported Solids, total suspended matches turbidity (proxy). Rank 3: ERBACH ENTERPRISES LLC PROPERTY (VAG408449), 7.4 km upstream, river travel time ≥ 9.4 h (velocity available for 10.7 of 11.0 km), 3 reported numeric limit violations, 2021–2026. Rank 4: SHENANDOAH VALLEY BOARDING AND TRAINING LLC (VAG408158), 17.57 km upstream, river travel time ≥ 18.7 h (velocity available for 20.6 of 20.8 km), 2 reported numeric limit violations, 2021–2026. The listed records are consistent with nearby permitted discharges but do not identify a source. This draft requires human review before any action.",
+    "summary": "The incident involves a simulated spill injected into a real baseline, and the fusion and triage systems both classify it as an incident with high confidence (0.95). Gauge data show rises in conductivity and turbidity and a drop in pH that align with the camera plume timing, and these three parameters are listed as anomalous. Rainfall records for the event day and the prior day have no readings, so rain does not explain the anomalies. Four facilities with reported violations are identified upstream: Rank 1 VALLEY MILK PRODUCTS LLC, 2.02 km upstream, travel time 7.4 h, 3 reported numeric limit violations; Rank 2 ERBACH ENTERPRISES LLC PROPERTY 2, 7.13 km upstream, travel time ≥ 9.1 h (velocity available for 10.3 of 10.6 km), 2 reported numeric limit violations; Rank 3 ERBACH ENTERPRISES LLC PROPERTY, 7.4 km upstream, travel time ≥ 9.4 h (velocity available for 10.7 of 11.0 km), 3 reported numeric limit violations; Rank 4 SHENANDOAH VALLEY BOARDING AND TRAINING LLC, 17.57 km upstream, travel time ≥ 18.7 h (velocity available for 20.6 of 20.8 km), 2 reported numeric limit violations. Facilities ranked 2, 3, and 4 each hold a small domestic general permit (VAG400000). ERBACH ENTERPRISES LLC PROPERTY 2 (VAG408560) holds a small domestic general permit (VAG400000). ERBACH ENTERPRISES LLC PROPERTY (VAG408449) holds a small domestic general permit (VAG400000). SHENANDOAH VALLEY BOARDING AND TRAINING LLC (VAG408158) holds a small domestic general permit (VAG400000).",
     "timeline": [
       {
         "timestamp": "2026-10-09T20:00:00Z",
@@ -565,6 +786,16 @@
         "tri_releases": [],
         "tri_match": null,
         "tri_match_confidence": null,
+        "permit_type": "individual",
+        "permit_type_code": "NPD",
+        "permit_type_desc": "NPDES Individual Permit",
+        "general_permit_id": null,
+        "general_permit_name": null,
+        "small_domestic_general_permit": false,
+        "facility_type": "Corporation",
+        "facility_type_code": "COR",
+        "facility_type_indicator": "NON-POTW",
+        "permit_note": "Holds an individual NPDES permit.",
         "rank": 1,
         "rank_basis": "river distance upstream of the spill reach (km), then distance to the river (km); not travel time"
       },
@@ -641,6 +872,16 @@
         "tri_releases": [],
         "tri_match": null,
         "tri_match_confidence": null,
+        "permit_type": "general",
+        "permit_type_code": "GPC",
+        "permit_type_desc": "General Permit Covered Facility",
+        "general_permit_id": "VAG400000",
+        "general_permit_name": "VPDES General Permit for Domestic Sewage Discharges of Less Than or Equal to 1,000 Gallons Per Day",
+        "small_domestic_general_permit": true,
+        "facility_type": "Privately Owned Facility",
+        "facility_type_code": "POF",
+        "facility_type_indicator": "NON-POTW",
+        "permit_note": "Holds a small domestic general permit (VAG400000: VPDES General Permit for Domestic Sewage Discharges of Less Than or Equal to 1,000 Gallons Per Day), not an individual industrial discharge permit.",
         "rank": 2,
         "rank_basis": "river distance upstream of the spill reach (km), then distance to the river (km); not travel time"
       },
@@ -725,6 +966,16 @@
         "tri_releases": [],
         "tri_match": null,
         "tri_match_confidence": null,
+        "permit_type": "general",
+        "permit_type_code": "GPC",
+        "permit_type_desc": "General Permit Covered Facility",
+        "general_permit_id": "VAG400000",
+        "general_permit_name": "VPDES General Permit for Domestic Sewage Discharges of Less Than or Equal to 1,000 Gallons Per Day",
+        "small_domestic_general_permit": true,
+        "facility_type": "Privately Owned Facility",
+        "facility_type_code": "POF",
+        "facility_type_indicator": "NON-POTW",
+        "permit_note": "Holds a small domestic general permit (VAG400000: VPDES General Permit for Domestic Sewage Discharges of Less Than or Equal to 1,000 Gallons Per Day), not an individual industrial discharge permit.",
         "rank": 3,
         "rank_basis": "river distance upstream of the spill reach (km), then distance to the river (km); not travel time"
       },
@@ -795,6 +1046,16 @@
         "tri_releases": [],
         "tri_match": null,
         "tri_match_confidence": null,
+        "permit_type": "general",
+        "permit_type_code": "GPC",
+        "permit_type_desc": "General Permit Covered Facility",
+        "general_permit_id": "VAG400000",
+        "general_permit_name": "VPDES General Permit for Domestic Sewage Discharges of Less Than or Equal to 1,000 Gallons Per Day",
+        "small_domestic_general_permit": true,
+        "facility_type": "Corporation",
+        "facility_type_code": "COR",
+        "facility_type_indicator": "NON-POTW",
+        "permit_note": "Holds a small domestic general permit (VAG400000: VPDES General Permit for Domestic Sewage Discharges of Less Than or Equal to 1,000 Gallons Per Day), not an individual industrial discharge permit.",
         "rank": 4,
         "rank_basis": "river distance upstream of the spill reach (km), then distance to the river (km); not travel time"
       }
@@ -803,7 +1064,8 @@
     "assumptions": [
       "Candidates are ranked by river distance upstream of the spill reach, then distance to the river; not by travel time.",
       "Travel times use the mean annual EROM velocity, treated as ft/s (a documented assumption); missing velocities are never filled in.",
-      "Only permits with at least one reported numeric limit violation in the window are listed."
+      "Only permits with at least one reported numeric limit violation in the window are listed.",
+      "Travel times assume the mean annual EROM velocity."
     ],
     "limitations": [
       "The spill, the gauge sensor spike and the plume camera footage are simulated: the spike is injected into a real gauge baseline and the footage is rendered.",
@@ -817,14 +1079,19 @@
     ],
     "classification": "incident",
     "data_origin": "simulated spill injected into real baseline",
-    "report_mode": "fallback",
-    "fallback_reason": "GROQ_API_KEY or GROQ_MODEL not set",
-    "guardrail_notes": []
+    "report_mode": "llm",
+    "fallback_reason": null,
+    "guardrail_notes": [
+      "triage: dropped a sentence with numbers not in the tool data (10)",
+      "report: added the small domestic general permit statement for VAG408560",
+      "report: added the small domestic general permit statement for VAG408449",
+      "report: added the small domestic general permit statement for VAG408158"
+    ]
   },
   "agent_modes": {
-    "triage": "fallback",
-    "trace": "fallback",
-    "compliance": "fallback",
-    "report": "fallback"
+    "triage": "llm",
+    "trace": "llm",
+    "compliance": "llm",
+    "report": "llm"
   }
 }

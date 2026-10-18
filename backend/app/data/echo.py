@@ -20,7 +20,45 @@ VA_BBOX = (36.0, 40.0, -84.0, -75.0)  # lat_min, lat_max, lon_min, lon_max; poin
 FACILITIES_FILE = "ICIS_FACILITIES.csv"
 OUTFALLS_FILE = "NPDES_PERM_FEATURE_COORDS.csv"
 
+PERMITS_FILE = "ICIS_PERMITS.csv"
+
 FACILITY_COLUMNS = ["npdes_id", "name", "frs_id", "latitude", "longitude"]
+PERMIT_COLUMNS = [
+    "npdes_id", "permit_type_code", "permit_status_code", "facility_type_indicator",
+    "general_permit_id", "general_permit_name",
+]
+FACILITY_TYPE_COLUMNS = ["npdes_id", "facility_type_code"]
+
+# Code tables from the ECHO ICIS-NPDES download summary (echo.epa.gov, checked 2026-10-18).
+PERMIT_TYPE_DESC = {
+    "NPD": "NPDES Individual Permit",
+    "NGP": "NPDES Master General Permit",
+    "GPC": "General Permit Covered Facility",
+    "SNN": "State Issued Master General Permit (Non-NPDES)",
+    "IIU": "Individual IU Permit (Non-NPDES)",
+    "SIN": "Individual State Issued Permit (Non-NPDES)",
+    "APR": "Associated Permit Record",
+    "UFT": "Unpermitted Facility",
+}
+# Only NPDES individual and general permits map to a permit_type; other codes keep the code only.
+PERMIT_TYPE_KIND = {"NPD": "individual", "GPC": "general", "NGP": "general"}
+FACILITY_TYPE_DESC = {
+    "CNG": "County Government",
+    "COR": "Corporation",
+    "CTG": "Municipality",
+    "DIS": "District",
+    "FDF": "Federal Facility (U.S. Government)",
+    "GOC": "GOCO (Gov Owned/Contractor Operated)",
+    "IND": "Individual",
+    "MWD": "Municipal or Water District",
+    "MXO": "Mixed Ownership (e.g., Public/Private)",
+    "NON": "Non-Government",
+    "POF": "Privately Owned Facility",
+    "SDT": "School District",
+    "STF": "State Government",
+    "TRB": "Tribal Government",
+    "UNK": "Unknown",
+}
 OUTFALL_COLUMNS = ["npdes_id", "outfall", "latitude", "longitude"]
 VIOLATION_COLUMNS = [
     "npdes_id", "outfall", "parameter", "violation_desc", "period_end", "is_numeric",
@@ -129,6 +167,62 @@ def load_facilities(npdes_dir: str | Path | None = None, cache_dir: str | Path |
     d, cache = _settings_paths(npdes_dir, cache_dir, "echo_npdes_dir")
     df = cached_frame(d / FACILITIES_FILE, cache, "echo_facilities_va", _build_facilities)
     return _restore_none(df, ["npdes_id", "name", "frs_id"])
+
+
+# ---- permits and facility types --------------------------------------------------------------
+def _build_permits(src: Path) -> pd.DataFrame:
+    raw = pd.read_csv(
+        src,
+        dtype=str,
+        encoding="latin-1",
+        usecols=["EXTERNAL_PERMIT_NMBR", "VERSION_NMBR", "FACILITY_TYPE_INDICATOR", "PERMIT_TYPE_CODE",
+                 "PERMIT_STATUS_CODE", "PERMIT_NAME", "MASTER_EXTERNAL_PERMIT_NMBR"],
+        keep_default_na=False,
+    )
+    raw = raw[raw["EXTERNAL_PERMIT_NMBR"].str.strip().str.startswith("VA")].copy()
+    for c in raw.columns:
+        raw[c] = raw[c].str.strip()
+    # One row per permit: the effective version if there is one, otherwise the highest version.
+    raw["_eff"] = (raw["PERMIT_STATUS_CODE"] == "EFF").astype(int)
+    raw["_ver"] = pd.to_numeric(raw["VERSION_NMBR"], errors="coerce").fillna(-1)
+    raw = raw.sort_values(["EXTERNAL_PERMIT_NMBR", "_eff", "_ver"], ascending=[True, False, False])
+    current = raw.drop_duplicates("EXTERNAL_PERMIT_NMBR", keep="first")
+    # Master general permits carry the general permit's title (e.g. VAG400000).
+    masters = current[current["PERMIT_TYPE_CODE"] == "NGP"].set_index("EXTERNAL_PERMIT_NMBR")["PERMIT_NAME"]
+    master_id = clean_str(current["MASTER_EXTERNAL_PERMIT_NMBR"])
+    df = pd.DataFrame({
+        "npdes_id": clean_str(current["EXTERNAL_PERMIT_NMBR"]),
+        "permit_type_code": clean_str(current["PERMIT_TYPE_CODE"]),
+        "permit_status_code": clean_str(current["PERMIT_STATUS_CODE"]),
+        "facility_type_indicator": clean_str(current["FACILITY_TYPE_INDICATOR"]),
+        "general_permit_id": master_id,
+        "general_permit_name": clean_str(master_id.map(lambda m: masters.get(m) if m else None)),
+    })
+    return df.reset_index(drop=True)[PERMIT_COLUMNS]
+
+
+def _build_facility_types(src: Path) -> pd.DataFrame:
+    raw = pd.read_csv(src, dtype=str, encoding="latin-1",
+                      usecols=["NPDES_ID", "FACILITY_TYPE_CODE", "STATE_CODE"], keep_default_na=False)
+    raw = raw[raw["STATE_CODE"].str.strip() == "VA"]
+    df = pd.DataFrame({
+        "npdes_id": clean_str(raw["NPDES_ID"]),
+        "facility_type_code": clean_str(raw["FACILITY_TYPE_CODE"]),
+    })
+    df = df[df["npdes_id"].notna()].drop_duplicates("npdes_id", keep="first")
+    return df.reset_index(drop=True)[FACILITY_TYPE_COLUMNS]
+
+
+def load_permits(npdes_dir: str | Path | None = None, cache_dir: str | Path | None = None) -> pd.DataFrame:
+    """One row per Virginia permit (current version) with its permit type and the facility type.
+
+    Columns: PERMIT_COLUMNS from ICIS_PERMITS plus facility_type_code from ICIS_FACILITIES.
+    """
+    d, cache = _settings_paths(npdes_dir, cache_dir, "echo_npdes_dir")
+    permits = cached_frame(d / PERMITS_FILE, cache, "echo_permits_va", _build_permits)
+    types = cached_frame(d / FACILITIES_FILE, cache, "echo_facility_types_va", _build_facility_types)
+    df = permits.merge(types, on="npdes_id", how="left")
+    return _restore_none(df, PERMIT_COLUMNS + ["facility_type_code"])
 
 
 # ---- outfalls --------------------------------------------------------------------------------

@@ -70,6 +70,9 @@ def _collect_facilities(value: Any, ids: set[str], names: set[str]) -> None:
             name = value.get("name")
             if isinstance(name, str) and name:
                 names.add(name)
+            gp = value.get("general_permit_id")  # master general permit ID, also from the ECHO data
+            if isinstance(gp, str) and gp:
+                ids.add(gp)
         for v in value.values():
             _collect_facilities(v, ids, names)
     elif isinstance(value, (list, tuple)):

@@ -1,15 +1,16 @@
 {
   "simulated": true,
   "requires_human_review": true,
+  "disclaimer": "Simulated incident. Facilities are listed only because they have reported permit violations upstream; no link to any real event is implied.",
   "incident_id": "spill-20261009T2000Z",
   "status": "completed",
   "case": "spill",
   "classification": "incident",
-  "report_mode": "fallback",
+  "report_mode": "llm",
   "agent_modes": {
-    "triage": "fallback",
-    "trace": "fallback",
-    "compliance": "fallback",
-    "report": "fallback"
+    "triage": "llm",
+    "trace": "llm",
+    "compliance": "llm",
+    "report": "llm"
   }
 }
