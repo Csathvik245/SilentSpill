@@ -11,6 +11,7 @@
     "tri_data": true,
     "roboflow_cache": true,
     "groq_configured": true,
+    "backboard_configured": true,
     "naip_imagery": false
   }
 }

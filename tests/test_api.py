@@ -5,6 +5,9 @@ import math
 import pytest
 from fastapi.testclient import TestClient
 
+from backboard_fake import FakeStore
+
+from backend.app.agents.memory import IncidentMemory
 from backend.app.config import ConfigError, get_settings
 
 SPILL_ID = "spill-20261009T2000Z"
@@ -20,14 +23,24 @@ class NoLLM:
 
 
 @pytest.fixture(scope="module")
-def client():
+def memory_store():
+    return FakeStore()
+
+
+@pytest.fixture(scope="module")
+def client(memory_store, tmp_path_factory):
     try:
         settings = get_settings()
     except ConfigError:
         pytest.skip("no .env")
     from backend.app.main import create_app
 
-    with TestClient(create_app(settings, client_factory=lambda s: NoLLM())) as c:
+    cache = tmp_path_factory.mktemp("bb_cache")
+    app = create_app(
+        settings, client_factory=lambda s: NoLLM(),
+        memory_factory=lambda s: IncidentMemory("bb-test-key", cache, memory_store.factory),
+    )
+    with TestClient(app) as c:
         assert c.post("/scenario/run", json={"case": "spill"}).status_code == 200
         assert c.post("/scenario/run", json={"case": "storm"}).status_code == 200
         yield c
@@ -227,3 +240,71 @@ def test_facilities_carry_permit_type(client):
     for c in client.get("/facilities").json()["candidates"]:
         assert c["permit_type"] in ("individual", "general", None)
         assert "small_domestic_general_permit" in c and "facility_type" in c
+
+
+# ---- review endpoint and incident memory ---------------------------------------------------------
+def test_review_saves_a_linked_memory(client, memory_store):
+    r = client.post(f"/incidents/{SPILL_ID}/review", json={"decision": "confirmed", "note": "Checked the clip."})
+    assert r.status_code == 200
+    body = r.json()
+    assert_flags(body)
+    assert body["incident_id"] == SPILL_ID and body["decision"] == "confirmed"
+    assert body["memory_mode"] == "backboard" and body["memory_id"]
+    saved = next(m for m in reversed(memory_store.memories) if m["id"] == body["memory_id"])
+    meta = saved["metadata"]
+    assert meta["type"] == "review" and meta["incident_id"] == SPILL_ID and meta["decision"] == "confirmed"
+    assert meta["reach_id"] == str(get_settings().reach_nhdplusid) and meta["simulated"] is True
+    assert "decision confirmed" in saved["content"] and "Checked the clip." in saved["content"]
+
+
+def test_next_run_recalls_the_review(client):
+    client.post(f"/incidents/{SPILL_ID}/review", json={"decision": "confirmed"})
+    run = client.post("/scenario/run", json={"case": "spill"}).json()
+    assert run["memory_mode"] == "backboard"
+    report = client.get(f"/incidents/{SPILL_ID}").json()["report"]
+    assert report["related_past_events_text"] != "none"
+    assert any(e["memory_type"] == "review" and e["review_decision"] == "confirmed"
+               for e in report["related_past_events"])
+    assert len(report["related_past_events"]) <= 3
+
+
+@pytest.mark.parametrize("decision", ["confirmed", "storm_runoff", "false_alarm"])
+def test_review_accepts_each_decision(client, decision):
+    r = client.post(f"/incidents/{STORM_ID}/review", json={"decision": decision})
+    assert r.status_code == 200 and r.json()["decision"] == decision and r.json()["note"] == ""
+
+
+def test_review_validation_and_unknown_incident(client):
+    bad = client.post(f"/incidents/{SPILL_ID}/review", json={"decision": "guilty"})
+    assert bad.status_code == 422
+    assert_flags(bad.json())
+    missing = client.post("/incidents/nope/review", json={"decision": "confirmed"})
+    assert missing.status_code == 404
+    assert_flags(missing.json())
+
+
+def test_review_without_backboard_key_is_skipped(tmp_path):
+    from backend.app.main import create_app
+
+    app = create_app(get_settings(), client_factory=lambda s: NoLLM(),
+                     memory_factory=lambda s: IncidentMemory(None, tmp_path))
+    with TestClient(app) as c:
+        assert c.post("/scenario/run", json={"case": "storm"}).json()["memory_mode"] == "skipped"
+        r = c.post(f"/incidents/{STORM_ID}/review", json={"decision": "false_alarm", "note": "n"})
+        assert r.status_code == 200 and r.json()["memory_mode"] == "skipped" and r.json()["memory_id"] is None
+        assert c.get("/health").json()["data_ready"]["backboard_configured"] is False
+
+
+def test_review_with_failing_backboard_still_records(tmp_path):
+    from backend.app.main import create_app
+
+    store = FakeStore()
+    store.fail["add_memory"] = 500
+    app = create_app(get_settings(), client_factory=lambda s: NoLLM(),
+                     memory_factory=lambda s: IncidentMemory("bb-test-key", tmp_path, store.factory))
+    with TestClient(app) as c:
+        assert c.post("/scenario/run", json={"case": "storm"}).json()["memory_mode"] == "failed"
+        r = c.post(f"/incidents/{STORM_ID}/review", json={"decision": "confirmed"})
+        assert r.status_code == 200
+        assert r.json()["memory_mode"] == "failed" and r.json()["memory_reason"] == "FakeAPIError (status 500)"
+        assert "bb-test-key" not in r.text

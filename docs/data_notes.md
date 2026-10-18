@@ -130,6 +130,18 @@ Fetch from the new USGS Water Data API (`https://api.waterdata.usgs.gov/ogcapi/v
   The notes record each rejection without repeating the rejected name or wording.
 - **Number guardrail:** a sentence is dropped if it cites a number that is not in the tool results, the pipeline outputs (gauge events, storm filter, rain, camera summary, fusion, run settings) or the context shown to the model. Dates, times, year ranges and the "≥ X h" bounds are recognised. Per-reach trace values and per-frame camera values are not citable, so the allowed set stays small. Limit: numbers are checked without their units, so a real value cited with the wrong unit (e.g. a 3.4 FNU turbidity peak written as "3.4 in" of rain) would pass.
 
+## Incident memory on Backboard (optional)
+
+- `backboard-sdk==1.5.19` (async `BackboardClient`, base URL `https://app.backboard.io/api`, key in the `X-API-Key` header, sent by the SDK). The key is read from `BACKBOARD_API_KEY`. Without it, memory is `skipped`. Any failing call is logged as its error type and status code only, the memory step is `failed`, and the run still completes.
+- One assistant, "SilentSpill incident memory": found by name or created once, with its ID cached in `cache/backboard_assistant.json`. A 404 on a cached ID clears the cache and resolves the assistant again once.
+- After each completed run, a memory is saved. Metadata: `type: run`, `incident_id`, `reach_id`, `date` (scenario date), `classification`, `confidence`, `evidence_summary` (fusion sources and reasons), `simulated: true`, `saved_at`.
+- `POST /incidents/{id}/review` saves `type: review` with the decision and note, linked by `incident_id`.
+- Before Triage, the memories are searched (limit 3), and only those whose `reach_id` matches this reach are kept. Each memory's text goes through `clean_text` against this run's tool ledger with no extra allowed numbers, so a memory cannot add a facility or a number. The guardrail notes for memories never quote the rejected values. A memory with nothing left is dropped.
+- Triage sees them as `prior_context` and may mention them. The classification guard and the fusion confidence are unchanged, and numbers in `prior_context` never count as citable.
+- The report's `related_past_events` lists what survived, and `related_past_events_text` is "none" when nothing did. `memory_mode` is on the incident and run responses.
+- Incident IDs are deterministic (`spill-20261009T2000Z`), so repeated runs of the demo share an ID. `saved_at` tells the runs apart.
+- Tests never reach Backboard. `tests/conftest.py` blocks the real client for the whole session, and the tests use an in-memory fake.
+
 ## ECHO (verified)
 
 ### Facilities (`ICIS_FACILITIES.csv`)

@@ -12,5 +12,6 @@
     "trace": "llm",
     "compliance": "llm",
     "report": "llm"
-  }
+  },
+  "memory_mode": "backboard"
 }

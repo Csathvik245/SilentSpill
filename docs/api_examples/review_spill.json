@@ -1,0 +1,10 @@
+{
+  "simulated": true,
+  "requires_human_review": true,
+  "incident_id": "spill-20261009T2000Z",
+  "decision": "confirmed",
+  "note": "Example review posted by scripts/make_api_docs.py.",
+  "memory_mode": "backboard",
+  "memory_id": "43967ef8-3a50-4fb4-88f6-8ec3372c54d4",
+  "memory_reason": null
+}

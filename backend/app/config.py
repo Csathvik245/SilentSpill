@@ -67,6 +67,7 @@ class Settings(BaseSettings):
     groq_model: str | None = None
     noaa_cdo_token: SecretStr | None = None
     roboflow_api_key: SecretStr | None = None
+    backboard_api_key: SecretStr | None = None  # optional incident memory; skipped when unset
     roboflow_model_id: str = "illegal-dumping-detection-dd6wk-3t0jf/1"
     roboflow_api_url: str = "https://serverless.roboflow.com"
     dem_tif_path: Path | None = None

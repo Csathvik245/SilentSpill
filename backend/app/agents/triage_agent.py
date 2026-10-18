@@ -9,7 +9,7 @@ from typing import Any
 
 from pydantic import BaseModel, ConfigDict
 
-from ..schemas import AgentMode, TriageClass, TriageResult
+from ..schemas import AgentMode, RelatedPastEvent, TriageClass, TriageResult
 from ..simulation.scenario import ScenarioResult
 from . import fallback
 from .base import run_agent
@@ -28,6 +28,7 @@ Rules:
 - Use only the values in TOOL RESULTS. Do not invent numbers, dates, facility names, permit IDs or chemicals. Copy numbers exactly as written there.
 - Non-accusatory wording: never say anything "caused" or "is responsible for" a spill; no "polluter", "culprit", "to blame", "dumping" or "source of the spill". Use "consistent with". Triage does not identify a source.
 - Rain is daily totals only; a missing day is "no rain reading", never zero rain.
+- prior_context lists related past events on this reach from incident memory (earlier runs and human review decisions). You may mention them briefly as context, but they never change the classification: classify from the current fusion result only.
 - Write 2 to 5 short, factual reasons.
 
 Return only a JSON object of this shape:
@@ -42,8 +43,19 @@ class TriageLLM(BaseModel):
     reasons: list[str] = []
 
 
-def build_context(scenario: ScenarioResult) -> dict[str, Any]:
-    """Compact JSON context for the model (and the numbers it may cite)."""
+def prior_context(events: list[RelatedPastEvent] | None) -> list[dict[str, Any]]:
+    """Recalled past events as the model sees them (already through the guardrails)."""
+    return [
+        {
+            "memory_type": e.memory_type, "incident_id": e.incident_id, "scenario_date": e.scenario_date,
+            "classification": e.classification, "review_decision": e.review_decision, "text": e.text,
+        }
+        for e in events or []
+    ]
+
+
+def build_context(scenario: ScenarioResult, prior: list[RelatedPastEvent] | None = None) -> dict[str, Any]:
+    """Compact JSON context for the model. Numbers it may cite come from everything but prior_context."""
     f = scenario.fusion
     vision = None
     if scenario.vision is not None:
@@ -84,7 +96,13 @@ def build_context(scenario: ScenarioResult) -> dict[str, Any]:
         ],
         "anomalous_parameters": scenario.anomalous_parameters,
         "vision": vision,
+        "prior_context": prior_context(prior),
     }
+
+
+def allowed_numbers(ctx: dict[str, Any]) -> set[str]:
+    """Numbers in the context except prior_context: memories never make a number citable."""
+    return fallback.context_numbers({k: v for k, v in ctx.items() if k != "prior_context"})
 
 
 def guard_classification(model_class: str, fusion_class: str) -> tuple[TriageClass, str | None]:
@@ -112,7 +130,7 @@ def finalize(
     cls, note = guard_classification(llm.classification, fusion.classification)
     if note:
         notes.append(note)
-    extra = fallback.context_numbers(ctx)
+    extra = allowed_numbers(ctx)
     reasons = fallback.clean_all(llm.reasons, tools.ledger, extra, "triage", notes)
     if not reasons:
         reasons = fallback.clean_all(fallback.triage(ctx)["reasons"], tools.ledger, extra, "triage", notes)
@@ -127,9 +145,9 @@ def finalize(
 
 
 def run(
-    scenario: ScenarioResult, tools: Tools, client: Any
+    scenario: ScenarioResult, tools: Tools, client: Any, prior: list[RelatedPastEvent] | None = None
 ) -> tuple[TriageResult, AgentMode, str | None, list[str]]:
-    ctx = build_context(scenario)
+    ctx = build_context(scenario, prior)
     user = (
         "TOOL RESULTS (JSON):\n" + fallback.to_json(ctx)
         + "\n\nTASK: Classify this event and give short reasons. Return only the JSON object."
@@ -142,7 +160,9 @@ def run(
     return result, mode, reason, notes
 
 
-def fallback_result(scenario: ScenarioResult, tools: Tools) -> tuple[TriageResult, list[str]]:
+def fallback_result(
+    scenario: ScenarioResult, tools: Tools, prior: list[RelatedPastEvent] | None = None
+) -> tuple[TriageResult, list[str]]:
     """Deterministic result without any model call."""
-    ctx = build_context(scenario)
+    ctx = build_context(scenario, prior)
     return finalize(TriageLLM.model_validate(fallback.triage(ctx)), scenario, tools, ctx)

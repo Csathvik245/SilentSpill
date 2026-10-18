@@ -1,7 +1,8 @@
 """FastAPI app: JSON routes and a Server-Sent Events replay over the deterministic demo scenarios.
 
 Every response carries `simulated` and `requires_human_review`. The pipeline reads only local data
-and cached responses; the only network call is the optional Groq agent chain on POST /scenario/run.
+and cached responses; the only network calls are the optional Groq agent chain and the optional
+Backboard incident memory (POST /scenario/run and POST /incidents/{id}/review).
 Start with: python -m uvicorn backend.app.main:app --reload --port 8000
 """
 from __future__ import annotations
@@ -11,7 +12,7 @@ import json
 import math
 import threading
 from collections.abc import AsyncIterator, Callable
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import datetime, timedelta
 from typing import Any
 
@@ -23,7 +24,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, RedirectResponse, StreamingResponse
 from starlette.exceptions import HTTPException
 
-from .agents import orchestrator
+from .agents import memory, orchestrator
+from .agents.memory import IncidentMemory
 from .config import DISTANCE_CRS, SOURCE_CRS, Settings, get_settings
 from .data import nhd_graph
 from .data.baselines import MANIFEST, SNAPSHOT_DIR, load_snapshot
@@ -37,6 +39,8 @@ from .schemas import (
     HealthResponse,
     IncidentResponse,
     ReachResponse,
+    ReviewRequest,
+    ReviewResponse,
     ScenarioRunRequest,
     ScenarioRunResponse,
     SensorSample,
@@ -55,14 +59,19 @@ MAX_STREAM_SLEEP_S = 5.0  # cap on any single pause in the replay
 class _Incident:
     scenario: scen.ScenarioResult
     response: IncidentResponse
+    reviews: list[ReviewResponse] = field(default_factory=list)
 
 
 class _State:
-    """Settings, the lazily loaded river graph, and the incidents run in this process."""
+    """Settings, the lazily loaded river graph, incident memory, and the incidents run in this process."""
 
-    def __init__(self, settings: Settings, client_factory: Callable[[Settings], Any]):
+    def __init__(
+        self, settings: Settings, client_factory: Callable[[Settings], Any],
+        memory_factory: Callable[[Settings], IncidentMemory],
+    ):
         self.settings = settings
         self.client_factory = client_factory
+        self.memory = memory_factory(settings)
         self.incidents: dict[str, _Incident] = {}
         self._graph: nx.DiGraph | None = None
         self._lock = threading.Lock()
@@ -205,10 +214,15 @@ def _sse(event: StreamEvent) -> str:
     return f"id: {event.seq}\nevent: {event.kind}\ndata: {event.model_dump_json()}\n\n"
 
 
-def create_app(settings: Settings | None = None, client_factory: Callable[[Settings], Any] | None = None) -> FastAPI:
-    """Build the app. client_factory returns the Groq client for the agent chain (tests inject a stub)."""
+def create_app(
+    settings: Settings | None = None,
+    client_factory: Callable[[Settings], Any] | None = None,
+    memory_factory: Callable[[Settings], IncidentMemory] | None = None,
+) -> FastAPI:
+    """Build the app. client_factory returns the Groq client for the agent chain and memory_factory
+    the Backboard incident memory (tests inject stubs for both)."""
     settings = settings or get_settings()
-    state = _State(settings, client_factory or orchestrator.make_client)
+    state = _State(settings, client_factory or orchestrator.make_client, memory_factory or IncidentMemory.from_settings)
     app = FastAPI(
         title="SilentSpill API",
         version="0.1.0",
@@ -252,6 +266,7 @@ def create_app(settings: Settings | None = None, client_factory: Callable[[Setti
             "tri_data": s.tri_csv_path.exists(),
             "roboflow_cache": (DEBRIS_CACHE_DIR / "roboflow_spill.json").exists(),
             "groq_configured": s.groq_configured,  # optional: without it the report uses the template
+            "backboard_configured": state.memory.configured,  # optional: without it memory is skipped
             "naip_imagery": s.naip_available,  # optional: clips are drawn without it
         }
         required = ("baseline_snapshot", "reach_fixture", "nhdplus_gpkg", "echo_data", "tri_data")
@@ -292,17 +307,33 @@ def create_app(settings: Settings | None = None, client_factory: Callable[[Setti
         case = (body or ScenarioRunRequest()).case
         s, G = state.settings, state.graph()
         sc = scen.run_spill_scenario(s, G) if case == "spill" else scen.run_storm_scenario(s, G)
-        resp = orchestrator.run_chain(sc, client=state.client_factory(s), settings=s, G=G)
+        resp = orchestrator.run_chain(sc, client=state.client_factory(s), settings=s, G=G, memory_store=state.memory)
         state.incidents[resp.incident_id] = _Incident(sc, resp)
         return ScenarioRunResponse(
             incident_id=resp.incident_id, status="completed", case=case,
             classification=resp.report.classification, report_mode=resp.report.report_mode,
-            agent_modes=resp.agent_modes,
+            agent_modes=resp.agent_modes, memory_mode=resp.memory_mode,
         )
 
     @app.get("/incidents/{incident_id}", response_model=IncidentResponse)
     def get_incident(incident_id: str) -> IncidentResponse:
         return incident(incident_id).response
+
+    @app.post("/incidents/{incident_id}/review", response_model=ReviewResponse)
+    def review_incident(incident_id: str, body: ReviewRequest) -> ReviewResponse:
+        """Record a human review decision; saved to incident memory, linked by incident_id."""
+        rec = incident(incident_id)
+        sc = rec.scenario
+        content, metadata = memory.review_memory(
+            incident_id, sc.reach_nhdplusid, sc.scenario_timestamp.date(), body.decision, body.note
+        )
+        saved = state.memory.save(content, metadata)
+        review = ReviewResponse(
+            incident_id=incident_id, decision=body.decision, note=body.note, memory_mode=saved.mode,
+            memory_id=saved.value if saved.mode == "backboard" else None, memory_reason=saved.reason,
+        )
+        rec.reviews.append(review)
+        return review
 
     @app.get("/sensors/{incident_id}", response_model=SensorSeriesResponse)
     def sensors(

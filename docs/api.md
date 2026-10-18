@@ -30,6 +30,13 @@ produced in **`llm`** mode (triage `llm`, trace `llm`, compliance `llm`, report 
 - Travel times use `travel_time.display`. A value starting with `≥` is a lower bound (some reaches
   have no velocity data); show it as written, never as an estimate.
 - Wording is non-accusatory: facilities are "facilities with reported violations near this reach".
+- Incident memory (optional, Backboard): every completed run is saved, and before Triage up to 3
+  memories of past runs and reviews on the same reach are recalled. They pass through the same
+  guardrails as model output (no new facilities or numbers) and never change the classification or
+  confidence. The report lists them under `related_past_events` (`related_past_events_text` is
+  `"none"` when there are none). `memory_mode` on the incident and run responses is `backboard`,
+  `skipped` (no `BACKBOARD_API_KEY`) or `failed` (a call failed; the run still completes). In this run:
+  `backboard`.
 - Every incident response (`POST /scenario/run`, `GET /incidents/{id}`) and every report carry a fixed
   `disclaimer`: "Simulated incident. Facilities are listed only because they have reported permit
   violations upstream; no link to any real event is implied." Show it with the report.
@@ -47,6 +54,7 @@ produced in **`llm`** mode (triage `llm`, trace `llm`, compliance `llm`, report 
 | GET | `/facilities?comid=&max_km=50&buffer_m=1000` | Candidate facilities with reported violations (GeoJSON + details) |
 | POST | `/scenario/run` | Run the deterministic simulated spill (`{"case": "spill"}`) or the real storm (`{"case": "storm"}`) |
 | GET | `/incidents/{id}` | Triage, trace, compliance and the final report |
+| POST | `/incidents/{id}/review` | Record a human review decision (saved to incident memory) |
 | GET | `/sensors/{id}?hours_before=72&hours_after=` | Real baseline series plus the injected (simulated) rows |
 | GET | `/stream/{id}?speed=` | SSE replay of the scenario timeline |
 
@@ -68,6 +76,7 @@ produced in **`llm`** mode (triage `llm`, trace `llm`, compliance `llm`, report 
     "tri_data": true,
     "roboflow_cache": true,
     "groq_configured": true,
+    "backboard_configured": true,
     "naip_imagery": false
   }
 }
@@ -573,7 +582,8 @@ Spill:
     "trace": "llm",
     "compliance": "llm",
     "report": "llm"
-  }
+  },
+  "memory_mode": "backboard"
 }
 ```
 
@@ -594,7 +604,8 @@ Storm (real observed data; storm runoff gets no candidate list, so trace and com
     "trace": "skipped",
     "compliance": "skipped",
     "report": "llm"
-  }
+  },
+  "memory_mode": "backboard"
 }
 ```
 
@@ -615,8 +626,9 @@ Spill (`incident`, ranked candidates):
     "fusion_classification": "incident",
     "confidence": 0.95,
     "reasons": [
-      "Camera clip labeled 'spill' shows dye‑coloured water from 2026-10-09 20:02 to 2026-10-09 21:49 UTC (216 of 240 frames, peak plume confidence 1.00).",
-      "Gauge anomalies in conductivity rise, turbidity rise, and pH drop occur within the ±3.0 h allowance of the camera plume, providing two independent sources of agreement."
+      "Camera clip shows a dye‑coloured plume from 2026-10-09 20:02 to 2026-10-09 21:49 UTC (216 of 240 frames, peak plume confidence 1.00).",
+      "Gauge anomalies in conductivity, turbidity, and pH occur within the ±3.0 h allowance of the camera plume.",
+      "... 2 more"
     ]
   },
   "trace": {
@@ -782,10 +794,10 @@ Spill (`incident`, ranked candidates):
       "... 2 more"
     ],
     "candidate_notes": {
-      "VA0052621": "2.02 km upstream; river travel time 7.4 h; 3 reported numeric limit violations in the window; no matched parameters.",
-      "VAG408560": "7.13 km upstream; river travel time ≥ 9.1 h (velocity available for 10.3 of 10.6 km); 2 reported numeric limit violations in the window; reported turbidity matches (proxy).",
-      "VAG408449": "7.4 km upstream; river travel time ≥ 9.4 h (velocity available for 10.7 of 11.0 km); 3 reported numeric limit violations in the window; no matched parameters.",
-      "VAG408158": "17.57 km upstream; river travel time ≥ 18.7 h (velocity available for 20.6 of 20.8 km); 2 reported numeric limit violations in the window; no matched parameters."
+      "VA0052621": "2.02 km upstream by river; river travel time 7.4 h; 3 reported numeric limit violations in the window; no matched parameters.",
+      "VAG408560": "7.13 km upstream by river; river travel time ≥ 9.1 h (velocity available for 10.3 of 10.6 km); 2 reported numeric limit violations in the window; turbidity (proxy) matches.",
+      "VAG408449": "7.4 km upstream by river; river travel time ≥ 9.4 h (velocity available for 10.7 of 11.0 km); 3 reported numeric limit violations in the window; no matched parameters.",
+      "VAG408158": "17.57 km upstream by river; river travel time ≥ 18.7 h (velocity available for 20.6 of 20.8 km); 2 reported numeric limit violations in the window; no matched parameters."
     },
     "assumptions": [
       "Candidates are ranked by river distance upstream of the spill reach, then distance to the river; not by travel time.",
@@ -806,12 +818,12 @@ Spill (`incident`, ranked candidates):
       },
       {
         "facility_id": "VA0052621",
-        "statement": "6 historical numeric limit violations.",
+        "statement": "6 historical numeric limit violations (reported or alleged).",
         "value": "6",
         "source_field": "historical_numeric_violation_count",
         "source_file": "VA_NPDES_EFF_VIOLATIONS.csv"
       },
-      "... 38 more"
+      "... 35 more"
     ]
   },
   "report": {
@@ -819,7 +831,7 @@ Spill (`incident`, ranked candidates):
     "requires_human_review": true,
     "disclaimer": "Simulated incident. Facilities are listed only because they have reported permit violations upstream; no link to any real event is implied.",
     "banner": "SIMULATED DEMONSTRATION. The spill, plume footage and sensor spike are synthetic. This draft requires human review before any action.",
-    "summary": "The incident involves a simulated spill injected into a real baseline, and the fusion and triage systems both classify it as an incident with high confidence (0.95). Gauge data show rises in conductivity and turbidity and a drop in pH that align with the camera plume timing, and these three parameters are listed as anomalous. Rainfall records for the event day and the prior day have no readings, so rain does not explain the anomalies. Four facilities with reported violations are identified upstream: Rank 1 VALLEY MILK PRODUCTS LLC, 2.02 km upstream, travel time 7.4 h, 3 reported numeric limit violations; Rank 2 ERBACH ENTERPRISES LLC PROPERTY 2, 7.13 km upstream, travel time ≥ 9.1 h (velocity available for 10.3 of 10.6 km), 2 reported numeric limit violations; Rank 3 ERBACH ENTERPRISES LLC PROPERTY, 7.4 km upstream, travel time ≥ 9.4 h (velocity available for 10.7 of 11.0 km), 3 reported numeric limit violations; Rank 4 SHENANDOAH VALLEY BOARDING AND TRAINING LLC, 17.57 km upstream, travel time ≥ 18.7 h (velocity available for 20.6 of 20.8 km), 2 reported numeric limit violations. Facilities ranked 2, 3, and 4 each hold a small domestic general permit (VAG400000). ERBACH ENTERPRISES LLC PROPERTY 2 (VAG408560) holds a small domestic general permit (VAG400000). ERBACH ENTERPRISES LLC PROPERTY (VAG408449) holds a small domestic general permit (VAG400000). SHENANDOAH VALLEY BOARDING AND TRAINING LLC (VAG408158) holds a small domestic general permit (VAG400000).",
+    "summary": "The incident is based on a simulated spill injected into a real baseline, and the fusion system classifies it as an incident with 0.95 confidence. Gauge sensors show unexplained rises in conductivity and turbidity and a drop in pH during the plume window, and no rain was recorded for the two days examined. Four facilities with reported violations are upstream: Rank 1 – VALLEY MILK PRODUCTS LLC (VA0052621), 2.02 km upstream, river travel time 7.4 h, 3 reported numeric limit violations; Rank 2 – ERBACH ENTERPRISES LLC PROPERTY 2 (VAG408560), 7.13 km upstream, river travel time ≥ 9.1 h (velocity available for 10.3 of 10.6 km), 2 reported numeric limit violations, and it holds a small domestic general permit VAG400000; Rank 3 – ERBACH ENTERPRISES LLC PROPERTY (VAG408449), 7.4 km upstream, river travel time ≥ 9.4 h (velocity available for 10.7 of 11.0 km), 3 reported numeric limit violations, also holding a small domestic general permit VAG400000; Rank 4 – SHENANDOAH VALLEY BOARDING AND TRAINING LLC (VAG408158), 17.57 km upstream, river travel time ≥ 18.7 h (velocity available for 20.6 of 20.8 km), 2 reported numeric limit violations, and it holds a small domestic general permit VAG400000. The anomalous parameters are not explained by rainfall, indicating a non‑rain‑related event. These records are consistent with nearby permitted discharges but do not identify a source.",
     "timeline": [
       {
         "timestamp": "2026-10-09T20:00:00Z",
@@ -1005,18 +1017,37 @@ Spill (`incident`, ranked candidates):
     "data_origin": "simulated spill injected into real baseline",
     "report_mode": "llm",
     "fallback_reason": null,
-    "guardrail_notes": [
-      "triage: dropped a sentence with numbers not in the tool data (10)",
-      "report: added the small domestic general permit statement for VAG408560",
-      "... 2 more"
-    ]
+    "guardrail_notes": [],
+    "related_past_events": [
+      {
+        "memory_type": "review",
+        "incident_id": "spill-20261009T2000Z",
+        "scenario_date": "2026-10-09",
+        "saved_at": "2026-10-18T12:41:54Z",
+        "classification": null,
+        "review_decision": "confirmed",
+        "text": "Human review of SilentSpill run spill-20261009T2000Z on reach 10000500083697, scenario date 2026-10-09: decision confirmed. Reviewer note: Plume and gauge spike checked against the clip. Simulated: true."
+      },
+      {
+        "memory_type": "run",
+        "incident_id": "spill-20261009T2000Z",
+        "scenario_date": "2026-10-09",
+        "saved_at": "2026-10-18T12:51:13Z",
+        "classification": "incident",
+        "review_decision": null,
+        "text": "SilentSpill run spill-20261009T2000Z on reach 10000500083697, scenario date 2026-10-09: classified incident with confidence 0.95. Fused evidence: sources sensor, vision. Camera clip 'spill' shows dye-coloured water from 2026-10-09 20:02 to 2026-10-09 21:49 UTC in 216 of 240 frames (peak plume confidence 1.00). Gauge anomalies in 3 parameter(s) (conductivity rise, turbidity rise, pH drop) fall within the ±3.0 h allowance of the camera plume, so two independent sources agree (not single-source). Camera and gauge observations are compared with a ±3.0 h allowance (river travel time over the reach between them). Classified as a possible incident for human review; it does not identify a source. Simulated: true."
+      }
+    ],
+    "related_past_events_text": "Human review of spill-20261009T2000Z: confirmed (saved 2026-10-18 12:41 UTC). Past run spill-20261009T2000Z: incident (saved 2026-10-18 12:51 UTC)."
   },
   "agent_modes": {
     "triage": "llm",
     "trace": "llm",
     "compliance": "llm",
     "report": "llm"
-  }
+  },
+  "memory_mode": "backboard",
+  "memory_reason": null
 }
 ```
 
@@ -1035,9 +1066,9 @@ Storm (`storm_runoff`, no candidates):
     "fusion_classification": "storm_runoff",
     "confidence": 0.65,
     "reasons": [
-      "Turbidity rises on 2026-09-22 align with 1.23 in total rain exceeding the 0.5 in threshold.",
-      "Conductivity drop coincides with the turbidity rise, matching the storm‑runoff pattern.",
-      "No camera analysis was available; the classification relies on sensor data and rain record alone."
+      "Turbidity rise on 2026-09-22 aligns with 1.23 in total rain exceeding the 0.5 in threshold, matching storm‑runoff pattern.",
+      "Conductivity drop coincides with the turbidity rise and rain, consistent with dilution from storm runoff.",
+      "No camera analysis was available, so the classification relies on sensor data and rain alone."
     ]
   },
   "trace": {
@@ -1059,7 +1090,7 @@ Storm (`storm_runoff`, no candidates):
     "requires_human_review": true,
     "disclaimer": "Simulated incident. Facilities are listed only because they have reported permit violations upstream; no link to any real event is implied.",
     "banner": "SIMULATED DEMONSTRATION. The spill, plume footage and sensor spike are synthetic. This draft requires human review before any action.",
-    "summary": "Real observed gauge and rain data classify this incident as storm runoff (confidence 0.65). Because the pattern is explained by the storm, no anomalous parameters remain and no facility candidates are generated by design. The report does not identify a source and only notes that the observed changes are consistent with storm‑runoff conditions.",
+    "summary": "Real observed gauge and rain data classify the event as storm runoff (confidence 0.65). Because the classification is storm runoff, no facility candidates are generated by design. The anomalous parameters list is empty, indicating the observed changes are explained by the rain event.",
     "timeline": [
       {
         "timestamp": "2026-09-21T00:00:00Z",
@@ -1091,15 +1122,63 @@ Storm (`storm_runoff`, no candidates):
     "report_mode": "llm",
     "fallback_reason": null,
     "guardrail_notes": [
+      "memory 2: dropped a sentence with numbers not in the tool data",
       "report summary: dropped a sentence with numbers not in the tool data (22)"
-    ]
+    ],
+    "related_past_events": [
+      {
+        "memory_type": "review",
+        "incident_id": "spill-20261009T2000Z",
+        "scenario_date": "2026-10-09",
+        "saved_at": "2026-10-18T12:41:54Z",
+        "classification": null,
+        "review_decision": "confirmed",
+        "text": "Human review of SilentSpill run spill-20261009T2000Z on reach 10000500083697, scenario date 2026-10-09: decision confirmed. Reviewer note: Plume and gauge spike checked against the clip. Simulated: true."
+      },
+      {
+        "memory_type": "run",
+        "incident_id": "spill-20261009T2000Z",
+        "scenario_date": "2026-10-09",
+        "saved_at": "2026-10-18T12:52:51Z",
+        "classification": "incident",
+        "review_decision": null,
+        "text": "SilentSpill run spill-20261009T2000Z on reach 10000500083697, scenario date 2026-10-09: classified incident with confidence 0.95. Fused evidence: sources sensor, vision. Gauge anomalies in 3 parameter(s) (conductivity rise, turbidity rise, pH drop) fall within the ±3.0 h allowance of the camera plume, so two independent sources agree (not single-source). Camera and gauge observations are compared with a ±3.0 h allowance (river travel time over the reach between them). Classified as a possible incident for human review; it does not identify a source. Simulated: true."
+      }
+    ],
+    "related_past_events_text": "Human review of spill-20261009T2000Z: confirmed (saved 2026-10-18 12:41 UTC). Past run spill-20261009T2000Z: incident (saved 2026-10-18 12:52 UTC)."
   },
   "agent_modes": {
     "triage": "llm",
     "trace": "skipped",
     "compliance": "skipped",
     "report": "llm"
-  }
+  },
+  "memory_mode": "backboard",
+  "memory_reason": null
+}
+```
+
+### POST /incidents/{id}/review
+
+Records a person's decision on an incident and saves it to incident memory (Backboard), linked by
+`incident_id`, so later runs on the same reach can recall it. The decision does not change the
+stored incident.
+
+Body: `{"decision": "confirmed" | "storm_runoff" | "false_alarm", "note": "..."}` (`note` optional, up
+to 2,000 characters). Unknown incident: 404. Any other decision: 422. `memory_mode` is `backboard`
+when saved, `skipped` without `BACKBOARD_API_KEY`, `failed` when the call failed (the review is still
+returned; `memory_reason` gives the error type, never the key).
+
+```json
+{
+  "simulated": true,
+  "requires_human_review": true,
+  "incident_id": "spill-20261009T2000Z",
+  "decision": "confirmed",
+  "note": "Example review posted by scripts/make_api_docs.py.",
+  "memory_mode": "backboard",
+  "memory_id": "43967ef8-3a50-4fb4-88f6-8ec3372c54d4",
+  "memory_reason": null
 }
 ```
 
@@ -1250,8 +1329,8 @@ data: {
       "fusion_classification": "incident",
       "confidence": 0.95,
       "reasons": [
-        "Camera clip labeled 'spill' shows dye‑coloured water from 2026-10-09 20:02 to 2026-10-09 21:49 UTC (216 of 240 frames, peak plume confidence 1.00).",
-        "... 1 more"
+        "Camera clip shows a dye‑coloured plume from 2026-10-09 20:02 to 2026-10-09 21:49 UTC (216 of 240 frames, peak plume confidence 1.00).",
+        "... 3 more"
       ]
     }
   }

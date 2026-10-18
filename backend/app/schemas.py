@@ -335,6 +335,23 @@ class TimelineEntry(BaseModel):
     event: str
 
 
+# Incident memory on Backboard: "skipped" without BACKBOARD_API_KEY, "failed" when a call failed.
+MemoryMode = Literal["backboard", "skipped", "failed"]
+ReviewDecision = Literal["confirmed", "storm_runoff", "false_alarm"]
+
+
+class RelatedPastEvent(BaseModel):
+    """A recalled memory of a past run or review on the same reach, after the guardrails."""
+
+    memory_type: Literal["run", "review"]
+    incident_id: str | None = None
+    scenario_date: date | None = None
+    saved_at: datetime | None = None
+    classification: Literal["incident", "storm_runoff", "flag_for_review", "no_incident"] | None = None
+    review_decision: ReviewDecision | None = None
+    text: str  # memory text that passed the guardrails (no new facilities or numbers)
+
+
 class IncidentReport(ResponseBase):
     disclaimer: Literal[DISCLAIMER] = DISCLAIMER  # fixed text, first field of the report
     banner: str = BANNER
@@ -349,6 +366,9 @@ class IncidentReport(ResponseBase):
     report_mode: AgentMode
     fallback_reason: str | None = None  # why the template was used, never containing a key
     guardrail_notes: list[str] = []  # what the guardrails rejected or rewrote
+    # "Related past events" section: memories of earlier runs and reviews on this reach.
+    related_past_events: list[RelatedPastEvent] = []
+    related_past_events_text: str = "none"
 
 
 class IncidentResponse(ResponseBase):
@@ -359,6 +379,8 @@ class IncidentResponse(ResponseBase):
     compliance: ComplianceResult
     report: IncidentReport
     agent_modes: dict[str, AgentMode] = {}  # triage/trace/compliance/report -> "llm", "fallback" or "skipped"
+    memory_mode: MemoryMode = "skipped"
+    memory_reason: str | None = None  # why memory was skipped or failed; never contains the key
 
 
 class ScenarioRunRequest(BaseModel):
@@ -373,6 +395,21 @@ class ScenarioRunResponse(ResponseBase):
     classification: Literal["incident", "storm_runoff", "flag_for_review", "no_incident"]
     report_mode: AgentMode
     agent_modes: dict[str, AgentMode]
+    memory_mode: MemoryMode = "skipped"
+
+
+class ReviewRequest(BaseModel):
+    decision: ReviewDecision
+    note: str = Field("", max_length=2000)
+
+
+class ReviewResponse(ResponseBase):
+    incident_id: str
+    decision: ReviewDecision
+    note: str
+    memory_mode: MemoryMode
+    memory_id: str | None = None
+    memory_reason: str | None = None
 
 
 class StreamEvent(ResponseBase):

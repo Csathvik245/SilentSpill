@@ -73,6 +73,11 @@ def triage(ctx: dict[str, Any]) -> dict[str, Any]:
     storm = ctx.get("storm_filter") or {}
     if storm.get("overall"):
         reasons.append(f"Storm filter result: {storm['overall']}.")
+    if ctx.get("prior_context"):
+        reasons.append(
+            "Incident memory has related past events on this reach (listed in the report under Related past "
+            "events); they do not change this classification."
+        )
     reasons.append("Triage follows the sensor and camera fusion result; it does not identify a source.")
     return {"classification": map_fusion(fusion["classification"]), "reasons": reasons}
 

@@ -12,5 +12,6 @@
     "trace": "skipped",
     "compliance": "skipped",
     "report": "llm"
-  }
+  },
+  "memory_mode": "backboard"
 }

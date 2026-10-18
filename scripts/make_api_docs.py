@@ -57,6 +57,8 @@ def main() -> int:
     save("scenario_run_storm", client.post("/scenario/run", json={"case": "storm"}).json())
     spill_id = shots["scenario_run_spill"]["incident_id"]
     storm_id = shots["scenario_run_storm"]["incident_id"]
+    save("review_spill", client.post(f"/incidents/{spill_id}/review", json={
+        "decision": "confirmed", "note": "Example review posted by scripts/make_api_docs.py."}).json())
     save("incident_spill", client.get(f"/incidents/{spill_id}").json())
     save("incident_storm", client.get(f"/incidents/{storm_id}").json())
     save("sensors_spill", client.get(f"/sensors/{spill_id}", params={"hours_before": 1, "hours_after": 1}).json())
@@ -92,6 +94,8 @@ def main() -> int:
         sensors=block(trim(shots["sensors_spill"])),
         sse="\n\n".join(sse_examples),
         error=block(shots["error_404"]),
+        review=block(shots["review_spill"]),
+        memory_mode=shots["scenario_run_spill"].get("memory_mode"),
         origins=", ".join(f"`{o}`" for o in settings.cors_origin_list),
         speed=settings.stream_speed,
     )
@@ -133,6 +137,13 @@ produced in **`{mode}`** mode ({modes}).
 - Travel times use `travel_time.display`. A value starting with `≥` is a lower bound (some reaches
   have no velocity data); show it as written, never as an estimate.
 - Wording is non-accusatory: facilities are "facilities with reported violations near this reach".
+- Incident memory (optional, Backboard): every completed run is saved, and before Triage up to 3
+  memories of past runs and reviews on the same reach are recalled. They pass through the same
+  guardrails as model output (no new facilities or numbers) and never change the classification or
+  confidence. The report lists them under `related_past_events` (`related_past_events_text` is
+  `"none"` when there are none). `memory_mode` on the incident and run responses is `backboard`,
+  `skipped` (no `BACKBOARD_API_KEY`) or `failed` (a call failed; the run still completes). In this run:
+  `{memory_mode}`.
 - Every incident response (`POST /scenario/run`, `GET /incidents/{{id}}`) and every report carry a fixed
   `disclaimer`: "Simulated incident. Facilities are listed only because they have reported permit
   violations upstream; no link to any real event is implied." Show it with the report.
@@ -150,6 +161,7 @@ produced in **`{mode}`** mode ({modes}).
 | GET | `/facilities?comid=&max_km=50&buffer_m=1000` | Candidate facilities with reported violations (GeoJSON + details) |
 | POST | `/scenario/run` | Run the deterministic simulated spill (`{{"case": "spill"}}`) or the real storm (`{{"case": "storm"}}`) |
 | GET | `/incidents/{{id}}` | Triage, trace, compliance and the final report |
+| POST | `/incidents/{{id}}/review` | Record a human review decision (saved to incident memory) |
 | GET | `/sensors/{{id}}?hours_before=72&hours_after=` | Real baseline series plus the injected (simulated) rows |
 | GET | `/stream/{{id}}?speed=` | SSE replay of the scenario timeline |
 
@@ -197,6 +209,19 @@ Spill (`incident`, ranked candidates):
 Storm (`storm_runoff`, no candidates):
 
 {incident_storm}
+
+### POST /incidents/{{id}}/review
+
+Records a person's decision on an incident and saves it to incident memory (Backboard), linked by
+`incident_id`, so later runs on the same reach can recall it. The decision does not change the
+stored incident.
+
+Body: `{{"decision": "confirmed" | "storm_runoff" | "false_alarm", "note": "..."}}` (`note` optional, up
+to 2,000 characters). Unknown incident: 404. Any other decision: 422. `memory_mode` is `backboard`
+when saved, `skipped` without `BACKBOARD_API_KEY`, `failed` when the call failed (the review is still
+returned; `memory_reason` gives the error type, never the key).
+
+{review}
 
 ### GET /sensors/{{id}}
 
