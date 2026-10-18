@@ -1,61 +1,54 @@
-import { Suspense, lazy, useCallback, useEffect, useRef, useState } from 'react'
-import { motion, useReducedMotion } from 'motion/react'
-import { Activity, AlertCircle, ArrowUpRight, Check, ChevronDown, CircleHelp, Clock3, Database, Droplets, Film, Gauge, LoaderCircle, Map as MapIcon, MapPin, RefreshCw, Waves } from 'lucide-react'
+import { Suspense, lazy, useCallback, useEffect, useRef, useState, type ReactNode } from 'react'
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
+import { Activity, AlertCircle, ArrowRight, Check, ChevronDown, CloudRain, Database, Eye, GitBranch, Layers, MapPin, RefreshCw, ShieldCheck, Waves } from 'lucide-react'
 import { toast } from 'sonner'
-import { getHealth, getIncident, getReach, getSensors, runScenario, streamUrl } from './lib/api'
+import { API_BASE, getHealth, getIncident, getReach, getSensors, runScenario, streamUrl } from './lib/api'
 import type { AgentMode, CandidateFacility, IncidentResponse, ReachResponse, ScenarioRunResponse, SensorSample, SensorSeriesResponse, StreamEvent } from './lib/types'
-const ReachMap = lazy(() => import('./components/ReachMap').then((module) => ({ default: module.ReachMap })))
-const SensorChart = lazy(() => import('./components/SensorChart').then((module) => ({ default: module.SensorChart })))
 import { Button } from './components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './components/ui/card'
-import { Badge } from './components/ui/badge'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './components/ui/tabs'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './components/ui/accordion'
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './components/ui/tooltip'
-import { ScrollArea } from './components/ui/scroll-area'
-import { Separator } from './components/ui/separator'
-// Counts the backend confidence value when a report arrives.
 import { NumberTicker } from './components/ui/number-ticker'
-// Gives the API report a brief, low-motion entrance.
-import { BlurFade } from './components/ui/blur-fade'
-// Reveals ranked API candidates in sequence.
-import { AnimatedList } from './components/ui/animated-list'
-// Adds a static, low-contrast texture to the empty state.
-import { DotPattern } from './components/ui/dot-pattern'
 import { Skeleton } from './components/ui/skeleton'
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from './components/ui/sheet'
 import { Toaster } from './components/ui/sonner'
 import './App.css'
 import './charts.css'
-
+const ReachMap = lazy(() => import('./components/ReachMap').then(module => ({ default: module.ReachMap })))
+const SensorChart = lazy(() => import('./components/SensorChart').then(module => ({ default: module.SensorChart })))
 const NO_CANDIDATES: CandidateFacility[] = []
 const AGENTS = ['triage', 'trace', 'compliance', 'report'] as const
-const LABELS: Record<(typeof AGENTS)[number], string> = { triage: 'Triage', trace: 'Trace', compliance: 'Compliance', report: 'Report' }
+const LABELS = { triage: 'Triage', trace: 'Trace', compliance: 'Compliance', report: 'Report' }
 const EASE = [0.22, 1, 0.36, 1] as const
+const ROUTES = [['/', 'Overview'], ['/how', 'How it works'], ['/investigate', 'Investigate'], ['/data', 'Data & honesty'], ['/about', 'About']] as const
+const BACKEND_COMMAND = '.\\.venv\\Scripts\\python.exe -m uvicorn backend.app.main:app --host 127.0.0.1 --port 8000'
 type RunState = 'idle' | 'loading' | 'ready' | 'error'
 type HealthState = 'checking' | 'online' | 'degraded' | 'offline'
 type AgentState = 'waiting' | 'active' | 'done' | 'skipped'
 type AgentMap = Record<(typeof AGENTS)[number], AgentState>
 const initialAgents: AgentMap = { triage: 'waiting', trace: 'waiting', compliance: 'waiting', report: 'waiting' }
-
 function initialAgentState(modes: ScenarioRunResponse['agent_modes']): AgentMap {
-  return Object.fromEntries(AGENTS.map((agent) => [agent, modes[agent] === 'skipped' ? 'skipped' : 'waiting'])) as AgentMap
+  return Object.fromEntries(AGENTS.map(agent => [agent, modes[agent] === 'skipped' ? 'skipped' : 'waiting'])) as AgentMap
 }
-
-function modeLabel(mode: AgentMode | undefined) {
-  if (mode === 'llm') return 'Model-assisted'
-  if (mode === 'fallback') return 'Template fallback'
-  if (mode === 'skipped') return 'Not run for this case'
-  return 'Awaiting'
-}
+function readPage() { const path = window.location.hash.slice(1) || '/'; return ROUTES.some(([route]) => route === path) ? path : '/' }
 
 function App() {
   const reduceMotion = useReducedMotion()
+  const [page, setPage] = useState(readPage)
+  const [dataReady, setDataReady] = useState<Record<string, boolean>>({})
+  const [hoveredFacility, setHoveredFacility] = useState<string | null>(null)
+  const [reviewState, setReviewState] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle')
+  const [reviewDecision, setReviewDecision] = useState<'' | 'confirmed' | 'storm_runoff' | 'false_alarm'>('')
+  const [reviewMessage, setReviewMessage] = useState('')
+  useEffect(() => {
+    const change = () => { setPage(readPage()); window.scrollTo({ top: 0, behavior: 'instant' }) }
+    window.addEventListener('hashchange', change)
+    return () => window.removeEventListener('hashchange', change)
+  }, [])
   const [reach, setReach] = useState<ReachResponse | null>(null)
   const [health, setHealth] = useState<HealthState>('checking')
   const [runState, setRunState] = useState<RunState>('idle')
   const [caseName, setCaseName] = useState<'spill' | 'storm'>('spill')
   const [incident, setIncident] = useState<IncidentResponse | null>(null)
+  const [latestIncident, setLatestIncident] = useState<IncidentResponse | null>(null)
   const [sensors, setSensors] = useState<SensorSeriesResponse | null>(null)
   const [sensorError, setSensorError] = useState('')
   const [run, setRun] = useState<ScenarioRunResponse | null>(null)
@@ -71,14 +64,13 @@ function App() {
   useEffect(() => {
     const controller = new AbortController()
     Promise.all([getHealth(controller.signal), getReach(controller.signal)])
-      .then(([healthResult, reachResult]) => { setHealth(healthResult.status === 'ok' ? 'online' : 'degraded'); setReach(reachResult) })
+      .then(([healthResult, reachResult]) => { setDataReady(healthResult.data_ready); setHealth(healthResult.status === 'ok' ? 'online' : 'degraded'); setReach(reachResult) })
       .catch(() => { if (controller.signal.aborted) return; setHealth('offline'); setQueryError('The local backend is not running. Start it to load the river network and begin a review.') })
     return () => { controller.abort(); eventSource.current?.close() }
   }, [])
 
   const candidates = incident?.trace.candidates ?? NO_CANDIDATES
   const storm = incident?.report.classification === 'storm_runoff'
-  const candidateCount = storm ? 0 : candidates.length
   const selectFacility = useCallback((id: string) => setActiveFacility(id), [])
 
   const receiveEvent = useCallback((event: MessageEvent<string>) => {
@@ -102,19 +94,21 @@ function App() {
     }
   }, [])
 
-  async function startReview() {
+  async function startReview(selectedCase: 'spill' | 'storm' = caseName) {
     if (health === 'offline' || health === 'checking' || runState === 'loading') return
+    setCaseName(selectedCase); setReviewState('idle'); setReviewMessage(''); setHoveredFacility(null); setPlumePulse(0)
     eventSource.current?.close()
     setRunState('loading'); setQueryError(''); setSensorError(''); setIncident(null); setSensors(null); setRun(null)
     setReplayRows([]); setScenarioTime(null); setAgentState(initialAgents); setReplayLive(false); setActiveFacility(null)
     try {
-      const runResult = await runScenario(caseName)
+      const runResult = await runScenario(selectedCase)
       setRun(runResult)
       setAgentState(initialAgentState(runResult.agent_modes))
       const [reportResult, sensorResult] = await Promise.allSettled([getIncident(runResult.incident_id), getSensors(runResult.incident_id)])
       if (reportResult.status === 'rejected') throw reportResult.reason
       const report = reportResult.value
-      setIncident(report)
+      setIncident(report); setLatestIncident(report)
+      setReviewDecision('')
       if (sensorResult.status === 'fulfilled') setSensors(sensorResult.value)
       else setSensorError(sensorResult.reason instanceof Error ? sensorResult.reason.message : 'Sensor history could not be loaded.')
       setRunState('ready')
@@ -143,91 +137,95 @@ function App() {
     source.onerror = () => { setReplayLive(false); source.close(); toast.error('Replay unavailable', { description: 'Check the local backend connection and retry the review.' }) }
   }
 
+  async function markReviewed() {
+    if (!incident || !reviewDecision || reviewState === 'saving') return
+    setReviewState('saving'); setReviewMessage('')
+    try {
+      const response = await fetch(`${API_BASE}/incidents/${encodeURIComponent(incident.incident_id)}/review`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ decision: reviewDecision }) })
+      const result = await response.json() as { detail?: string; memory_mode?: string; memory_reason?: string | null }
+      if (!response.ok) throw new Error(result.detail ?? 'The review could not be saved. Please retry.')
+      setReviewState('saved')
+      const message = result.memory_mode === 'backboard' ? 'Review saved to incident memory.' : `Review received. Incident memory: ${result.memory_mode ?? 'unavailable'}.${result.memory_reason ? ` ${result.memory_reason}` : ''}`
+      setReviewMessage(message); toast.success('Review received', { description: message })
+    } catch (error) { setReviewState('error'); setReviewMessage(error instanceof Error ? error.message : 'The review could not be saved. Please retry.') }
+  }
+
   const bannerText = incident?.report.banner ?? 'SIMULATED — requires human review'
-  const healthText = health === 'online' ? 'Backend connected' : health === 'degraded' ? 'Backend degraded' : health === 'offline' ? 'Backend not running' : 'Connecting'
-  const mapClass = incident?.report.classification === 'incident' ? 'incident' : storm ? 'storm' : incident ? 'review' : ''
+  const disabled = health === 'offline' || health === 'checking' || runState === 'loading'
+  const progress = runState === 'loading' ? 0 : !incident ? -1 : !replayLive ? 4 : agentState.report === 'done' ? 4 : agentState.compliance === 'done' ? 3 : agentState.trace === 'done' ? 2 : replayRows.length ? 1 : 0
+  const mapView = (overview = false) => <div className={`map-stage ${overview ? 'overview-map' : ''}`}>
+    {reach ? <Suspense fallback={<MapLoading />}><ReachMap reach={reach} facilities={overview || storm ? NO_CANDIDATES : candidates} activeFacility={overview ? null : activeFacility} hoveredFacility={overview ? null : hoveredFacility} pulse={overview || storm ? 0 : plumePulse} onSelect={selectFacility} /></Suspense> : <MapLoading offline={health === 'offline'} />}
+    <div className="map-location"><Waves size={18} /><span>{reach?.gauge.name ?? 'Connecting to the river network'}<small>{reach ? `USGS ${reach.gauge.site_id}` : 'Real river geometry'}</small></span></div>
+    <div className="map-legend"><span><i className="water-key" /> River network</span><span><i className="gauge-key" /> Gauge</span>{!overview && !storm && candidates.length > 0 && <span><i className="pin-key" /> Facilities for review</span>}</div>
+    {!overview && scenarioTime && <time className="scenario-clock">{replayLive ? 'Replay · ' : ''}{new Date(scenarioTime).toLocaleTimeString([], { timeZone: 'UTC', hour: '2-digit', minute: '2-digit' })} UTC</time>}
+  </div>
 
-  return <TooltipProvider>
-    <main className="dashboard">
-      <motion.div className="sim-banner" initial={reduceMotion ? false : { opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .32, ease: EASE }}><span className="banner-led" />{bannerText}<span className="banner-side">DEMONSTRATION DATA</span></motion.div>
-      <header className="masthead"><motion.a href="#top" className="wordmark" initial={reduceMotion ? false : { opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .28, ease: EASE }}><span className="wordmark-icon"><Waves size={20} /></span><span>SilentSpill<span className="wordmark-period">.</span></span></motion.a><motion.div className="head-context" initial={reduceMotion ? false : { opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: .28, delay: reduceMotion ? 0 : .08, ease: EASE }}><span className={`connection-state ${health}`}><i />{healthText}</span><span className="head-rule" /><span className="place-name">Virginia waterways</span><Sheet><SheetTrigger render={<Button variant="ghost" size="icon" aria-label="About data and review requirements"><CircleHelp size={17} /></Button>} /><SheetContent className="data-sheet"><SheetHeader><SheetTitle>Review guidance</SheetTitle><SheetDescription>SilentSpill provides an investigation lead for a person to check.</SheetDescription></SheetHeader><div className="sheet-note"><p>River network, gauge readings and permit records are returned by the local service. Simulated event signals are labelled throughout.</p><p>Facility coordinates represent reported locations and may not be surveyed discharge points. Review the API disclaimer and limitations before taking action.</p><Badge variant="outline">Human review required</Badge></div></SheetContent></Sheet></motion.div></header>
-
-      <div className="workarea" id="top">
-        <section className="map-column" aria-label="River network map">
-          <div className="map-head"><motion.div initial={reduceMotion ? false : { opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .38, ease: EASE }}><motion.h1 initial={reduceMotion ? false : { opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .4, delay: reduceMotion ? 0 : .05, ease: EASE }}>Follow the river<span>.</span></motion.h1><motion.p className="map-subtitle" initial={reduceMotion ? false : { opacity: 0, y: 5 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .32, delay: reduceMotion ? 0 : .1, ease: EASE }}>Trace the upstream path from the monitoring gauge.</motion.p></motion.div><motion.div className="map-actions" initial={reduceMotion ? false : { opacity: 0, x: 7 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: .35, delay: reduceMotion ? 0 : .12, ease: EASE }}><Tooltip><TooltipTrigger render={<Button variant="outline" size="sm" className="source-button"><Database size={14} /> Live local data</Button>} /><TooltipContent>Reach geometry and facility records load from the API.</TooltipContent></Tooltip><span className="map-actions-separator" /><Button variant="outline" size="sm" onClick={() => { if (run?.case === 'spill') replayAgain(); else void startReview() }} disabled={health === 'offline' || health === 'checking' || runState === 'loading'}><RefreshCw size={14} className={replayLive ? 'rotate-icon' : ''} /> {run?.case === 'spill' ? 'Replay' : run ? 'Run again' : 'Start review'}</Button></motion.div></div>
-          {health === 'offline' && <div className="backend-alert" role="status"><AlertCircle size={15} /><span><b>Backend not running</b> — start the local API to load the river reach and run scenarios.</span><code>localhost:8000</code></div>}
-          <div className={`map-stage ${mapClass}`}>
-            {reach ? <Suspense fallback={<div className="map-skeleton"><Skeleton className="skeleton-river" /><div className="skeleton-message">Preparing map renderer</div></div>}><ReachMap reach={reach} facilities={storm ? NO_CANDIDATES : candidates} activeFacility={activeFacility} pulse={plumePulse} onSelect={selectFacility} /></Suspense> : <div className="map-skeleton"><Skeleton className="skeleton-river" /><Skeleton className="skeleton-gauge" /><div className="skeleton-message"><LoaderCircle size={16} className="spin" />{health === 'offline' ? 'Map data unavailable' : 'Loading river network'}</div></div>}
-            <div className="map-overlay-top"><Badge className={`classification-badge ${mapClass || 'neutral'}`}>{incident ? incident.report.classification.replaceAll('_', ' ') : 'Awaiting review'}</Badge>{incident && <span className="clock-chip"><Clock3 size={13} />{scenarioTime ? new Date(scenarioTime).toLocaleString([], { dateStyle: 'medium', timeStyle: 'short', timeZone: 'UTC' }) + ' UTC' : 'Report ready'}</span>}</div>
-            <div className="map-legend"><span><i className="legend-line" /> Upstream river trace</span>{!storm && candidates.length > 0 && <span><i className="legend-facility" /> Facility for review</span>}<span><i className="legend-gauge" /> Monitoring gauge</span></div>
-            <div className="map-scale"><MapIcon size={14} /><span>{reach?.max_km ?? '—'} km trace</span><span className="scale-line" /></div>
-          </div>
-          <div className="map-caption"><div><MapPin size={14} /><span><b>{reach?.gauge.name ?? 'Monitoring gauge'}</b><small>{reach ? `USGS ${reach.gauge.site_id} · linked to river network` : 'Connecting to local reach data'}</small></span></div><span className="map-caption-right"><span className="real-key" /> Real network and gauge <span className="caption-divider" /> <span className="sim-key" /> Simulated event evidence</span></div>
-          <div className="map-utility-row"><div className="map-stat"><span className="stat-icon"><Waves size={15} /></span><span><small>NETWORK REACH</small><b>{reach ? `${reach.upstream_path.length} connected segments` : 'Loading from API'}</b></span></div><Separator orientation="vertical" className="utility-separator" /><div className="map-stat"><span className="stat-icon"><Gauge size={15} /></span><span><small>MONITORING SITE</small><b>{reach?.gauge.site_id ?? 'Pending connection'}</b></span></div><Separator orientation="vertical" className="utility-separator" /><div className="map-stat"><span className="stat-icon amber"><Activity size={15} /></span><span><small>UPSTREAM FACILITIES</small><b>{storm ? 'None flagged' : incident ? `${candidateCount} for review` : 'Run a scenario'}</b></span></div></div>
-          {caseName === 'spill' && incident?.report.classification !== 'storm_runoff' && <section className="video-section" aria-label="Simulated aerial footage"><div className="video-head"><div><span className="video-index"><Film size={15} /></span><div><b>Simulated aerial footage</b><small>Supporting visual context · not a real spill recording</small></div></div><Badge variant="outline" className="video-tag">SIMULATED CLIP</Badge></div><video className="spill-video" autoPlay muted loop playsInline controls aria-label="Muted looping simulated aerial footage"><source src="/spill_20261009T2000Z_seed42.webm" type="video/webm" /><source src="/spill_20261009T2000Z_seed42.mp4" type="video/mp4" /></video></section>}
-        </section>
-
-        <motion.aside className="review-panel" aria-label="Investigation report panel" initial={reduceMotion ? false : { opacity: 0, x: 14 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: .42, delay: reduceMotion ? 0 : .08, ease: EASE }}>
-          <div className="panel-topline"><div><span className="panel-kicker">FIELD REVIEW</span><h2>Investigation</h2></div><div className="panel-tools"><span className={`panel-health ${health}`}><i />{health === 'online' ? 'Connected' : health === 'degraded' ? 'Degraded' : health === 'offline' ? 'Offline' : 'Checking'}</span><Tooltip><TooltipTrigger render={<Button variant="ghost" size="icon" aria-label="Refresh backend status" onClick={() => { setHealth('checking'); getHealth().then((value) => setHealth(value.status === 'ok' ? 'online' : 'degraded')).catch(() => setHealth('offline')) }}><RefreshCw size={15} /></Button>} /><TooltipContent>Check local backend status</TooltipContent></Tooltip></div></div>
-          <div className="scenario-controls"><div className="scenario-tabs" role="group" aria-label="Scenario type"><Button variant={caseName === 'spill' ? 'secondary' : 'ghost'} size="sm" onClick={() => setCaseName('spill')} disabled={runState === 'loading'}><Activity size={14} /> Signal review</Button><Button variant={caseName === 'storm' ? 'secondary' : 'ghost'} size="sm" onClick={() => setCaseName('storm')} disabled={runState === 'loading'}><Droplets size={14} /> Storm context</Button></div><Button onClick={startReview} disabled={health === 'offline' || health === 'checking' || runState === 'loading'} className="primary-action">{runState === 'loading' ? <><LoaderCircle size={15} className="spin" /> Preparing</> : run ? <>Run again <ArrowUpRight size={15} /></> : <>Run review <ArrowUpRight size={15} /> </>}</Button></div>
-          <div className="panel-message-area" aria-live="polite">{queryError && <div className={`panel-error ${health === 'offline' ? 'offline' : ''}`}><AlertCircle size={15} /><span>{queryError}</span></div>}{runState === 'loading' && <LoadingCard />}</div>
-          {incident && runState === 'ready' ? <Tabs defaultValue="findings" className="review-tabs">
-            <TabsList className="review-tablist"><TabsTrigger value="findings">Findings</TabsTrigger><TabsTrigger value="evidence">Evidence & review</TabsTrigger></TabsList>
-            <ScrollArea className="review-scroll"><TabsContent value="findings" className="tab-pane">
-              <ClassificationCard incident={incident} storm={Boolean(storm)} reduced={Boolean(reduceMotion)} />
-              <section className="confidence-row"><div><span className="confidence-label">REPORT CONFIDENCE</span><Tooltip><TooltipTrigger render={<button className="info-button" aria-label="About confidence"><CircleHelp size={13} /></button>} /><TooltipContent>Confidence is supplied by the backend report and is not a probability of facility involvement.</TooltipContent></Tooltip></div><ConfidenceValue value={incident.report.confidence} reduced={Boolean(reduceMotion)} /></section>
-              {!storm && <section className="candidate-section"><div className="section-heading"><div><h3>Facilities with reported violations near this reach</h3><p>Prioritized for a person to check · details from local records</p></div><Badge variant="outline" className="count-badge">{candidates.length}</Badge></div>{candidates.length ? <Accordion className="candidate-list" multiple>{reduceMotion ? candidates.map((candidate, index) => <CandidateRow key={candidate.facility_id} candidate={candidate} index={index} selected={activeFacility === candidate.facility_id} onSelect={selectFacility} reduceMotion />) : <AnimatedList className="animated-candidate-list" delay={55}>{candidates.map((candidate, index) => <CandidateRow key={candidate.facility_id} candidate={candidate} index={index} selected={activeFacility === candidate.facility_id} onSelect={selectFacility} reduceMotion={false} />)}</AnimatedList>}</Accordion> : <EmptyCandidates />}</section>}
-              {storm && <StormState />}
-              <div className="timeline-section"><div className="section-heading"><div><h3>Event timeline</h3><p>Report events in the order provided by the API</p></div></div><div className="timeline-list">{incident.report.timeline.map((item, index) => <motion.div key={`${item.timestamp}-${index}`} className="timeline-row" initial={reduceMotion ? false : { opacity: 0, x: 8 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: .28, delay: reduceMotion ? 0 : Math.min(index * .045, .27), ease: EASE }}><span className="timeline-dot" /><div><time>{item.timestamp ? new Date(item.timestamp).toLocaleString([], { timeZone: 'UTC', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', timeZoneName: 'short' }) : 'Time not specified'}</time><p>{item.event}</p></div></motion.div>)}</div></div>
-              <section className="agent-section"><div className="section-heading"><div><h3>Analysis chain</h3><p>Agent run status from this scenario</p></div>{replayLive && <span className="replay-status"><i /> Replaying</span>}</div><AgentChain run={run} state={agentState} reduced={Boolean(reduceMotion)} /></section>
-            </TabsContent><TabsContent value="evidence" className="tab-pane evidence-pane">
-              <section className="chart-section"><div className="section-heading"><div><h3>Sensor history</h3><p>Baseline and scenario measurements from the API</p></div><Badge variant="outline">{sensors?.site_id ?? 'No site'}</Badge></div>{sensorError ? <div className="panel-error"><AlertCircle size={14} /><span>{sensorError}</span></div> : <Suspense fallback={<Skeleton className="chart-fallback" />}><SensorChart data={sensors} replayRows={replayRows} scenarioTime={scenarioTime} /></Suspense>}</section>
-              {incident.report.disclaimer && <section className="report-disclaimer"><span className="disclaimer-mark"><AlertCircle size={15} /></span><p>{incident.report.disclaimer}</p></section>}
-              <Accordion className="report-sections" multiple><ApiTextSection value="assumptions" title="Assumptions" items={incident.report.assumptions} /><ApiTextSection value="limitations" title="Limitations" items={incident.report.limitations} /><AccordionItem value="related"><AccordionTrigger><span>Related past events</span><Badge variant="outline">{incident.report.related_past_events.length}</Badge></AccordionTrigger><AccordionContent><p className="api-copy">{incident.report.related_past_events_text}</p>{incident.report.related_past_events.map((past, index) => <p className="api-copy past-event" key={`${past.incident_id}-${index}`}>{past.text}</p>)}</AccordionContent></AccordionItem></Accordion>
-              <div className="mode-grid"><ModeItem label="Report mode" mode={incident.report.report_mode} /><ModeItem label="Memory mode" mode={incident.memory_mode} /></div>
-              <div className="origin-note"><Database size={14} /><span>{incident.report.data_origin}</span></div>
-            </TabsContent></ScrollArea>
-          </Tabs> : runState !== 'loading' && <EmptyReview health={health} />}
-        </motion.aside>
-      </div>
-      <footer className="app-footer"><span><Waves size={14} /> SilentSpill <i /> Investigation support for Virginia waterways</span><span>Every finding requires human review.</span></footer>
-      <Toaster position="top-right" closeButton />
-    </main>
-  </TooltipProvider>
+  return <>
+    <header className="site-header"><a href="#/" className="wordmark" aria-label="SilentSpill overview"><Waves size={23} />SilentSpill</a><nav aria-label="Main navigation">{ROUTES.map(([route, label]) => <a key={route} href={`#${route}`} aria-current={page === route ? 'page' : undefined}>{label}{page === route && <motion.span className="nav-indicator" layoutId="nav-indicator" transition={{ duration: reduceMotion ? 0 : .3, ease: EASE }} />}</a>)}</nav><span className="demo-pill"><span />Simulated demo</span></header>
+    <div className="simulation-banner" role="note">{bannerText}</div>
+    {health === 'offline' && <div className="offline-notice" role="alert"><AlertCircle size={22} /><div><strong>Backend not running</strong><p>Start the backend from the project folder, then reload this page.</p><code>{BACKEND_COMMAND}</code><Button variant="outline" onClick={() => window.location.reload()}>Retry connection</Button></div></div>}
+    <AnimatePresence mode="wait" initial={false}><motion.main key={page} className={page === '/investigate' ? 'investigation-page' : 'content-page'} initial={{ opacity: reduceMotion ? 1 : 0 }} animate={{ opacity: 1 }} exit={{ opacity: reduceMotion ? 1 : 0 }} transition={{ duration: reduceMotion ? 0 : .3, ease: EASE }}>
+      {page === '/' && <>
+        <Reveal className="overview-hero"><h1>Know where to look when a river goes wrong.</h1><p className="lede">SilentSpill combines a river camera and water sensors, rules out storms, traces the water upstream, and lists permitted facilities with reported violations — for a human to review.</p><div className="hero-actions"><a className="button-link primary" href="#/investigate">Run the investigation <ArrowRight size={18} /></a><a className="button-link secondary" href="#/how">How it works <ArrowRight size={18} /></a></div></Reveal>
+        <Reveal className="hero-map-wrap">{mapView(true)}<p className="map-caption">Explore the real river network, upstream from the monitoring gauge.</p></Reveal>
+        <Reveal className="value-points"><div><Activity /><h3>Two signals must agree</h3><p>Camera observations are checked against changes in the water.</p></div><div><CloudRain /><h3>Storms are ruled out</h3><p>Rainfall provides context before facilities are considered.</p></div><div><ShieldCheck /><h3>Never accuses — always human review</h3><p>A lead to investigate, with the evidence and limits in view.</p></div></Reveal>
+        <Reveal className="real-data-strip"><Database size={20} /><p>{reach && dataReady.baseline_snapshot ? <>Real USGS gauge <span className="number">{reach.gauge.site_id}</span> · Real NOAA rainfall</> : 'Gauge and rainfall data pending'}{dataReady.echo_data && ' · Real EPA permit records'}{reach && <> · <span className="number">{reach.upstream_path.length}</span> upstream river segments</>}</p><a href="#/data">What’s real <ArrowRight size={16} /></a></Reveal>
+      </>}
+      {page === '/how' && <HowPage />}
+      {page === '/investigate' && <div className="investigate-split"><section className="investigate-map" aria-label="River investigation map">{mapView()}</section><aside className="investigate-panel" aria-label="Investigation results">
+        <div className="panel-controls"><div className="panel-heading"><h1>Investigate</h1><span className="connection-status">{health === 'online' ? 'Connected' : health === 'degraded' ? 'Limited data' : health === 'offline' ? 'Offline' : 'Connecting…'}</span></div><div className="scenario-buttons"><Button className={`scenario-button ${caseName === 'spill' && run ? 'chosen' : ''}`} variant="outline" disabled={disabled} onClick={() => void startReview('spill')}><Activity size={18} />Spill scenario</Button><Button className={`scenario-button ${caseName === 'storm' && run ? 'chosen storm-choice' : ''}`} variant="outline" disabled={disabled} onClick={() => void startReview('storm')}><CloudRain size={18} />Storm scenario</Button><Button variant="ghost" className="replay-button" disabled={!run || disabled} onClick={replayAgain}><RefreshCw size={17} />Replay</Button></div>
+          <ol className="progress-stepper" aria-label="Investigation progress">{['Detect', 'Rain check', 'Trace', 'Facilities', 'Report'].map((label, index) => <li key={label} className={index <= progress ? 'complete' : ''} aria-current={index === progress ? 'step' : undefined}><span>{index < progress || (index === progress && !replayLive && incident) ? <Check size={12} /> : index + 1}</span><small>{label}</small></li>)}</ol>
+        </div>
+        <div className="panel-body" aria-live="polite">
+          {queryError && health !== 'offline' && <p className="error-message" role="alert">{queryError}</p>}
+          {runState === 'loading' && <div className="loading-report"><p>Checking the signals and upstream records…</p><Skeleton className="loading-title" /><Skeleton /><Skeleton /><Skeleton /></div>}
+          {!incident && runState !== 'loading' && <div className="investigate-empty"><Waves size={36} /><h2>Follow a signal.</h2><p>Choose a scenario to see the evidence, trace the river, and review what the system finds.</p><p className="muted">The spill tests an unusual signal. The storm shows when no facilities should be flagged.</p></div>}
+          {incident && runState === 'ready' && <>
+            <section className={`answer-card ${storm ? 'storm-answer' : incident.report.classification === 'incident' ? 'incident-answer' : 'review-answer'}`}><div><span className="answer-label">Investigation result</span><h2>{storm ? 'Storm runoff — no facilities flagged' : incident.report.classification === 'incident' ? 'Likely incident — needs review' : incident.report.classification === 'no_incident' ? 'No incident indicated' : 'Further review needed'}</h2></div><div className="confidence"><strong>{reduceMotion ? Math.round(incident.report.confidence * 100) : <NumberTicker key={incident.incident_id} value={Math.round(incident.report.confidence * 100)} className="confidence-number" />}<span>%</span></strong><span>Report confidence</span></div></section>
+            <Tabs defaultValue="facilities" className="investigate-tabs"><TabsList className="investigate-tablist">{['Facilities', 'Sensors', 'Report', 'Footage'].map(tab => <TabsTrigger key={tab} value={tab.toLowerCase()}>{tab}</TabsTrigger>)}</TabsList>
+              <TabsContent value="facilities" className="tab-content"><p className="api-disclaimer">{incident.report.disclaimer}</p>{storm ? <div className="storm-empty"><CloudRain size={30} /><h3>Storm runoff — no facilities flagged</h3><p>The report remains available in the Report tab.</p></div> : <><h3 className="facility-heading">Facilities with reported violations near this reach</h3>{candidates.length ? <Accordion multiple className="facility-list">{candidates.map((candidate, index) => <FacilityRow key={candidate.facility_id} candidate={candidate} index={index} selected={activeFacility === candidate.facility_id} onSelect={selectFacility} onHover={setHoveredFacility} />)}</Accordion> : <p>No facilities were returned for this report.</p>}</>}</TabsContent>
+              <TabsContent value="sensors" className="tab-content"><h3>Water sensor history</h3><p className="muted">Real observations and simulated changes, shown separately.</p>{sensorError ? <p className="error-message">{sensorError}</p> : <Suspense fallback={<Skeleton className="chart-fallback" />}><SensorChart data={sensors} replayRows={replayRows} scenarioTime={scenarioTime} /></Suspense>}</TabsContent>
+              <TabsContent value="report" className="tab-content"><h3>The report</h3><p className="api-copy">{incident.report.summary}</p><h3 className="section-spacer">Timeline</h3><ol className="report-timeline">{incident.report.timeline.map((item, index) => <li key={index}><time>{item.timestamp ? new Date(item.timestamp).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit', timeZone: 'UTC' }) : 'Time not specified'}{item.timestamp && ' UTC'}</time><p>{item.event}</p></li>)}</ol><Accordion multiple className="text-accordion"><ApiTextSection value="assumptions" title="Assumptions" items={incident.report.assumptions} /><ApiTextSection value="limitations" title="Limitations" items={incident.report.limitations} /></Accordion><p className="report-mode">Report: {incident.report.report_mode} · Memory: {incident.memory_mode}</p></TabsContent>
+              <TabsContent value="footage" className="tab-content">{run?.case === 'spill' && !storm ? <><span className="footage-label">SIMULATED FOOTAGE</span><h3>Simulated aerial footage</h3><p className="muted">Synthetic visual evidence for this demonstration.</p><video className="spill-video" autoPlay={!reduceMotion} muted loop playsInline controls aria-label="Simulated aerial footage"><source src="/spill_20261009T2000Z_seed42.webm" type="video/webm" /><source src="/spill_20261009T2000Z_seed42.mp4" type="video/mp4" /></video></> : <div className="storm-empty"><Eye size={28} /><h3>No footage for the storm scenario</h3><p>The simulated aerial clip belongs to the spill scenario.</p></div>}</TabsContent>
+            </Tabs>
+            <section className="review-footer"><div className="agent-pills" aria-label="Agent status">{AGENTS.map(agent => <span key={agent}>{LABELS[agent]} <b>{run?.agent_modes[agent] ?? incident.agent_modes[agent]}</b></span>)}</div><details className="related-events"><summary>Related past events <ChevronDown size={16} /></summary><p>{incident.report.related_past_events_text}</p>{incident.report.related_past_events.map((past, i) => <p key={i}>{past.text}</p>)}</details><div className="human-review"><label htmlFor="review-decision">Your review decision</label><select id="review-decision" value={reviewDecision} disabled={reviewState === 'saving'} onChange={e => { setReviewDecision(e.target.value as typeof reviewDecision); setReviewState('idle'); setReviewMessage('') }}><option value="" disabled>Choose your decision</option><option value="confirmed">Confirm incident for follow-up</option><option value="storm_runoff">Storm runoff</option><option value="false_alarm">False alarm</option></select><Button className="review-submit" onClick={() => void markReviewed()} disabled={!reviewDecision || reviewState === 'saving' || reviewState === 'saved'}>{reviewState === 'saving' ? 'Saving review…' : reviewState === 'saved' ? <><Check size={17} />Reviewed</> : 'Mark as reviewed'}</Button>{reviewMessage && <p role="status" className={reviewState === 'error' ? 'error-message' : 'muted'}>{reviewMessage}</p>}</div></section>
+          </>}
+        </div>
+      </aside></div>}
+      {page === '/data' && <DataPage incident={incident ?? latestIncident} dataReady={dataReady} />}
+      {page === '/about' && <AboutPage />}
+    </motion.main></AnimatePresence>
+    {page !== '/investigate' && <footer className="site-footer"><span>SilentSpill</span><p>Every finding is a starting point for human review.</p><a href="#/investigate">Open the investigation <ArrowRight size={16} /></a></footer>}
+    <Toaster position="bottom-right" closeButton />
+  </>
 }
 
-function LoadingCard() {
-  return <Card className="loading-card"><CardHeader><CardTitle><LoaderCircle size={15} className="spin" /> Preparing a review</CardTitle><CardDescription>Loading report, sensors, and upstream records from the backend.</CardDescription></CardHeader><CardContent className="loading-lines"><Skeleton /><Skeleton /><Skeleton /></CardContent></Card>
+function Reveal({ children, className = '' }: { children: ReactNode; className?: string }) {
+  const reduced = useReducedMotion()
+  return <motion.section className={className} initial={reduced ? false : { opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: .1 }} transition={{ duration: reduced ? 0 : .4, ease: EASE }}>{children}</motion.section>
 }
-
-function EmptyReview({ health }: { health: HealthState }) {
-  return <div className="empty-review"><DotPattern width={20} height={20} cr={.8} className="empty-pattern" /><span className="empty-icon">{health === 'offline' ? <AlertCircle size={19} /> : <Activity size={19} />}</span><h3>{health === 'offline' ? 'Backend not running' : 'Review a signal'}</h3><p>{health === 'offline' ? 'Start the local API to load the map, reports, sensor history, and facility records.' : 'Choose a scenario and run a review to bring the timeline, sensor evidence, and API report into this panel.'}</p>{health === 'offline' && <code>uvicorn · port 8000</code>}</div>
+function MapLoading({ offline = false }: { offline?: boolean }) { return <div className="map-loading">{!offline && <Waves size={30} />}<p>{offline ? 'Map unavailable until the backend is running.' : 'Loading the river network…'}</p></div> }
+function FacilityRow({ candidate: c, index, selected, onSelect, onHover }: { candidate: CandidateFacility; index: number; selected: boolean; onSelect: (id: string) => void; onHover: (id: string | null) => void }) {
+  const reduced = useReducedMotion()
+  return <motion.div className={`facility-row ${selected ? 'selected' : ''}`} initial={reduced ? false : { opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .3, delay: reduced ? 0 : index * .05, ease: EASE }} onMouseEnter={() => onHover(c.facility_id)} onMouseLeave={() => onHover(null)} onFocus={() => onHover(c.facility_id)} onBlur={() => onHover(null)}><AccordionItem value={c.facility_id}><AccordionTrigger onClick={() => onSelect(c.facility_id)}><span className="facility-rank number">{index + 1}</span><span className="facility-info"><strong>{c.name}</strong><span>{c.permit_type_desc ?? 'Permit type not reported'}</span><span className="facility-distance"><span className="number">{c.upstream_distance_km == null ? 'Distance unavailable' : `${c.upstream_distance_km.toFixed(1)} km upstream`}</span> · {c.travel_time?.display ?? 'Travel time unavailable'}</span><span className="violation-count">{c.numeric_violation_count} reported limit violations</span><span>{c.violation_window_label}</span></span></AccordionTrigger><AccordionContent><div className="facility-detail"><p className="muted">Facility ID: <span className="number">{c.facility_id}</span></p><p>{c.location_note}</p>{c.violations.length > 0 && <><h4>Reported violations</h4><div className="violations">{c.violations.map((v, i) => <div key={i}><strong>{v.parameter}</strong><p>{v.violation_desc}</p><time>{v.monitoring_period_end ?? 'Date not reported'}</time></div>)}</div></>}<Button variant="outline" onClick={() => onSelect(c.facility_id)}><MapPin size={16} />Show on map</Button></div></AccordionContent></AccordionItem></motion.div>
 }
-
-function ClassificationCard({ incident, storm, reduced }: { incident: IncidentResponse; storm: boolean; reduced: boolean }) {
-  const classification = incident.report.classification
-  return <BlurFade direction="up" blur="0px" duration={reduced ? 0 : .34} transition={{ duration: reduced ? 0 : .34, ease: EASE }}><Card className={`result-card ${storm ? 'storm-result' : classification === 'incident' ? 'incident-result' : 'review-result'}`}><CardHeader><div className="result-label-row"><span className="result-eyebrow">API REPORT · {incident.report.data_origin}</span><Badge className={`classification-badge ${storm ? 'storm' : classification === 'incident' ? 'incident' : 'review'}`}>{classification.replaceAll('_', ' ')}</Badge></div><CardTitle>{storm ? 'Storm runoff, no facilities flagged' : classification === 'incident' ? 'Signal review' : classification.replaceAll('_', ' ')}</CardTitle></CardHeader><CardContent><p className="report-summary">{incident.report.summary}</p></CardContent></Card></BlurFade>
+function ApiTextSection({ value, title, items }: { value: string; title: string; items: string[] }) { return <AccordionItem value={value}><AccordionTrigger>{title}</AccordionTrigger><AccordionContent>{items.length ? <ul className="plain-list">{items.map((text, index) => <li key={index}>{text}</li>)}</ul> : <p>None listed in this report.</p>}</AccordionContent></AccordionItem> }
+function HowPage() {
+  const steps = [
+    { title: 'Detect', text: 'A river camera or water sensor picks up an unusual change.', icon: Eye },
+    { title: 'Rule out rain', text: 'Recent rainfall is checked to see whether storm runoff explains the signal.', icon: CloudRain },
+    { title: 'Combine camera and sensors', text: 'The camera and gauge must agree within the allowed time window.', icon: Activity },
+    { title: 'Trace upstream', text: 'The real river network connects the gauge to upstream reaches.', icon: GitBranch },
+    { title: 'Report with AI agents', text: 'The agents organize the evidence and records into a report for a person to review.', icon: Layers },
+  ]
+  return <div className="editorial-page"><Reveal className="page-intro"><h1>From a signal to a place to look.</h1><p className="lede">Five checks turn an unusual river observation into a reviewable lead.</p></Reveal><div className="how-steps">{steps.map(({ title, text, icon: Icon }, index) => <Reveal key={title} className="how-step"><span className="step-number number">{index + 1}</span><div><h2>{title}</h2><p>{text}</p></div><Icon size={30} strokeWidth={1.4} /></Reveal>)}</div><Reveal className="agents-explained"><h2>The AI, explained</h2><p className="section-intro">Each agent has one job. The backend supplies the facts.</p><div className="agent-explanations">{[['Triage', 'Checks the evidence and rainfall context.'], ['Trace', 'Follows the connected river network upstream.'], ['Compliance', 'Matches facilities with reported permit violations.'], ['Report', 'Presents the evidence, assumptions, and limits.']].map(([title, text], i) => <div key={title}><span className="agent-name">{title}{i < 3 && <ArrowRight size={18} />}</span><p>{text}</p></div>)}</div></Reveal><Reveal className="guardrails"><ShieldCheck size={28} /><div><h2>Guardrails</h2><ul className="plain-list"><li>No invented facilities.</li><li>No invented numbers.</li><li>No blame words.</li><li>A template fallback if the AI fails.</li><li>A human makes the final call.</li></ul></div></Reveal><a className="button-link primary" href="#/investigate">See it in the investigation <ArrowRight size={18} /></a></div>
 }
-
-function ConfidenceValue({ value, reduced }: { value: number; reduced: boolean }) {
-  return <strong className="confidence-value">{reduced ? Math.round(value * 100) : <NumberTicker value={Math.round(value * 100)} className="confidence-ticker" />}<small>%</small></strong>
+function DataPage({ incident, dataReady }: { incident: IncidentResponse | null; dataReady: Record<string, boolean> }) {
+  const real = [['River network', 'USGS NHDPlus HR river geometry and connectivity.', 'nhdplus_gpkg'], ['Gauge readings', 'USGS NWIS measurements from the local baseline snapshot.', 'baseline_snapshot'], ['Rainfall', 'NOAA rainfall in the local baseline snapshot.', 'baseline_snapshot'], ['Permits and violations', 'EPA ECHO permit and reported violation records.', 'echo_data'], ['TRI records', 'EPA annual self-reported releases; not evidence of an individual event.', 'tri_data']]
+  return <div className="editorial-page"><Reveal className="page-intro"><h1>Real records.<br />A simulated event.</h1><p className="lede">Know what you’re looking at before deciding what to do with it.</p></Reveal><Reveal className="data-columns"><div><h2><span className="real-dot" />Real</h2>{real.map(([title, text, key]) => <div className="data-item" key={title}><h3>{title}</h3><p>{text}</p><span className="availability">{dataReady[key] ? 'Available in the local data' : 'Availability not confirmed'}</span></div>)}</div><div><h2><span className="sim-dot" />Simulated</h2><div className="data-item"><h3>Spill spike</h3><p>Injected changes to water sensor readings for the demonstration.</p><span className="availability">Dashed amber lines in the charts</span></div><div className="data-item"><h3>Aerial footage</h3><p>A rendered plume clip, created for the spill scenario.</p><span className="availability">Labelled simulated wherever it appears</span></div><p className="honesty-note">Facilities are listed only because they have reported permit violations upstream. SilentSpill never assigns blame; a person reviews the evidence.</p></div></Reveal><Reveal className="limitations-section"><h2>What this report cannot tell you</h2>{incident ? <><p className="muted">Limitations from the latest investigation.</p><ul className="plain-list">{incident.report.limitations.map((limit, i) => <li key={i}>{limit}</li>)}</ul></> : <p>Run a scenario to see its limitations, exactly as returned by the backend. <a href="#/investigate">Open Investigate <ArrowRight size={16} /></a></p>}</Reveal></div>
 }
-
-function CandidateRow({ candidate, index, selected, onSelect, reduceMotion }: { candidate: CandidateFacility; index: number; selected: boolean; onSelect: (id: string) => void; reduceMotion: boolean }) {
-  return <motion.div className={`candidate-wrap ${selected ? 'selected' : ''}`} layout initial={reduceMotion ? false : { opacity: 0, y: 7 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .32, delay: reduceMotion ? 0 : Math.min(index * .06, .24), ease: EASE }}><AccordionItem value={candidate.facility_id}><AccordionTrigger onClick={() => onSelect(candidate.facility_id)}><span className="candidate-trigger"><span className="candidate-rank">{String(index + 1).padStart(2, '0')}</span><span className="candidate-names"><b>{candidate.name}</b><small>{candidate.facility_id} <i /> {candidate.location_type}</small></span><span className="candidate-count">{candidate.numeric_violation_count}<small>numeric</small></span><ChevronDown className="candidate-chevron" size={14} /></span></AccordionTrigger><AccordionContent><div className="candidate-content"><div className="candidate-stat-grid"><div><small>UPSTREAM DISTANCE</small><b>{candidate.upstream_distance_km == null ? '—' : `${candidate.upstream_distance_km.toFixed(1)} km`}</b></div><div><small>TRAVEL TIME</small><b>{candidate.travel_time?.display ?? 'Unavailable'}</b></div><div><small>PERMIT TYPE</small><b>{candidate.permit_type_desc ?? 'Not reported'}</b></div><div><small>REPORTED WINDOW</small><b>{candidate.violation_window_label || 'Not specified'}</b></div></div><p className="location-note">{candidate.location_note}</p>{candidate.violations.length > 0 && <div className="violation-list"><b>Reported violations</b>{candidate.violations.map((violation, violationIndex) => <div className="violation-row" key={`${violation.parameter}-${violationIndex}`}><span>{violation.parameter}</span><span>{violation.violation_desc}</span><time>{violation.monitoring_period_end ?? 'Date not reported'}</time></div>)}</div>}<Button variant="outline" size="sm" className="locate-button" onClick={(event) => { event.stopPropagation(); onSelect(candidate.facility_id) }}><MapPin size={13} /> Show on map <ArrowUpRight size={13} /></Button></div></AccordionContent></AccordionItem></motion.div>
+function AboutPage() {
+  return <div className="editorial-page about-page"><Reveal className="page-intro"><h1>A weekend to follow the river.</h1><p className="lede">Built by first-time hackers at <span className="todo-name">[TODO: hackathon name]</span> in one weekend.</p></Reveal><Reveal className="about-section"><h2>How we built it</h2><p>We wrote the plan and rules, and AI coding agents (Claude Code and Codex) helped build it step by step.</p><p>The central rule stayed simple: show the evidence and its limits, and leave the final decision to a person.</p></Reveal><Reveal className="about-section"><h2>The tools behind it</h2><div className="stack-grid">{['FastAPI', 'NetworkX', 'Groq', 'Backboard', 'Roboflow', 'React', 'MapLibre', 'shadcn/ui'].map(name => <span key={name}>{name}</span>)}</div></Reveal><Reveal className="about-section"><h2>What we learned</h2><p className="muted">Draft notes for the team to edit.</p><ul className="plain-list"><li>Write the data rules before building the interface.</li><li>Show uncertainty where people make decisions.</li><li>Keep a working fallback when a model is unavailable.</li><li>Make simulated evidence easy to recognize.</li></ul></Reveal></div>
 }
-
-function EmptyCandidates() { return <div className="empty-candidates"><MapPin size={16} /><span>No facility candidates were returned by the API for this report.</span></div> }
-function StormState() { return <motion.div className="storm-state" initial={{ opacity: 0, y: 7 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .35, ease: EASE }}><span className="storm-icon"><Droplets size={17} /></span><div><b>Storm runoff, no facilities flagged</b><p>No facility list is shown for this classification.</p></div></motion.div> }
-
-function AgentChain({ run, state, reduced }: { run: ScenarioRunResponse | null; state: AgentMap; reduced: boolean }) {
-  return <ol className="agent-chain">{AGENTS.map((agent, index) => { const status = state[agent]; const mode = run?.agent_modes[agent]; return <li className={`agent-step ${status}`} key={agent}><motion.span className="agent-marker" layout initial={false} animate={{ scale: status === 'active' ? 1.05 : 1 }} transition={{ type: 'spring', stiffness: 380, damping: 28 }}>{status === 'done' ? <Check size={13} /> : status === 'active' ? <LoaderCircle size={13} className={reduced ? '' : 'spin'} /> : <span>{index + 1}</span>}</motion.span>{index < AGENTS.length - 1 && <motion.span className="agent-connector" initial={false} animate={{ opacity: status === 'done' ? 1 : .45 }} transition={{ duration: .3, ease: EASE }} /> }<div className="agent-text"><b>{LABELS[agent]}</b><small>{status === 'skipped' ? modeLabel(mode) : status === 'done' ? modeLabel(mode) : status === 'active' ? 'In progress' : mode ? modeLabel(mode) : 'Awaiting'}</small></div></li> })}</ol>
-}
-
-function ApiTextSection({ value, title, items }: { value: string; title: string; items: string[] }) {
-  return <AccordionItem value={value}><AccordionTrigger><span>{title}</span><Badge variant="outline">{items.length}</Badge></AccordionTrigger><AccordionContent>{items.length ? items.map((text, index) => <p className="api-copy" key={`${value}-${index}`}>{text}</p>) : <p className="api-copy">None listed in this report.</p>}</AccordionContent></AccordionItem>
-}
-
-function ModeItem({ label, mode }: { label: string; mode: string }) { return <div className="mode-item"><small>{label}</small><b>{mode.replaceAll('_', ' ')}</b></div> }
-
 export default App
+

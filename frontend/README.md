@@ -56,3 +56,23 @@ Open `http://127.0.0.1:5173/`. If the servers are already running on these ports
 ```powershell
 npm run build
 ```
+
+## Pages and review flow
+
+The site uses hash routing with no routing dependency:
+
+- `#/` - Overview, with a live watershed strip and API-backed data availability.
+- `#/how` - Detection, rain checks, upstream tracing, and agent guardrails.
+- `#/investigate` - Spill/storm controls, replay, ranked map pins, Facilities / Sensors / Report / Footage tabs, and human review.
+- `#/data` - Real versus simulated records, plus limitations from the current or latest completed run in this browser session.
+- `#/about` - Team story and editable learning notes. Replace `[TODO: hackathon name]` before presenting.
+
+Switching pages retains the current investigation and replay. A full browser reload starts a fresh session. No incident content is invented or cached as a frontend fixture.
+
+The review control requires a person to choose a decision. `POST /incidents/{id}/review` submits that choice and displays whether incident memory saved it, skipped it, or failed. It does not silently infer a human decision from the model classification.
+
+Charts show conductivity, turbidity, and pH separately. Real observations use solid water-coloured lines; simulated values use dashed amber lines. Missing measurements are shown as unavailable. Replay is driven by the existing SSE endpoint.
+
+Numbered map labels are 28 px and use screen-space offsets with connecting lines when they would overlap. Their API coordinates are unchanged. Hovering a facility lifts its label; selecting it flies to its location. The panel occupies its own column, so it does not cover the map camera.
+
+Geist Mono is hosted locally in `public/geist-mono.ttf`; its SIL Open Font License is included alongside it. No packages were added for the multi-page redesign. The API client, API types, and backend remain unchanged.

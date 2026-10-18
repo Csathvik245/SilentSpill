@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { LngLatBounds, Map as MapLibreMap, NavigationControl, type GeoJSONSource } from 'maplibre-gl'
+import { LngLatBounds, Map as MapLibreMap, Marker, NavigationControl, type GeoJSONSource } from 'maplibre-gl'
 import { setWorkerUrl } from 'maplibre-gl'
 import mapLibreWorkerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?url'
 import 'maplibre-gl/dist/maplibre-gl.css'
@@ -34,13 +34,14 @@ function downstreamBearing(upstream: [number, number], downstream: [number, numb
   return Math.atan2(Math.sin(longitude) * Math.cos(latitude2), Math.cos(latitude1) * Math.sin(latitude2) - Math.sin(latitude1) * Math.cos(latitude2) * Math.cos(longitude)) / radians
 }
 
-type Props = { reach: ReachResponse | null; facilities: CandidateFacility[]; activeFacility: string | null; pulse: number; onSelect: (id: string) => void }
-export function ReachMap({ reach, facilities, activeFacility, pulse, onSelect }: Props) {
+type Props = { reach: ReachResponse | null; facilities: CandidateFacility[]; activeFacility: string | null; hoveredFacility?: string | null; pulse: number; onSelect: (id: string) => void }
+export function ReachMap({ reach, facilities, activeFacility, hoveredFacility, pulse, onSelect }: Props) {
   const container = useRef<HTMLDivElement>(null)
   const map = useRef<MapLibreMap | null>(null)
   const initialized = useRef(false)
   const selectionTimeout = useRef<number | undefined>(undefined)
   const plumeFrame = useRef(0)
+  const markers = useRef<Map<string, HTMLButtonElement>>(new Map())
   useEffect(() => {
     if (!container.current || !reach) return
     const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)')
@@ -51,6 +52,7 @@ export function ReachMap({ reach, facilities, activeFacility, pulse, onSelect }:
     let disposed = false
     let terrainFailed = false
     let syncMotion = () => {}
+    const pinInstances: { marker: Marker; button: HTMLButtonElement; coordinates: [number, number] }[] = []
     const mainName = reach.reach.properties.gnis_name
     const features = [...(reach.upstream_geojson?.features ?? [reach.reach])]
       .map((feature) => ({ ...feature, properties: { ...feature.properties,
@@ -68,7 +70,7 @@ export function ReachMap({ reach, facilities, activeFacility, pulse, onSelect }:
     const field = colors.getPropertyValue('--color-field').trim()
     const instance = new MapLibreMap({
       container: container.current,
-      style: { version: 8, sources: { osm: { type: 'raster', tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'], tileSize: 256, attribution: '© OpenStreetMap contributors' } }, layers: [{ id: 'paper', type: 'raster', source: 'osm', paint: { 'raster-brightness-max': .36, 'raster-saturation': -.85 } }] },
+      style: { version: 8, sources: { osm: { type: 'raster', tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'], tileSize: 256, attribution: '© OpenStreetMap contributors' } }, layers: [{ id: 'paper', type: 'raster', source: 'osm', paint: { 'raster-brightness-max': .23, 'raster-saturation': -1 } }] },
       center: [reach.gauge.longitude, reach.gauge.latitude], zoom: 5, dragRotate: true, maxPitch: 75,
     })
     map.current = instance
@@ -96,15 +98,44 @@ export function ReachMap({ reach, facilities, activeFacility, pulse, onSelect }:
       } catch { flattenTerrain() }
       // Dash lengths use ordinary line distance; lineMetrics would distort their scale.
       instance.addSource('upstream-path', { type: 'geojson', data: { type: 'FeatureCollection', features: [] } })
-      instance.addLayer({ id: 'river-glow', type: 'line', source: 'upstream-path', paint: { 'line-color': '#42c2cb', 'line-width': 8, 'line-opacity': .12, 'line-opacity-transition': { duration: 300, delay: 0 }, 'line-width-transition': { duration: 360, delay: 0 } } })
+      instance.addLayer({ id: 'river-glow', type: 'line', source: 'upstream-path', paint: { 'line-color': water, 'line-width': 8, 'line-blur': 4, 'line-opacity': .24, 'line-opacity-transition': { duration: 300, delay: 0 }, 'line-width-transition': { duration: 360, delay: 0 } } })
       instance.addLayer({ id: 'river-path', type: 'line', source: 'upstream-path', paint: { 'line-color': water, 'line-width': ['case', ['get', 'main_stem'], 3, 1.4], 'line-opacity': ['case', ['get', 'main_stem'], .45, .22] } })
       instance.addLayer({ id: 'plume-glow', type: 'line', source: 'upstream-path', filter: ['==', ['get', 'main_stem'], true], paint: { 'line-color': warm, 'line-width': 17, 'line-blur': 7, 'line-opacity': 0, 'line-opacity-transition': { duration: 0, delay: 0 } } })
       for (const main of [false, true]) instance.addLayer({ id: main ? 'main-flow' : 'tributary-flow', type: 'line', source: 'upstream-path', filter: ['==', ['get', 'main_stem'], main], layout: { 'line-cap': 'butt', 'line-join': 'round' }, paint: { 'line-color': water, 'line-width': main ? 2.4 : 1.2, 'line-opacity': main ? .98 : .48, 'line-dasharray': FLOW_DASHES[0], 'line-dasharray-transition': { duration: 0, delay: 0 } } })
       const pointFeatures = facilities.map((item) => ({ type: 'Feature' as const, geometry: { type: 'Point' as const, coordinates: [item.longitude, item.latitude] }, properties: { id: item.facility_id, name: item.name } }))
       pointFeatures.push({ type: 'Feature', geometry: { type: 'Point', coordinates: [reach.gauge.longitude, reach.gauge.latitude] }, properties: { id: reach.gauge.site_id, name: reach.gauge.name ?? '' } })
       instance.addSource('review-points', { type: 'geojson', data: { type: 'FeatureCollection', features: pointFeatures } })
-      instance.addLayer({ id: 'point-halo', type: 'circle', source: 'review-points', paint: { 'circle-radius': ['case', ['==', ['get', 'id'], reach.gauge.site_id], 7, 5], 'circle-color': ['case', ['==', ['get', 'id'], reach.gauge.site_id], '#67c7b3', '#e1a456'], 'circle-opacity': .95, 'circle-stroke-color': '#071419', 'circle-stroke-width': 2, 'circle-radius-transition': { duration: 360, delay: 0 }, 'circle-opacity-transition': { duration: 360, delay: 0 } } })
-      instance.addLayer({ id: 'selection-pulse', type: 'circle', source: 'review-points', filter: ['==', ['get', 'id'], '__none__'], paint: { 'circle-radius': 5, 'circle-color': '#e1a456', 'circle-opacity': .35, 'circle-stroke-color': '#f1cb8a', 'circle-stroke-width': 1, 'circle-radius-transition': { duration: reduced ? 0 : 360, delay: 0 }, 'circle-opacity-transition': { duration: reduced ? 0 : 360, delay: 0 } } })
+      instance.addLayer({ id: 'point-halo', type: 'circle', source: 'review-points', paint: { 'circle-radius': ['case', ['==', ['get', 'id'], reach.gauge.site_id], 7, 0], 'circle-color': ['case', ['==', ['get', 'id'], reach.gauge.site_id], water, warm], 'circle-opacity': .95, 'circle-stroke-color': paper, 'circle-stroke-width': 2, 'circle-radius-transition': { duration: 360, delay: 0 }, 'circle-opacity-transition': { duration: 360, delay: 0 } } })
+      instance.addLayer({ id: 'selection-pulse', type: 'circle', source: 'review-points', filter: ['==', ['get', 'id'], '__none__'], paint: { 'circle-radius': 5, 'circle-color': warm, 'circle-opacity': .35, 'circle-stroke-color': warm, 'circle-stroke-width': 1, 'circle-radius-transition': { duration: reduced ? 0 : 360, delay: 0 }, 'circle-opacity-transition': { duration: reduced ? 0 : 360, delay: 0 } } })
+      facilities.forEach((facility, index) => {
+        const anchor = document.createElement('div')
+        const button = document.createElement('button')
+        button.className = 'rank-marker'
+        button.textContent = String(index + 1)
+        button.setAttribute('aria-label', `Facility ${index + 1}: ${facility.name}`)
+        button.addEventListener('click', () => onSelect(facility.facility_id))
+        anchor.append(button)
+        const coordinates: [number, number] = [facility.longitude, facility.latitude]
+        const marker = new Marker({ element: anchor, anchor: 'center' }).setLngLat(coordinates).addTo(instance)
+        pinInstances.push({ marker, button, coordinates })
+        button.classList.toggle('is-selected', facility.facility_id === activeFacility)
+        markers.current.set(facility.facility_id, button)
+      })
+      // Separate nearby rank labels in screen space; the map coordinates stay unchanged.
+      const spacePins = () => {
+        const placed: { x: number; y: number }[] = []
+        pinInstances.forEach(({ marker, coordinates }) => {
+          const point = instance.project(coordinates)
+          let offset = 0
+          while (placed.some(other => Math.abs(other.x - point.x - offset) < 32 && Math.abs(other.y - point.y) < 32)) offset += 34
+          marker.setOffset([offset, 0])
+          marker.getElement().classList.toggle('offset-pin', offset > 0)
+          marker.getElement().style.setProperty('--pin-offset', `${offset}px`)
+          placed.push({ x: point.x + offset, y: point.y })
+        })
+      }
+      instance.on('move', spacePins)
+      spacePins()
       instance.on('click', 'point-halo', (event) => {
         const feature = event.features?.[0]
         const id = feature?.properties?.id
@@ -172,8 +203,15 @@ export function ReachMap({ reach, facilities, activeFacility, pulse, onSelect }:
       motionPreference.addEventListener('change', syncMotion)
       if (!reduced) flowFrame = requestAnimationFrame(flow)
     })
-    return () => { disposed = true; cancelAnimationFrame(flowFrame); cancelAnimationFrame(revealFrame); cancelAnimationFrame(plumeFrame.current); plumeFrame.current = 0; clearTimeout(cameraTimeout); motionPreference.removeEventListener('change', syncMotion); window.clearTimeout(selectionTimeout.current); instance.remove(); map.current = null; initialized.current = false }
+    return () => { disposed = true; cancelAnimationFrame(flowFrame); cancelAnimationFrame(revealFrame); cancelAnimationFrame(plumeFrame.current); plumeFrame.current = 0; clearTimeout(cameraTimeout); motionPreference.removeEventListener('change', syncMotion); window.clearTimeout(selectionTimeout.current); markers.current.clear(); instance.remove(); map.current = null; initialized.current = false }
   }, [reach, facilities, onSelect])
+
+  useEffect(() => {
+    markers.current.forEach((button, id) => {
+      button.classList.toggle('is-hovered', id === hoveredFacility)
+      button.classList.toggle('is-selected', id === activeFacility)
+    })
+  }, [hoveredFacility, activeFacility])
 
   useEffect(() => {
     const instance = map.current
@@ -181,7 +219,7 @@ export function ReachMap({ reach, facilities, activeFacility, pulse, onSelect }:
     const point = facilities.find((candidate) => candidate.facility_id === activeFacility)
     if (point) {
       const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-      instance.flyTo({ center: [point.longitude, point.latitude], zoom: Math.max(instance.getZoom(), 11), duration: reduced ? 0 : 500 })
+      instance.flyTo({ center: [point.longitude, point.latitude], zoom: Math.max(instance.getZoom(), 11), duration: reduced ? 0 : 400, easing: easeOut })
       if (instance.getLayer('selection-pulse')) {
         instance.setFilter('selection-pulse', ['==', ['get', 'id'], activeFacility])
         instance.setPaintProperty('selection-pulse', 'circle-radius', reduced ? 9 : 6)

@@ -1,21 +1,17 @@
+﻿/* Hallmark · modern-minimal · user-specified palette and page architecture. */
 :root {
-  --color-paper: #080f12;
-  --color-panel: #101a1e;
-  --color-ink: #e7f0ee;
-  --color-muted: #9badaa;
-  --color-line: #29383a;
-  --color-river: #66d2dc;
-  --color-river-soft: #16474c;
-  --color-field: #61c7b6;
-  --color-simulated: #d9a85e;
-  --color-banner: #3b2e1e;
+  --color-paper: #070b0d;
+  --color-panel: #0e1518;
+  --color-ink: #e6edf0;
+  --color-muted: #8a9aa3;
+  --color-line: #ffffff14;
+  --color-river: #5eead4;
+  --color-field: #5eead4;
+  --color-simulated: #f5b544;
+  --color-incident: #ff7a59;
+  --color-storm: #60a5fa;
   --font-body: "Geist Variable", sans-serif;
-  --font-report: Georgia, serif;
-  --space-1: 4px;
-  --space-2: 8px;
-  --space-3: 12px;
-  --space-4: 16px;
-  --space-6: 24px;
-  --radius-card: 9px;
-  --duration-quick: 150ms;
+  --font-mono: "Geist Mono", monospace;
+  --ease: cubic-bezier(.22,1,.36,1);
 }
+@font-face { font-family: "Geist Mono"; font-style: normal; font-weight: 400; font-display: swap; src: url('/geist-mono.ttf') format('truetype'); }
